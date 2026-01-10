@@ -1,0 +1,41 @@
+// ChamferBox.module.scss
+
+.box {
+  position: relative;
+  transition: filter 0.2s, transform 0.2s;
+
+  isolation: isolate;
+}
+
+.chamfer {
+  clip-path: polygon(var(--cut-size) 0,
+      100% 0,
+      100% calc(100% - var(--cut-size)),
+      calc(100% - var(--cut-size)) 100%,
+      0 100%,
+      0 var(--cut-size));
+}
+
+.bevel {
+  clip-path: polygon(0 0,
+      100% 0,
+      100% calc(100% - var(--cut-size)),
+      calc(100% - var(--cut-size)) 100%,
+      0 100%);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.hoverEffect {
+  &:hover {
+    filter: brightness(1.1);
+    transform: translateY(-2px);
+  }
+}
+
+.innerContent {
+  width: auto;
+  height: 100%;
+}

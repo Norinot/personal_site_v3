@@ -1,0 +1,230 @@
+@use "@/styles/variables" as *;
+
+.playerLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  @include md {
+    flex-direction: row;
+  }
+}
+
+.albumArtContainer {
+  width: 100%;
+  min-height: 300px;
+  position: relative;
+  background-color: #1f2937;
+
+  @include md {
+    width: 33.333333%;
+  }
+}
+
+.albumImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.albumGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, $bg-card, transparent);
+}
+
+.albumInfo {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+}
+
+.albumTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.albumSubtitle {
+  color: $accent;
+}
+
+.playerControlsContainer {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #13151a;
+
+  @include md {
+    width: 66.666667%;
+  }
+}
+
+.trackList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 2rem;
+}
+
+.trackRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.trackActive {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.trackInfoLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trackIndex {
+  font-size: 0.875rem;
+  font-family: monospace;
+  color: #4b5563;
+
+  &.active {
+    color: $accent;
+  }
+}
+
+.trackTitle {
+  font-weight: 500;
+  color: white;
+
+  &.active {
+    color: $accent;
+  }
+}
+
+.trackArtist {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.trackIndicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: $accent;
+  border-radius: 9999px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
+}
+
+.controlBox {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timeBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.timeStamp {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-family: monospace;
+}
+
+.progressBar {
+  flex: 1;
+  margin: 0 1rem;
+  height: 0.25rem;
+  background-color: #374151;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.progressFill {
+  width: 33.33%;
+  height: 100%;
+  background-color: $accent;
+}
+
+.btnRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mediaBtns {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skipBtn {
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.playBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $accent;
+  color: black;
+  border-radius: 9999px;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.volumeControls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.volumeBar {
+  width: 5rem;
+  height: 0.25rem;
+  background-color: #374151;
+  border-radius: 9999px;
+}
+
+.volumeFill {
+  width: 66%;
+  height: 100%;
+  background-color: #9ca3af;
+}

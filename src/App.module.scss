@@ -1,0 +1,33 @@
+// --- Variables & Mixins ---
+$accent: var(--accent);
+$bg-dark: #050608;
+$bg-card: #1a1d24;
+$text-gray: #9ca3af;
+$text-light-gray: #d1d5db;
+
+@mixin md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
+
+// --- Global Layout ---
+.appContainer {
+  min-height: 100vh;
+  background-color: #333333;
+}
+
+.mainContent {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 8rem 1rem 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 8rem;
+}

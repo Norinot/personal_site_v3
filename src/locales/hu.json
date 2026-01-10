@@ -1,0 +1,120 @@
+{
+  "nav": {
+    "about": "Rólam",
+    "skills": "Készségek",
+    "projects": "Projektek",
+    "services": "Szolgáltatások",
+    "hobbies": "Hobbik",
+    "contactMe": "Kapcsolat"
+  },
+  "hero": {
+    "hi": "Szia, a nevem",
+    "firstName": "Bernáth",
+    "lastName": "Márk Bence",
+    "description": "Fullstack fejlesztő 3 év tapasztalattal, beleértve a Deutsche Telekomnál végzett munkát is. Szakterületem az Angular, React és a Svelte, különös tekintettel az end-to-end fejlesztésre. A Code_Craftsmen társalapítójaként egyedi szoftvermegoldásokat készítek.",
+    "hireMe": "Dolgozzunk együtt",
+    "viewWork": "Munkáim"
+  },
+  "skills": {
+    "title": "Technológiai Stack",
+    "subtitle": "Eszközök és technológiák, amiket szoftverfejlesztéshez használok.",
+    "expert": "Szakértő",
+    "advanced": "Haladó",
+    "intermediate": "Középhaladó"
+  },
+  "projects": {
+    "sectionTitle": "Kiemelt Projektek",
+    "sectionSubtitle": "Válogatás a legutóbbi fejlesztési munkáimból.",
+    "items": {
+      "business-gpt": {
+        "title": "Business GPT",
+        "subtitle": "Egyedi párbeszédes AI megoldás",
+        "description": "Egyedi csevegőalkalmazás fejlesztése a GPT-alapú mesterséges intelligencia legmodernebb képességeivel, testreszabott felhasználói felülettel az ügyfél egyedi igényei szerint."
+      },
+      "ai4test": {
+        "title": "AI4TEST",
+        "subtitle": "AI-integrált automatizált tesztelő platform",
+        "description": "Részvétel egy AI-t integráló webalkalmazás fejlesztésében automatizált teszteléshez. Teljesítménystatisztikák és felhasználóbarát videólejátszási funkció megvalósítása."
+      },
+      "saray-webshop": {
+        "title": "SARAY Webshop",
+        "subtitle": "E-kereskedelmi platform a SARAY Szőnyegház részére",
+        "description": "Átfogó e-kereskedelmi platform fejlesztése, amely a cég specifikus igényeihez szabott standard webshop funkciókat tartalmaz."
+      },
+      "mapa-crm": {
+        "title": "MAPA",
+        "subtitle": "Testreszabható CRM alaprendszer",
+        "description": "Együttműködés egy fejlesztőcsapattal egy testreszabható CRM rendszer kiépítésében, amely alapalkalmazásként szolgál a jövőbeli ügyféligényekhez."
+      }
+    }
+  },
+  "services": {
+    "title": "Szolgáltatások",
+    "subtitle": "Miben tudok segíteni",
+    "consulting": {
+      "title": "TANÁCSADÁS",
+      "description": "Stratégiai technikai tanácsadás, amely segít a vállalkozásoknak kiválasztani a legmegfelelőbb technológiákat és megközelítéseket projektjeikhez."
+    },
+    "frontendDevelopment": {
+      "title": "FRONTEND FEJLESZTÉS",
+      "description": "Reszponzív és dinamikus felhasználói felületek készítése modern keretrendszerek és könyvtárak használatával, mint például a React, Angular és Vue.js."
+    },
+    "backendDevelopment": {
+      "title": "BACKEND FEJLESZTÉS",
+      "description": "Robusztus szerveroldali alkalmazások, API-k és adatbázis-integrációk építése .Net, Java és SQL adatbázisok használatával."
+    },
+    "maintenanceAndSupport": {
+      "title": "KARBANTARTÁS ÉS TÁMOGATÁS",
+      "description": "Meglévő webalkalmazások és rendszerek folyamatos karbantartása, frissítése és támogatása az optimális teljesítmény biztosítása érdekében."
+    }
+  },
+  "work": {
+    "title": "Tapasztalat",
+    "subtitle": "Szakmai utam.",
+    "achievementsLabel": "Eredmények:",
+    "items": {
+      "deutsche-telekom": {
+        "role": "Szoftverfejlesztő",
+        "company": "Deutsche Telekom System Solutions",
+        "bullets": [
+          "Frontend alkalmazások fejlesztése és karbantartása Angular, React és Svelte használatával.",
+          "Együttműködés keresztfunkcionális csapatokkal felhasználóközpontú funkciók tervezésében.",
+          "Full-stack fejlesztés támogatása Go és Java (Spring Boot) backend megoldásokkal.",
+          "Alkalmazásteljesítmény optimalizálása és a kód karbantarthatóságának biztosítása.",
+          "Frontend tesztcsomagok írása és karbantartása Jasmine és Playwright keretrendszerekben.",
+          "Részvétel CI/CD folyamatok hibakeresésében és a telepítési megbízhatóság növelésében.",
+          "Rendszeres kódismétlés (code review) és építészeti visszajelzések a kódminőség javítására.",
+          "Projektek indítása a frontend architektúra és repozitórium-struktúra megtervezésével.",
+          "Szoros együttműködés UX/UI tervezőkkel a végleges design kialakításában.",
+          "Részvétel backend tervezési folyamatokban az API és adatbázis igények összehangolásáért."
+        ]
+      },
+      "code-craftsmen": {
+        "role": "Alapító és Vezető Szoftvermérnök",
+        "company": "Code_Craftsmen",
+        "bullets": [
+          "Mérnökökből és UX/UI tervezőből álló csapat vezetése webes megoldások szállítására.",
+          "Full-stack alkalmazások tervezése és fejlesztése React, Angular, Java, C# és Go nyelveken.",
+          "Projektek életciklusának teljes körű kezelése a UX tervezéstől a karbantartásig.",
+          "Megoldások telepítése Linux VPS-re Docker, NGINX és SSL konfigurációval."
+        ]
+      }
+    }
+  },
+  "hobbies": {
+    "title": "FREKVENCIA",
+    "subtitle": "Ez adja a ritmust a kódhoz."
+  },
+  "contact": {
+    "title": "Kapcsolatfelvétel",
+    "subtitle": "Szabadúszó projektekre elérhető vagyok.",
+    "emailLabel": "Email címed",
+    "emailPlaceholder": "pelda@email.hu",
+    "subjectLabel": "Tárgy",
+    "subjectPlaceholder": "Projekt megkeresés",
+    "messageLabel": "Üzenet",
+    "messagePlaceholder": "Írd le pár szóban a projektet...",
+    "sendButton": "Üzenet küldése",
+    "alert": "Üzenet elküldve!"
+  }
+}

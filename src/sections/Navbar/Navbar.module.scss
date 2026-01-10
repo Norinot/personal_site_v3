@@ -1,0 +1,188 @@
+@use "@/styles/variables" as *;
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  height: 6rem;
+}
+
+
+.backgroundLayer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.headerInner {
+  backdrop-filter: blur(12px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  width: 100%;
+  height: 100%;
+}
+
+.navContainer {
+  position: relative;
+  z-index: 1;
+
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.headerInner {
+  backdrop-filter: blur(12px);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.navContainer {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  height: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1.5rem;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoBox {
+  width: 2rem;
+  height: 2rem;
+  background-color: #33ff00;
+}
+
+.navLinks {
+  display: none;
+
+  @include md {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+}
+
+.contactBtnWrapper {
+  display: none;
+
+  @include md {
+    display: block;
+  }
+}
+
+.contactBtnText {
+  padding: 0.5rem 1.5rem;
+  color: black;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  letter-spacing: 0.025em;
+}
+
+.langWrapper {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+
+  @include md {
+    display: flex;
+  }
+
+}
+
+.dropdownContainer {
+  position: relative;
+  z-index: 50;
+}
+
+.triggerBtn {
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #d1d5db;
+  transition: color 150ms ease;
+  cursor: pointer;
+  min-width: 80px;
+  justify-content: space-between;
+
+  &:hover {
+    color: #ffffff;
+  }
+}
+
+.currentLang {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.langLabel {
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.chevron {
+  transition: transform 300ms ease;
+
+  &.open {
+    transform: rotate(180deg);
+  }
+}
+
+.menuPosition {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  margin-top: 0.5rem;
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+}
+
+.menuItem {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 150ms, color 150ms;
+  color: #9ca3af;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+
+  &.active {
+    color: var(--accent);
+  }
+}

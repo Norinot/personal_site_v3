@@ -1,0 +1,40 @@
+@use "@/styles/variables" as *;
+
+.contactContainer {
+  max-width: 48rem;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @include md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.formSpacing {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.submitBtnContainer {
+  margin-top: 1rem;
+}
+
+.submitBtn {
+  width: 100%;
+  color: black;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}

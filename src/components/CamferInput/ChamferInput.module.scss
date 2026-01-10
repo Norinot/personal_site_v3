@@ -1,0 +1,73 @@
+// ChamferInput.module.scss
+
+$accent: var(--accent);
+$gray-500: #6b7280;
+$gray-600: #4b5563;
+$text-white: #ffffff;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: $gray-500;
+  font-weight: 700;
+  margin-left: 0.25rem;
+}
+
+.boxTransition {
+  transition: border-color 300ms ease, background-color 300ms ease;
+}
+
+.inputWrapper {
+  display: flex;
+  align-items: flex-start;
+}
+
+.inputField {
+  flex: 1;
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: $text-white;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 1rem;
+  margin: 0;
+
+  &::placeholder {
+    color: $gray-500;
+    opacity: 1;
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: $text-white;
+    -webkit-box-shadow: 0 0 0px 1000px #0f1115 inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+.textarea {
+  resize: none;
+}
+
+.iconWrapper {
+  margin-left: 0.75rem;
+  color: $gray-600;
+  transition: color 300ms;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iconFocused {
+  color: $accent;
+}

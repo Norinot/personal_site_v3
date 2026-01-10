@@ -1,0 +1,15 @@
+@use "@/styles/variables" as *;
+
+.projectsList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.projectLink {
+  color: $accent;
+
+  &:hover {
+    color: white;
+  }
+}

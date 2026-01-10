@@ -1,0 +1,120 @@
+{
+  "nav": {
+    "about": "About",
+    "skills": "Skills",
+    "projects": "Projects",
+    "services": "Services",
+    "hobbies": "Hobbies",
+    "contactMe": "Contact Me"
+  },
+  "hero": {
+    "hi": "Hello, I am",
+    "firstName": "Bernáth",
+    "lastName": "Márk Bence",
+    "description": "Fullstack developer with 3 years of experience, including work at Deutsche Telekom. Specialized in Angular, React, and Svelte, with a strong interest in end-to-end development. Co-founder of Code_Craftsmen, delivering custom software solutions.",
+    "hireMe": "Hire me",
+    "viewWork": "View Work"
+  },
+  "skills": {
+    "title": "Technical Arsenal",
+    "subtitle": "Tools and technologies I use to build digital products.",
+    "expert": "Expert",
+    "advanced": "Advanced",
+    "intermediate": "Intermediate"
+  },
+  "projects": {
+    "sectionTitle": "Featured Projects",
+    "sectionSubtitle": "A selection of my recent development work.",
+    "items": {
+      "business-gpt": {
+        "title": "Business GPT",
+        "subtitle": "Bespoke conversational AI solution",
+        "description": "Developed a bespoke chat application leveraging the cutting-edge capabilities of GPT-based conversational AI, tailored with a custom user interface to meet unique client requirements."
+      },
+      "ai4test": {
+        "title": "AI4TEST",
+        "subtitle": "AI-integrated automated testing platform",
+        "description": "Contributed to a web application integrating AI for automated testing. Implemented performance statistics and a user-friendly video playback feature for comprehensive analysis."
+      },
+      "saray-webshop": {
+        "title": "SARAY Webshop",
+        "subtitle": "E-commerce platform for SARAY Szőnyegház",
+        "description": "Development of a comprehensive e-commerce platform integrating standard webshop functionalities tailored to the company's specific needs."
+      },
+      "mapa-crm": {
+        "title": "MAPA",
+        "subtitle": "Customizable CRM Baseline",
+        "description": "Collaborated with a team to build a customizable CRM system designed as a baseline application that can be tailored to future client needs."
+      }
+    }
+  },
+  "services": {
+    "title": "Services",
+    "subtitle": "What I can do for you",
+    "consulting": {
+      "title": "CONSULTING",
+      "description": "Strategic technical consulting to help businesses determine the best technologies and approaches for their projects."
+    },
+    "frontendDevelopment": {
+      "title": "FRONTEND DEVELOPMENT",
+      "description": "Creation of responsive and dynamic user interfaces using modern frameworks and libraries like React, Angular, and Vue.js."
+    },
+    "backendDevelopment": {
+      "title": "BACKEND DEVELOPMENT",
+      "description": "Building robust server-side applications, APIs, and database integrations using .Net, Java, and SQL databases."
+    },
+    "maintenanceAndSupport": {
+      "title": "MAINTENANCE & SUPPORT",
+      "description": "Ongoing maintenance, updates and support for existing web applications and systems to ensure optimal performance."
+    }
+  },
+  "work": {
+    "title": "Experience",
+    "subtitle": "My professional journey.",
+    "achievementsLabel": "Achievements:",
+    "items": {
+      "deutsche-telekom": {
+        "role": "Software Developer",
+        "company": "Deutsche Telekom System Solutions",
+        "bullets": [
+          "Developed and maintained frontend applications using Angular, React, and Svelte.",
+          "Collaborated with cross-functional teams to design and implement user-centric features.",
+          "Contributed to backend development with Go and Java (Spring Boot) to support full-stack functionality.",
+          "Optimized application performance and ensured code maintainability.",
+          "Wrote and maintained frontend test suites using Jasmine and Playwright.",
+          "Participated in CI/CD pipeline debugging and enhanced deployment reliability.",
+          "Performed code reviews and provided architectural feedback to improve consistency.",
+          "Initiated projects by designing frontend architecture and repository structures.",
+          "Collaborated with UX/UI designers to integrate suggestions into final designs.",
+          "Participated in backend design discussions to align frontend requirements with APIs."
+        ]
+      },
+      "code-craftsmen": {
+        "role": "Founder & Lead Software Engineer",
+        "company": "Code_Craftsmen",
+        "bullets": [
+          "Led a small team of engineers and a UX/UI designer to deliver web solutions.",
+          "Designed and built full-stack applications using React, Angular, Java, C#, and Go.",
+          "Owned project lifecycles from UX design to implementation and maintenance.",
+          "Deployed solutions to Linux VPS using Docker, NGINX, and SSL setup."
+        ]
+      }
+    }
+  },
+  "hobbies": {
+    "title": "FREQUENCY",
+    "subtitle": "What keeps me coding."
+  },
+  "contact": {
+    "title": "Initialize Contact",
+    "subtitle": "Available for freelance opportunities.",
+    "emailLabel": "Your Email",
+    "emailPlaceholder": "john@doe.com",
+    "subjectLabel": "Subject",
+    "subjectPlaceholder": "Project Inquiry",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Tell me about your project...",
+    "sendButton": "Send Message",
+    "alert": "Message Sent!"
+  }
+}

@@ -1,0 +1,31 @@
+$accent: var(--accent);
+$text-muted: var(--text-muted);
+
+.container {
+  margin-bottom: 3rem;
+}
+
+.heading {
+  font-size: 2.25rem;
+  line-height: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: white;
+}
+
+.accentBar {
+  display: block;
+  width: 2rem;
+  height: 0.25rem;
+  background-color: $accent;
+}
+
+.subtitle {
+  color: $text-muted;
+  margin-left: 2.75rem;
+}

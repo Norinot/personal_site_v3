@@ -1,0 +1,159 @@
+@use "@/styles/variables" as *;
+
+.heroSection {
+  position: relative;
+  padding-top: 2.5rem;
+}
+
+.heroGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  align-items: center;
+
+  @include lg {
+    grid-template-columns: repeat(12, 1fr);
+  }
+}
+
+.heroImageColumn {
+  position: relative;
+  z-index: 10;
+  order: 2;
+  display: flex;
+  justify-content: center;
+
+  @include lg {
+    grid-column: span 5;
+    margin-right: -40px;
+    order: 1;
+    display: block;
+  }
+}
+
+.heroImageWrapper {
+  position: relative;
+  width: 16rem;
+  height: 20rem;
+
+  @include lg {
+    width: 20rem;
+    height: 28rem;
+  }
+}
+
+.profileMask {
+  position: absolute;
+  inset: 0;
+  z-index: 20;
+  overflow: hidden;
+  background-color: #4b5563;
+}
+
+.profileImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+  transition: transform 700ms;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.profileBorder {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  width: 100%;
+  height: 100%;
+  border: 2px solid $accent;
+  opacity: 0.5;
+  z-index: 10;
+  background: transparent;
+}
+
+.heroContentColumn {
+  order: 1;
+
+  @include lg {
+    grid-column: span 7;
+    padding-left: 5rem;
+    order: 2;
+  }
+}
+
+.heroTexts {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.greeting {
+  color: $accent;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.mainHeadline {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.25;
+
+  @include md {
+    font-size: 4.5rem;
+  }
+}
+
+.introText {
+  font-size: 1.25rem;
+  color: $text-gray;
+  margin-top: 1rem;
+  max-width: 32rem;
+}
+
+.socialRow {
+  display: flex;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.socialIcon {
+  padding: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 0.125rem;
+  transition: background-color 0.2s, color 0.2s;
+  color: inherit;
+
+  &:hover {
+    background-color: $accent;
+    color: black;
+  }
+}
+
+.ctaRow {
+  padding-top: 2rem;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.hireBtnText {
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+}
+
+.workBtnText {
+  padding: 0.75rem 2rem;
+  font-weight: 700;
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 0.875rem;
+}

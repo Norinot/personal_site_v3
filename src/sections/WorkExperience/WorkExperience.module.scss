@@ -1,0 +1,45 @@
+@use "@/styles/variables" as *;
+
+
+.experienceList {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.expDetails {
+  list-style-type: disc;
+  padding-left: 1.25rem;
+  color: $text-light-gray;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.expHeader {
+  color: $accent;
+  list-style: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.05em;
+  margin-left: -1.25rem;
+}
+
+.locationWrapper {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  .locationText {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: #6b7280;
+  }
+
+  .locationIcon {
+    color: #6b7280;
+    flex-shrink: 0;
+  }
+}
