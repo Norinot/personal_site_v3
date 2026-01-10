@@ -4,6 +4,7 @@ import { ExternalLink } from "lucide-react";
 import styles from "./Projects.module.scss";
 import { useTranslation } from "react-i18next";
 import type { ReactNode } from "react";
+import { getIcon } from "@/utils/getIcon";
 
 interface Project {
   id: string;
@@ -46,10 +47,6 @@ const projects: Project[] = [
 
 const Projects = () => {
   const { t } = useTranslation();
-
-  const getIcon = (icon: string): ReactNode => {
-    return <></>;
-  };
 
   return (
     <section id="projects">
