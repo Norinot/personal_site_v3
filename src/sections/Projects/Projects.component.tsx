@@ -3,7 +3,6 @@ import SectionTitle from "@/components/SectionTitle/SectionTitle.component";
 import { ExternalLink } from "lucide-react";
 import styles from "./Projects.module.scss";
 import { useTranslation } from "react-i18next";
-import type { ReactNode } from "react";
 import { getIcon } from "@/utils/getIcon";
 
 interface Project {
