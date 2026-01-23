@@ -1,0 +1,581 @@
+@use "@/styles/variables" as *;
+
+.playerLayout {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  @include md {
+    flex-direction: row;
+  }
+}
+
+.albumArtContainer {
+  width: 100%;
+  min-height: 300px;
+  position: relative;
+  background-color: #1f2937;
+
+  @include md {
+    width: 33.333333%;
+  }
+}
+
+.albumImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.albumGradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, $bg-card, transparent);
+}
+
+.albumInfo {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+}
+
+.albumTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: white;
+}
+
+.albumSubtitle {
+  color: $accent;
+}
+
+.playerControlsContainer {
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #13151a;
+
+  @include md {
+    width: 66.666667%;
+  }
+}
+
+.trackList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 10px;
+  max-height: 225px;
+  overflow-y: scroll;
+
+
+  mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 20px,
+      black calc(100% - 20px),
+      transparent 100%);
+
+  -webkit-mask-image: linear-gradient(to bottom,
+      transparent 0%,
+      black 20px,
+      black calc(100% - 20px),
+      transparent 100%);
+
+  padding: 20px 0;
+}
+
+.trackList::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.trackList::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.trackList::-webkit-scrollbar-thumb {
+  background-color: #9ca3af;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+.trackRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+}
+
+.trackActive {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.trackInfoLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.trackIndex {
+  font-size: 0.875rem;
+  font-family: monospace;
+  color: #4b5563;
+
+  &.active {
+    color: $accent;
+  }
+}
+
+.trackTitle {
+  font-weight: 500;
+  color: white;
+
+  &.active {
+    color: $accent;
+  }
+}
+
+.trackArtist {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.trackIndicator {
+  width: 0.5rem;
+  height: 0.5rem;
+  background-color: $accent;
+  border-radius: 9999px;
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: .5;
+  }
+}
+
+.controlBox {
+  background-color: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.timeBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.timeStamp {
+  font-size: 0.75rem;
+  color: #6b7280;
+  font-family: monospace;
+}
+
+.progressBar {
+  flex: 1;
+  margin: 0 1rem;
+  height: 0.25rem;
+  background-color: #374151;
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+  }
+}
+
+.progressFill {
+  height: 100%;
+  background-color: $accent;
+  border-radius: 9999px;
+  position: relative;
+}
+
+
+.progressHandle {
+  position: absolute;
+  right: -6px;
+  top: 50%;
+  transform: translateY(-50%) scale(0);
+  width: 12px;
+  height: 12px;
+  background-color: white;
+  border-radius: 50%;
+  transition: transform 0.1s;
+  pointer-events: none;
+}
+
+.progressBar:hover .progressHandle {
+  transform: translateY(-50%) scale(1);
+}
+
+.btnRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.mediaBtns {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.skipBtn {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.playBtn {
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $accent;
+  color: black;
+  border-radius: 9999px;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.volumeControls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.volumeBar {
+  width: 5rem;
+  height: 0.25rem;
+  background-color: #374151;
+  border-radius: 9999px;
+  position: relative;
+  cursor: pointer;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -10px;
+    bottom: -10px;
+    left: 0;
+    right: 0;
+  }
+}
+
+.volumeFill {
+  height: 100%;
+  background-color: #9ca3af;
+  border-radius: 9999px;
+  position: relative;
+  pointer-events: none;
+}
+
+
+.volumeHandle {
+  position: absolute;
+  right: -5px;
+  bottom: -8px;
+  transform: translateY(-50%) scale(0);
+  width: 10px;
+  height: 10px;
+  background-color: white;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+  transition: transform 0.1s ease;
+}
+
+.volumeBar:hover .volumeHandle,
+.volumeBar:active .volumeHandle {
+  transform: translateY(-50%) scale(1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.title {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: $gray-500;
+}
+
+.addButton {
+  all: unset;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 150ms ease;
+  cursor: pointer;
+
+  .icon {
+    color: $gray-500;
+    transition: color 150ms ease;
+  }
+
+  &:hover {
+    background-color: rgba(114, 111, 111, 0.1);
+
+    .icon {
+      color: $accent;
+    }
+  }
+}
+
+.none {
+  all: unset;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.stickyPlayer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background-color: rgba(19, 21, 26, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  z-index: 100;
+
+  transform: translateY(100%);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.5);
+
+  &.visible {
+    transform: translateY(0);
+  }
+}
+
+.stickyProgressContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background-color: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: height 0.2s ease;
+
+  &:hover {
+    height: 6px;
+  }
+}
+
+.stickyProgressFill {
+  height: 100%;
+  background-color: $accent;
+  box-shadow: 0 0 10px rgba($accent, 0.5);
+  transition: width 0.1s linear;
+}
+
+.stickyContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding: 0 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.stickyInfo {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  overflow: hidden;
+}
+
+.stickyText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.stickyTitle {
+  color: white;
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.stickyArtist {
+  color: #9ca3af;
+  font-size: 0.75rem;
+}
+
+.stickyControls {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.stickySkip {
+  all: unset;
+  color: #9ca3af;
+  cursor: pointer;
+  transition: color 0.2s;
+  display: flex;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.stickyPlay {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+
+.stickyActions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.stickyBtn {
+  all: unset;
+  color: #9ca3af;
+  cursor: pointer;
+  padding: 0.5rem;
+
+  &:hover {
+    color: $accent;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .stickyPlayer {
+    height: 70px;
+  }
+
+  .stickyControls {
+    gap: 1rem;
+  }
+
+  .stickyInfo {
+    max-width: 40%;
+  }
+}
+
+
+.albumArtContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  position: relative;
+}
+
+.vinylRecord {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background-color: #1a1a1a;
+  background-image:
+    linear-gradient(135deg, transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%),
+    repeating-radial-gradient(#111 0,
+      #111 2px,
+      #222 3px,
+      #222 4px);
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  will-change: transform;
+
+}
+
+.vinylLabel {
+  width: 35%;
+  height: 35%;
+  border-radius: 50%;
+  overflow: hidden;
+  position: absolute;
+  border: 4px solid #1a1a1a;
+  z-index: 2;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.spindleHole {
+  width: 12px;
+  height: 12px;
+  background: #000;
+  border-radius: 50%;
+  position: absolute;
+  z-index: 3;
+}

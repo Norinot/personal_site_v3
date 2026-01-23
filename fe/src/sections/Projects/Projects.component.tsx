@@ -19,7 +19,7 @@ const projects: Project[] = [
     date: "2024",
     tags: ["React", "Svelte", "Python"],
     icon: "Layers",
-    link: "#",
+    link: "https://www.telekom-mms.com/expertise/business-gpt",
   },
   {
     id: "ai4test",
@@ -33,7 +33,7 @@ const projects: Project[] = [
     date: "2024",
     tags: ["Angular", "Go"],
     icon: "ExternalLink",
-    link: "#",
+    link: "https://sarayszonyeg.hu/",
   },
   {
     id: "mapa-crm",
@@ -63,9 +63,15 @@ const Projects = () => {
             tags={project.tags}
             icon={getIcon(project.icon)}
             sideAction={
-              <a href="#" className={styles.projectLink}>
-                <ExternalLink size={20} />
-              </a>
+              project.link !== "#" && (
+                <a
+                  target="_blank"
+                  href={project.link}
+                  className={styles.projectLink}
+                >
+                  <ExternalLink size={20} />
+                </a>
+              )
             }
           >
             <p>{t(`projects.items.${project.id}.description`)}</p>

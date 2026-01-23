@@ -103,7 +103,8 @@
   },
   "hobbies": {
     "title": "FREQUENCY",
-    "subtitle": "What keeps me coding."
+    "subtitle": "What keeps me coding.",
+    "que": "Queue"
   },
   "contact": {
     "title": "Initialize Contact",

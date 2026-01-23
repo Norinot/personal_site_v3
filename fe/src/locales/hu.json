@@ -103,7 +103,8 @@
   },
   "hobbies": {
     "title": "FREKVENCIA",
-    "subtitle": "Ez adja a ritmust a kódhoz."
+    "subtitle": "Ez adja a ritmust a kódhoz.",
+    "que": "Queue"
   },
   "contact": {
     "title": "Kapcsolatfelvétel",

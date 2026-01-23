@@ -38,3 +38,24 @@
   justify-content: center;
   gap: 0.5rem;
 }
+
+.contactsWrapper {
+  margin-bottom: 40px;
+  .label {
+    font-size: 0.79rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: $gray-500;
+    font-weight: 700;
+    margin-left: 0.25rem;
+
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 8px;
+    span {
+      color: rgb(199, 196, 196);
+    }
+  }
+}

@@ -11,7 +11,7 @@ import WorkExperience from "@/sections/WorkExperience/WorkExperience.component";
 import Contact from "@/sections/Contact/Contact.component";
 import Footer from "@/sections/Footer/Footer.component";
 
-const App = () => {
+const MainContent = () => {
   const [activeSection, setActiveSection] = useState("hero");
 
   const scrollTo = (id: string) => {
@@ -38,4 +38,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default MainContent;

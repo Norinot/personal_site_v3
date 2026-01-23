@@ -15,6 +15,7 @@ const ChamferInput: React.FC<ChamferInputProps> = ({
   icon,
   label,
   as = "input",
+  value,
   ...props
 }) => {
   const [isFocused, setIsFocused] = useState(false);
