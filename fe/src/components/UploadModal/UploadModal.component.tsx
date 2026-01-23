@@ -4,7 +4,6 @@ import ChamferInput from "../CamferInput/ChamferInput.component";
 import styles from "./UploadModal.module.scss";
 import ChamferBox from "../CamferBox/ChamferBox.component";
 import { useAuth } from "@clerk/clerk-react";
-import { URL_BASEAPTH } from "@/App";
 
 const UploadModal = ({
   isOpen,
@@ -19,8 +18,9 @@ const UploadModal = ({
   const [title, setTitle] = useState("");
   const [artist, setArtist] = useState("");
   const [description, setDescription] = useState("");
-  const [isUploading, setIsUploading] = useState(false);
+  const [backlink, setBacklink] = useState("");
 
+  const [isUploading, setIsUploading] = useState(false);
   if (!isOpen) return null;
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,9 +48,10 @@ const UploadModal = ({
       formData.append("title", title);
       formData.append("artist", artist);
       formData.append("description", description);
+      formData.append("backlink", backlink);
       // ------------------------------------------
 
-      const response = await fetch(URL_BASEAPTH + "upload", {
+      const response = await fetch("/upload", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -138,6 +139,13 @@ const UploadModal = ({
                 placeholder="e.g. Neon Horizon"
                 value={title}
                 onChange={(e: any) => setTitle(e.target.value)}
+              />
+
+              <ChamferInput
+                label="Backlink (Optional)"
+                placeholder="e.g. https://soundcloud.com/..."
+                value={backlink}
+                onChange={(e: any) => setBacklink(e.target.value)}
               />
               <ChamferInput
                 label="Artist"

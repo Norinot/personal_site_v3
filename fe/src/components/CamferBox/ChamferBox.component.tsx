@@ -29,26 +29,21 @@ const ChamferBox = ({
   style = {},
 }: ChamferBoxProps) => {
   const cssVars = {
-    "--cut-size": `${cutSize}px`,
+    "--requested-cut-size": `${cutSize}px`,
     ...style,
   } as React.CSSProperties;
 
   const shapeClass = variant === "chamfer" ? styles.chamfer : styles.bevel;
   const hoverClass = hoverEffect ? styles.hoverEffect : "";
   const cursorClass = onClick ? styles.clickable : "";
+  const paddingClass = !noPadding ? styles.padded : "";
 
-  const containerClasses = `${styles.box} ${shapeClass} ${hoverClass} ${cursorClass} ${className}`;
-
-  const contentPadding = noPadding
-    ? "0"
-    : variant === "chamfer"
-      ? `1.5rem calc(${cutSize}px + 10px)`
-      : `1.5rem 1rem calc(${cutSize}px + 1rem) 1rem`;
+  const baseClasses = `${styles.box} ${shapeClass} ${hoverClass} ${cursorClass} ${className}`;
 
   if (borderColor) {
     return (
       <div
-        className={containerClasses}
+        className={baseClasses}
         onClick={onClick}
         style={{
           ...cssVars,
@@ -57,14 +52,10 @@ const ChamferBox = ({
         }}
       >
         <div
-          className={`${styles.innerContent} ${shapeClass}`}
-          style={
-            {
-              "--cut-size": `${cutSize}px`,
-              backgroundColor: bg,
-              padding: contentPadding,
-            } as React.CSSProperties
-          }
+          className={`${styles.innerContent} ${shapeClass} ${paddingClass}`}
+          style={{
+            backgroundColor: bg,
+          }}
         >
           {children}
         </div>
@@ -74,12 +65,11 @@ const ChamferBox = ({
 
   return (
     <div
-      className={containerClasses}
+      className={`${baseClasses} ${paddingClass}`}
       onClick={onClick}
       style={{
         ...cssVars,
         backgroundColor: bg,
-        padding: contentPadding,
       }}
     >
       {children}

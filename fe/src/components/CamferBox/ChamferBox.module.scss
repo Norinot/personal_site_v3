@@ -1,10 +1,16 @@
 // ChamferBox.module.scss
 
 .box {
+  --cut-size: 12px;
+
   position: relative;
   transition: filter 0.2s, transform 0.2s;
 
   isolation: isolate;
+
+  @media (min-width: 768px) {
+    --cut-size: var(--requested-cut-size);
+  }
 }
 
 .chamfer {
@@ -38,4 +44,18 @@
 .innerContent {
   width: auto;
   height: 100%;
+}
+
+.padded {
+  padding: 1rem 1.25rem;
+
+  @media (min-width: 768px) {
+    &.chamfer {
+      padding: 1.5rem calc(var(--cut-size) + 10px);
+    }
+
+    &.bevel {
+      padding: 1.5rem 1rem calc(var(--cut-size) + 1rem) 1rem;
+    }
+  }
 }

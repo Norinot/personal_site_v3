@@ -11,7 +11,7 @@
     "hi": "Szia, a nevem",
     "firstName": "Bernáth",
     "lastName": "Márk Bence",
-    "description": "Fullstack fejlesztő 3 év tapasztalattal, beleértve a Deutsche Telekomnál végzett munkát is. Szakterületem az Angular, React és a Svelte, különös tekintettel az end-to-end fejlesztésre. A Code_Craftsmen társalapítójaként egyedi szoftvermegoldásokat készítek.",
+    "description": "Szoftvermérnök és csapatvezető, bizonyított tapasztalattal komplex full-stack alkalmazások építésében. A modern frontend ökoszisztémák (Angular, React, Svelte) és robusztus backend architektúrák (Java, Go) szakértője. Elkötelezett az egyedi, nagy teljesítményű digitális termékek szállítása iránt.",
     "hireMe": "Dolgozzunk együtt",
     "viewWork": "Munkáim"
   },
@@ -20,7 +20,18 @@
     "subtitle": "Eszközök és technológiák, amiket szoftverfejlesztéshez használok.",
     "expert": "Szakértő",
     "advanced": "Haladó",
-    "intermediate": "Középhaladó"
+    "intermediate": "Középhaladó",
+    "descriptions": {
+      "react_desc": "Dinamikus, nagy teljesítményű felületek specialistája, az AI-vezérelt műszerfalaktól a folyékony társalgási interfészekig.",
+      "angular_desc": "Vállalati szintű, skálázható alkalmazások mérnöki tervezése, fókuszban a moduláris felépítéssel és a hosszú távú fenntarthatósággal.",
+      "ts_desc": "A szigorú típusosság kiaknázása atombiztos, hibamentes kódbázisok építéséhez, amelyek könnyedén skálázhatók.",
+      "svelte_desc": "Új generációs, könnyűsúlyú felületek készítése, ahol a nyers sebesség és a kivételes felhasználói élmény az elsődleges.",
+      "java_desc": "Biztonságos, robusztus backend rendszerek tervezése, amelyek képesek összetett üzleti logika és nagy adatforgalom kezelésére.",
+      "go_desc": "Nagy konkurens terhelésű mikroszolgáltatások és alacsony késleltetésű API-k építése a maximális hatékonyság érdekében.",
+      "git_desc": "Komplex fejlesztési munkafolyamatok menedzselése a kód integritásának és a zökkenőmentes csapatmunkának a biztosítására.",
+      "csharp_desc": "Híd az interaktív 3D élmények és a stabil szoftverlogika között játékok és alkalmazások fejlesztésében.",
+      "docker_desc": "Éles környezetek precíz hangszerelése és biztonságos, saját üzemeltetésű infrastruktúrák kezelése."
+    }
   },
   "projects": {
     "sectionTitle": "Kiemelt Projektek",
@@ -117,5 +128,6 @@
     "messagePlaceholder": "Írd le pár szóban a projektet...",
     "sendButton": "Üzenet küldése",
     "alert": "Üzenet elküldve!"
-  }
+  },
+  "common": { "close": "Bezár" }
 }

@@ -10,6 +10,7 @@ import {
   Play,
   VolumeX,
   Maximize2,
+  ExternalLink,
 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 import { useCallback, useEffect, useRef, useState } from "react";
@@ -23,6 +24,7 @@ interface Song {
   duration: number;
   id: string;
   title: string;
+  backlink?: string;
 }
 
 const Hobbies = () => {
@@ -30,7 +32,6 @@ const Hobbies = () => {
   const userEmail = user?.primaryEmailAddress?.emailAddress;
   const { t } = useTranslation();
 
-  const [loading, setLoading] = useState<boolean>(true);
   const [music, setMusic] = useState<Song[]>([]);
   const [isUploadModalOpen, setIsUploadModalOpen] = useState(false);
 
@@ -39,9 +40,14 @@ const Hobbies = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [volume, setVolume] = useState(1);
-  const [isDraggingVolume, setIsDraggingVolume] = useState(false);
 
+  // Dragging States
+  const [isDraggingVolume, setIsDraggingVolume] = useState(false);
+  const [isDraggingProgress, setIsDraggingProgress] = useState(false);
+
+  // Animation Refs
   const discRef = useRef<HTMLDivElement>(null);
+  const stickyDiscRef = useRef<HTMLDivElement>(null);
   const rotationRef = useRef(0);
   const velocityRef = useRef(0);
   const isPlayingRef = useRef(isPlaying);
@@ -51,7 +57,10 @@ const Hobbies = () => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const progressBarRef = useRef<HTMLDivElement>(null);
   const stickyProgressBarRef = useRef<HTMLDivElement>(null);
+
   const volumeBarRef = useRef<HTMLDivElement>(null);
+  const stickyVolumeBarRef = useRef<HTMLDivElement>(null);
+
   const playAnimationRef = useRef<number>(null);
   const mainContainerRef = useRef<HTMLElement>(null);
 
@@ -60,7 +69,7 @@ const Hobbies = () => {
       ([entry]) => {
         setIsMainPlayerVisible(entry.isIntersecting);
       },
-      { threshold: 0.2 }
+      { threshold: 0.2 },
     );
 
     if (mainContainerRef.current) {
@@ -81,38 +90,38 @@ const Hobbies = () => {
   useEffect(() => {
     const fetchSongs = async () => {
       try {
-        const response = await fetch("http://localhost:8080/songs");
+        const response = await fetch("/songs");
         if (!response.ok) throw new Error("Network response was not ok!");
         const data = await response.json();
-        setMusic(data);
+        setMusic(data || []);
       } catch (error) {
         console.error("Failed to fetch music:", error);
-      } finally {
-        setLoading(false);
+        setMusic([]);
       }
     };
     fetchSongs();
   }, []);
 
   const animate = useCallback(() => {
-    if (audioRef.current) {
+    if (audioRef.current && !isDraggingProgress) {
       setCurrentTime(audioRef.current.currentTime);
     }
 
     const targetSpeed = isPlayingRef.current ? 0.5 : 0;
-
     velocityRef.current += (targetSpeed - velocityRef.current) * 0.005;
-
     rotationRef.current += velocityRef.current;
 
     if (discRef.current) {
       discRef.current.style.transform = `rotate(${rotationRef.current}deg)`;
     }
+    if (stickyDiscRef.current) {
+      stickyDiscRef.current.style.transform = `rotate(${rotationRef.current}deg)`;
+    }
 
     if (isPlayingRef.current || Math.abs(velocityRef.current) > 0.01) {
       playAnimationRef.current = requestAnimationFrame(animate);
     }
-  }, []);
+  }, [isDraggingProgress]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -130,8 +139,15 @@ const Hobbies = () => {
   useEffect(() => {
     if (isDraggingVolume) {
       const handleGlobalMouseMove = (e: MouseEvent) => {
-        if (!volumeBarRef.current || !audioRef.current) return;
-        const rect = volumeBarRef.current.getBoundingClientRect();
+        let rect: DOMRect | undefined;
+        if (isMainPlayerVisible && volumeBarRef.current) {
+          rect = volumeBarRef.current.getBoundingClientRect();
+        } else if (stickyVolumeBarRef.current) {
+          rect = stickyVolumeBarRef.current.getBoundingClientRect();
+        }
+
+        if (!rect || !audioRef.current) return;
+
         const offsetX = e.clientX - rect.left;
         let newVolume = offsetX / rect.width;
         if (newVolume < 0) newVolume = 0;
@@ -147,7 +163,49 @@ const Hobbies = () => {
         window.removeEventListener("mouseup", handleGlobalMouseUp);
       };
     }
-  }, [isDraggingVolume]);
+  }, [isDraggingVolume, isMainPlayerVisible]);
+
+  useEffect(() => {
+    if (isDraggingProgress) {
+      const handleProgressMove = (e: MouseEvent) => {
+        if (!audioRef.current) return;
+
+        let rect: DOMRect | undefined;
+        if (isMainPlayerVisible && progressBarRef.current) {
+          rect = progressBarRef.current.getBoundingClientRect();
+        } else if (stickyProgressBarRef.current) {
+          rect = stickyProgressBarRef.current.getBoundingClientRect();
+        }
+
+        if (!rect) return;
+
+        const clickX = e.clientX - rect.left;
+        const width = rect.width;
+        let percentage = clickX / width;
+
+        // Clamp
+        if (percentage < 0) percentage = 0;
+        if (percentage > 1) percentage = 1;
+
+        const newTime = percentage * duration;
+        setCurrentTime(newTime);
+      };
+
+      const handleProgressUp = () => {
+        if (audioRef.current) {
+          audioRef.current.currentTime = currentTime;
+        }
+        setIsDraggingProgress(false);
+      };
+
+      window.addEventListener("mousemove", handleProgressMove);
+      window.addEventListener("mouseup", handleProgressUp);
+      return () => {
+        window.removeEventListener("mousemove", handleProgressMove);
+        window.removeEventListener("mouseup", handleProgressUp);
+      };
+    }
+  }, [isDraggingProgress, duration, isMainPlayerVisible, currentTime]);
 
   const playSelectedTrack = (id: string) => {
     if (activeTrack === id) {
@@ -160,7 +218,7 @@ const Hobbies = () => {
 
   useEffect(() => {
     if (activeTrack && audioRef.current) {
-      audioRef.current.src = `http://localhost:8080/stream/${activeTrack}`;
+      audioRef.current.src = `/stream/${activeTrack}`;
       audioRef.current.play();
       setIsPlaying(true);
     }
@@ -168,21 +226,29 @@ const Hobbies = () => {
 
   const togglePlay = () => {
     if (!audioRef.current) return;
+
+    if (!activeTrack) {
+      if (music.length === 0) return;
+      setActiveTrack(music[0].id);
+      return;
+    }
+
     if (isPlaying) audioRef.current.pause();
     else audioRef.current.play();
+
     setIsPlaying(!isPlaying);
   };
 
   const onTimeUpdate = () => {
-    if (audioRef.current) {
+    if (audioRef.current && !isDraggingProgress) {
       setCurrentTime(audioRef.current.currentTime);
       setDuration(audioRef.current.duration || 0);
     }
   };
 
-  const handleSeek = (
+  const handleSeekClick = (
     e: React.MouseEvent<HTMLDivElement>,
-    ref: React.RefObject<HTMLDivElement | null>
+    ref: React.RefObject<HTMLDivElement | null>,
   ) => {
     if (!ref.current || !audioRef.current) return;
     const rect = ref.current.getBoundingClientRect();
@@ -216,6 +282,12 @@ const Hobbies = () => {
     });
   };
 
+  const openLink = (song: Song) => {
+    if (!song.backlink) return;
+
+    window.open(song.backlink, "_blank", "noopener,noreferrer");
+  };
+
   const progressPercent = duration ? (currentTime / duration) * 100 : 0;
   const currentSong = music.find((m) => m.id === activeTrack);
 
@@ -236,6 +308,16 @@ const Hobbies = () => {
         <ChamferBox cutSize={30} borderColor="rgba(255,255,255,0.05)" noPadding>
           <div className={styles.playerLayout}>
             <div className={styles.albumArtContainer}>
+              {currentSong?.backlink && (
+                <button
+                  className={styles.openMusic}
+                  onClick={() => {
+                    openLink(currentSong);
+                  }}
+                >
+                  <ExternalLink />
+                </button>
+              )}
               <div className={styles.vinylRecord} ref={discRef}>
                 <div className={styles.vinylLabel}>
                   <img
@@ -305,7 +387,10 @@ const Hobbies = () => {
                   <div
                     className={styles.progressBar}
                     ref={progressBarRef}
-                    onClick={(e) => handleSeek(e, progressBarRef)}
+                    onMouseDown={(e) => {
+                      handleSeekClick(e, progressBarRef);
+                      setIsDraggingProgress(true);
+                    }}
                   >
                     <div
                       className={styles.progressFill}
@@ -365,7 +450,7 @@ const Hobbies = () => {
                           volumeBarRef.current.getBoundingClientRect();
                         const newVol = Math.max(
                           0,
-                          Math.min(1, (e.clientX - rect.left) / rect.width)
+                          Math.min(1, (e.clientX - rect.left) / rect.width),
                         );
                         setVolume(newVol);
                         audioRef.current.volume = newVol;
@@ -387,12 +472,15 @@ const Hobbies = () => {
       </section>
 
       <div
-        className={`${styles.stickyPlayer} ${!isMainPlayerVisible && activeTrack ? styles.visible : ""}`}
+        className={`${styles.stickyPlayer} ${!isMainPlayerVisible && isPlaying ? styles.visible : ""}`}
       >
         <div
           className={styles.stickyProgressContainer}
           ref={stickyProgressBarRef}
-          onClick={(e) => handleSeek(e, stickyProgressBarRef)}
+          onMouseDown={(e) => {
+            handleSeekClick(e, stickyProgressBarRef);
+            setIsDraggingProgress(true);
+          }}
         >
           <div
             className={styles.stickyProgressFill}
@@ -402,17 +490,33 @@ const Hobbies = () => {
 
         <div className={styles.stickyContent}>
           <div className={styles.stickyInfo}>
+            {currentSong?.backlink && (
+              <button
+                className={styles.openMusicSmall}
+                onClick={() => {
+                  openLink(currentSong);
+                }}
+              >
+                <ExternalLink />
+              </button>
+            )}
+            <div className={styles.miniVinyl} ref={stickyDiscRef}>
+              <img
+                src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                alt="Album Art"
+              />
+            </div>
+
             {currentSong && (
-              <>
-                <div className={styles.stickyText}>
-                  <span className={styles.stickyTitle}>
-                    {currentSong.title}
-                  </span>
-                  <span className={styles.stickyArtist}>
-                    {currentSong.artist}
-                  </span>
-                </div>
-              </>
+              <div className={styles.stickyText}>
+                <span className={styles.stickyTitle}>{currentSong.title}</span>
+                <span className={styles.stickyArtist}>
+                  {currentSong.artist}
+                </span>
+                <span className={styles.stickyDuration}>
+                  {formatTime(currentTime)} / {formatTime(duration)}
+                </span>
+              </div>
             )}
           </div>
 
@@ -439,6 +543,33 @@ const Hobbies = () => {
           </div>
 
           <div className={styles.stickyActions}>
+            <div className={styles.stickyVolumeBox}>
+              <div
+                className={styles.volumeBar}
+                style={{ width: "60px" }}
+                ref={stickyVolumeBarRef}
+                onMouseDown={(e) => {
+                  setIsDraggingVolume(true);
+                  if (!stickyVolumeBarRef.current || !audioRef.current) return;
+                  const rect =
+                    stickyVolumeBarRef.current.getBoundingClientRect();
+                  const newVol = Math.max(
+                    0,
+                    Math.min(1, (e.clientX - rect.left) / rect.width),
+                  );
+                  setVolume(newVol);
+                  audioRef.current.volume = newVol;
+                }}
+              >
+                <div
+                  className={styles.volumeFill}
+                  style={{ width: `${volume * 100}%` }}
+                >
+                  <div className={styles.volumeHandle}></div>
+                </div>
+              </div>
+            </div>
+
             <button
               className={styles.stickyBtn}
               onClick={scrollToPlayer}
@@ -453,7 +584,6 @@ const Hobbies = () => {
       <UploadModal
         isOpen={isUploadModalOpen}
         onClose={() => {
-          setLoading(true);
           setIsUploadModalOpen(false);
         }}
       />

@@ -5,7 +5,6 @@ import { Mail, PhoneCall, Send } from "lucide-react";
 import styles from "./Contact.module.scss";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { URL_BASEAPTH } from "@/App";
 import { useAuth } from "@clerk/clerk-react";
 
 interface Contact {
@@ -32,7 +31,7 @@ const Contact = () => {
     try {
       const token = await getToken();
 
-      const response = await fetch(URL_BASEAPTH + "contact", {
+      const response = await fetch("/contact", {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,

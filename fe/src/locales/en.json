@@ -11,7 +11,7 @@
     "hi": "Hello, I am",
     "firstName": "Bernáth",
     "lastName": "Márk Bence",
-    "description": "Fullstack developer with 3 years of experience, including work at Deutsche Telekom. Specialized in Angular, React, and Svelte, with a strong interest in end-to-end development. Co-founder of Code_Craftsmen, delivering custom software solutions.",
+    "description": "Software Engineer and Team Lead with a proven track record in building complex full-stack applications. Expert in modern frontend ecosystems (Angular, React, Svelte) and robust backend architectures (Java, Go). Dedicated to delivering bespoke, high-performance digital products.",
     "hireMe": "Hire me",
     "viewWork": "View Work"
   },
@@ -20,7 +20,18 @@
     "subtitle": "Tools and technologies I use to build digital products.",
     "expert": "Expert",
     "advanced": "Advanced",
-    "intermediate": "Intermediate"
+    "intermediate": "Intermediate",
+    "descriptions": {
+      "react_desc": "Specializing in dynamic, high-performance UIs, from complex AI-driven dashboards to seamless conversational interfaces.",
+      "angular_desc": "Engineering enterprise-grade, scalable web applications with a focus on modular architecture and long-term maintainability.",
+      "ts_desc": "Leveraging strict typing to build bulletproof, bug-free codebases that scale effortlessly across complex architectures.",
+      "svelte_desc": "Crafting next-generation, lightweight interfaces that prioritize raw speed and exceptional user experience.",
+      "java_desc": "Architecting secure, robust backend systems capable of handling complex business logic and high-volume data flow.",
+      "go_desc": "Building high-concurrency microservices and low-latency APIs optimized for maximum efficiency and speed.",
+      "git_desc": "Managing complex development workflows to ensure code integrity and seamless collaboration in fast-paced environments.",
+      "csharp_desc": "Bridging the gap between interactive 3D experiences and robust software logic for games and applications.",
+      "docker_desc": "Orchestrating production-ready deployments and managing secure, self-hosted infrastructure with precision."
+    }
   },
   "projects": {
     "sectionTitle": "Featured Projects",
@@ -117,5 +128,6 @@
     "messagePlaceholder": "Tell me about your project...",
     "sendButton": "Send Message",
     "alert": "Message Sent!"
-  }
+  },
+  "common": { "close": "Close" }
 }

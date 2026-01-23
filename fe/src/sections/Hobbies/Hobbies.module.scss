@@ -70,7 +70,6 @@
   max-height: 225px;
   overflow-y: scroll;
 
-
   mask-image: linear-gradient(to bottom,
       transparent 0%,
       black 20px,
@@ -271,9 +270,22 @@
   border-radius: 9999px;
   transition: transform 0.2s;
 
+  cursor: pointer;
+
   &:hover {
     transform: scale(1.1);
+
+    &:disabled {
+      opacity: 0.4;
+      transform: none;
+    }
+
+    &:disabled:hover {
+      transform: none;
+    }
   }
+
+
 }
 
 .volumeControls {
@@ -404,9 +416,10 @@
   background-color: rgba(255, 255, 255, 0.1);
   cursor: pointer;
   transition: height 0.2s ease;
+  z-index: 102;
 
   &:hover {
-    height: 6px;
+    height: 8px;
   }
 }
 
@@ -414,7 +427,6 @@
   height: 100%;
   background-color: $accent;
   box-shadow: 0 0 10px rgba($accent, 0.5);
-  transition: width 0.1s linear;
 }
 
 .stickyContent {
@@ -435,6 +447,23 @@
   overflow: hidden;
 }
 
+/* NEW MINI VINYL STYLE */
+.miniVinyl {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 2px solid #222;
+  background: #000;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
 .stickyText {
   display: flex;
   flex-direction: column;
@@ -453,6 +482,13 @@
 .stickyArtist {
   color: #9ca3af;
   font-size: 0.75rem;
+}
+
+.stickyDuration {
+  color: #555;
+  font-size: 0.7rem;
+  font-family: monospace;
+  margin-top: 2px;
 }
 
 .stickyControls {
@@ -496,6 +532,15 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  gap: 1rem;
+}
+
+.stickyVolumeBox {
+  display: none; // Hide on mobile
+
+  @include md {
+    display: block;
+  }
 }
 
 .stickyBtn {
@@ -520,7 +565,11 @@
   }
 
   .stickyInfo {
-    max-width: 40%;
+    max-width: 50%;
+  }
+
+  .stickyDuration {
+    display: none; // Hide duration string on very small screens
   }
 }
 
@@ -534,8 +583,8 @@
 }
 
 .vinylRecord {
-  width: 280px;
-  height: 280px;
+  width: 260px;
+  height: 260px;
   border-radius: 50%;
   background-color: #1a1a1a;
   background-image:
@@ -578,4 +627,49 @@
   border-radius: 50%;
   position: absolute;
   z-index: 3;
+}
+
+.openMusic {
+  all: unset;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  border-radius: 8px;
+  padding: 8px;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #888888;
+  color: black;
+  cursor: pointer;
+
+  &:hover {
+    transition: background-color 0.2s ease-in-out;
+    background-color: #13151a;
+    color: white;
+  }
+}
+
+.openMusicSmall {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 8px;
+  padding: 8px;
+  transition: background-color 0.2s ease-in-out;
+  background-color: #888888;
+  color: black;
+
+  &:hover {
+    transition: background-color 0.2s ease-in-out;
+    background-color: #13151a;
+    color: white;
+  }
 }
