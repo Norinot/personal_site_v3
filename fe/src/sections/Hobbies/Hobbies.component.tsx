@@ -52,6 +52,10 @@ const Hobbies = () => {
   const velocityRef = useRef(0);
   const isPlayingRef = useRef(isPlaying);
 
+  const timeTextRef = useRef<HTMLDivElement>(null);
+  const progressFillRef = useRef<HTMLDivElement>(null);
+  const stickyProgressFillRef = useRef<HTMLDivElement>(null);
+
   const [isMainPlayerVisible, setIsMainPlayerVisible] = useState(true);
 
   const audioRef = useRef<HTMLAudioElement>(null);
@@ -103,10 +107,6 @@ const Hobbies = () => {
   }, []);
 
   const animate = useCallback(() => {
-    if (audioRef.current && !isDraggingProgress) {
-      setCurrentTime(audioRef.current.currentTime);
-    }
-
     const targetSpeed = isPlayingRef.current ? 0.5 : 0;
     velocityRef.current += (targetSpeed - velocityRef.current) * 0.005;
     rotationRef.current += velocityRef.current;
@@ -116,6 +116,24 @@ const Hobbies = () => {
     }
     if (stickyDiscRef.current) {
       stickyDiscRef.current.style.transform = `rotate(${rotationRef.current}deg)`;
+    }
+
+    if (audioRef.current && !isDraggingProgress) {
+      const curr = audioRef.current.currentTime;
+      const dur = audioRef.current.duration || 1;
+      const pct = (curr / dur) * 100;
+
+      if (progressFillRef.current) {
+        progressFillRef.current.style.width = `${pct}%`;
+      }
+
+      if (stickyProgressFillRef.current) {
+        stickyProgressFillRef.current.style.width = `${pct}%`;
+      }
+
+      if (timeTextRef.current) {
+        timeTextRef.current.innerText = formatTime(curr);
+      }
     }
 
     if (isPlayingRef.current || Math.abs(velocityRef.current) > 0.01) {
@@ -240,9 +258,10 @@ const Hobbies = () => {
   };
 
   const onTimeUpdate = () => {
-    if (audioRef.current && !isDraggingProgress) {
-      setCurrentTime(audioRef.current.currentTime);
-      setDuration(audioRef.current.duration || 0);
+    if (audioRef.current) {
+      if (audioRef.current.duration !== duration) {
+        setDuration(audioRef.current.duration || 0);
+      }
     }
   };
 
@@ -288,7 +307,6 @@ const Hobbies = () => {
     window.open(song.backlink, "_blank", "noopener,noreferrer");
   };
 
-  const progressPercent = duration ? (currentTime / duration) * 100 : 0;
   const currentSong = music.find((m) => m.id === activeTrack);
 
   return (
@@ -381,8 +399,8 @@ const Hobbies = () => {
 
               <div className={styles.controlBox}>
                 <div className={styles.timeBar}>
-                  <div className={styles.timeStamp}>
-                    {formatTime(currentTime)}
+                  <div className={styles.timeStamp} ref={timeTextRef}>
+                    00:00
                   </div>
                   <div
                     className={styles.progressBar}
@@ -394,7 +412,8 @@ const Hobbies = () => {
                   >
                     <div
                       className={styles.progressFill}
-                      style={{ width: `${progressPercent}%` }}
+                      ref={progressFillRef}
+                      style={{ width: "0%" }}
                     >
                       <div className={styles.progressHandle}></div>
                     </div>
@@ -484,7 +503,8 @@ const Hobbies = () => {
         >
           <div
             className={styles.stickyProgressFill}
-            style={{ width: `${progressPercent}%` }}
+            ref={stickyProgressFillRef}
+            style={{ width: "0%" }}
           ></div>
         </div>
 
