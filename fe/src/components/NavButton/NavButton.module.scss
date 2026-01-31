@@ -1,6 +1,4 @@
-$accent: var(--accent);
-$gray-400: #9ca3af;
-$white: #ffffff;
+@use "@/styles/variables" as *;
 
 .navBtn {
   padding: 0.5rem 1rem;
@@ -13,20 +11,17 @@ $white: #ffffff;
   border: none;
   cursor: pointer;
 
-
-  color: $gray-400;
+  color: var(--text-muted);
 
   &:hover {
-    color: $white;
+    color: var(--text-main);
   }
 }
 
-
 .active {
-  color: $accent;
-
+  color: var(--accent);
 
   &:hover {
-    color: $accent;
+    color: var(--accent);
   }
 }

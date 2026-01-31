@@ -17,9 +17,10 @@
 }
 
 .headerInner {
-  backdrop-filter: blur(12px);
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--accent-dim);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
   height: 100%;
 }
@@ -47,18 +48,28 @@
   font-size: 1.5rem;
   font-weight: 700;
   letter-spacing: 0.1em;
-  color: white;
+  color: var(--text-main);
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+
+  &:hover .logoBox {
+    transform: rotate(45deg);
+  }
 }
 
 .logoBox {
-  width: 2rem;
-  height: 2rem;
-  background-color: #33ff00;
-}
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
+  border-radius: 2px;
+  transition: transform 0.3s ease;
 
+  &:hover {
+    transform: rotate(45deg);
+  }
+}
 
 .navLinks {
   display: none;
@@ -80,16 +91,22 @@
   }
 }
 
-
-
 .contactBtnText {
   padding: 0.5rem 1.5rem;
   color: black;
+  background-color: var(--accent);
   font-weight: 700;
   text-transform: uppercase;
   font-size: 0.875rem;
-  letter-spacing: 0.025em;
+  letter-spacing: 0.05em;
   white-space: nowrap;
+  transition: all 0.2s ease;
+
+  &:hover {
+    box-shadow: var(--glow);
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+  }
 
   &.centerText {
     text-align: center;
@@ -110,14 +127,16 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  color: #d1d5db;
+  color: var(--text-muted);
   transition: color 150ms ease;
   cursor: pointer;
   min-width: 80px;
   justify-content: space-between;
 
   &:hover {
-    color: #ffffff;
+    color: var(--text-main);
+    border-color: var(--accent-dim);
+    background-color: var(--bg-card);
   }
 }
 
@@ -147,6 +166,10 @@
   left: 0;
   right: 0;
   margin-top: 0.5rem;
+
+  background-color: var(--bg-card);
+  overflow: hidden;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
 }
 
 .menuList {
@@ -161,10 +184,15 @@
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: background-color 150ms, color 150ms;
-  color: #9ca3af;
+  color: var(--text-muted);
+
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--bg-card-hover);
+    color: var(--text-main);
   }
 
   &.active {
@@ -185,8 +213,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: white;
+  color: var(--text-main);
   cursor: pointer;
+  transition: color 0.2s;
+
+  &:hover {
+    color: var(--accent);
+    filter: drop-shadow(0 0 5px var(--accent-dim));
+  }
 }
 
 .mobileMenuContainer {
@@ -195,13 +229,13 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(13, 17, 22, 0.98);
+  background: var(--bg-dark);
   backdrop-filter: blur(20px);
   z-index: 40;
   display: flex;
   flex-direction: column;
   padding: 2rem 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--accent-dim);
   animation: slideIn 0.3s ease-out;
 
   @include lg {
@@ -236,7 +270,7 @@
 
 .mobileSeparator {
   height: 1px;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--accent-dim);
   width: 100%;
 }
 
@@ -250,23 +284,39 @@
 .mobileLangRow {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
   gap: 1rem;
 }
 
 .mobileLangBtn {
   padding: 0.75rem 1.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: #9ca3af;
+  border: 1px solid var(--accent-dim);
+  color: var(--text-muted);
   font-weight: 700;
   cursor: pointer;
-  background: rgba(255, 255, 255, 0.02);
-  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+  background: var(--bg-card);
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--text-main);
+  }
 
   &.activeLang {
     background: var(--accent);
     color: black;
     border-color: var(--accent);
+    box-shadow: var(--glow);
   }
+}
+
+
+.themeDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  display: inline-block;
 }
 
 @keyframes slideIn {

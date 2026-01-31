@@ -1,6 +1,5 @@
 @use "@/styles/variables" as *;
 
-
 .experienceList {
   display: flex;
   flex-direction: column;
@@ -10,14 +9,14 @@
 .expDetails {
   list-style-type: disc;
   padding-left: 1.25rem;
-  color: $text-light-gray;
+  color: var(--text-muted);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
 .expHeader {
-  color: $accent;
+  color: var(--accent);
   list-style: none;
   font-weight: 700;
   text-transform: uppercase;
@@ -25,21 +24,44 @@
   margin-bottom: 0.5rem;
   letter-spacing: 0.05em;
   margin-left: -1.25rem;
+
+  text-shadow: 0 0 8px var(--accent-dim);
 }
 
 .locationWrapper {
   display: flex;
   align-items: center;
   gap: 0.25rem;
+  transition: opacity 0.2s ease;
+  cursor: default;
 
   .locationText {
     font-size: 0.875rem;
     line-height: 1.25rem;
-    color: #6b7280;
+    color: var(--text-muted);
+    transition: color 0.2s ease;
   }
 
   .locationIcon {
-    color: #6b7280;
+    color: var(--text-muted);
     flex-shrink: 0;
+    transition: color 0.2s ease, transform 0.2s ease;
   }
+
+  &:hover {
+    .locationText {
+      color: var(--text-main);
+    }
+
+    .locationIcon {
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+  }
+}
+
+.highlight {
+  color: var(--accent);
+  font-weight: 600;
+  text-shadow: var(--glow);
 }

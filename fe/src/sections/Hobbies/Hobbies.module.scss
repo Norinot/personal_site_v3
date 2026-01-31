@@ -14,7 +14,7 @@
   width: 100%;
   min-height: 300px;
   position: relative;
-  background-color: #1f2937;
+  background-color: var(--bg-card);
 
   @include md {
     width: 33.333333%;
@@ -26,28 +26,33 @@
   height: 100%;
   object-fit: cover;
   opacity: 0.8;
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%); // Blend it slightly
 }
 
 .albumGradient {
   position: absolute;
   inset: 0;
-  background: linear-gradient(to top, $bg-card, transparent);
+  background: linear-gradient(to top, var(--bg-dark), transparent);
 }
 
 .albumInfo {
   position: absolute;
   bottom: 1.5rem;
   left: 1.5rem;
+  z-index: 10;
 }
 
 .albumTitle {
   font-size: 1.5rem;
   font-weight: 700;
-  color: white;
+  color: var(--text-main);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .albumSubtitle {
-  color: $accent;
+  color: var(--accent);
+  font-weight: 600;
+  text-shadow: 0 0 10px var(--accent-dim);
 }
 
 .playerControlsContainer {
@@ -55,7 +60,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background-color: #13151a;
+  background-color: var(--bg-dark);
 
   @include md {
     width: 66.666667%;
@@ -95,10 +100,8 @@
 }
 
 .trackList::-webkit-scrollbar-thumb {
-  background-color: #9ca3af;
+  background-color: var(--text-muted);
   border-radius: 20px;
-  border: 2px solid transparent;
-  background-clip: content-box;
 }
 
 .trackRow {
@@ -106,17 +109,25 @@
   align-items: center;
   justify-content: space-between;
   padding: 0.75rem;
-  border-radius: 0.25rem;
+  border-radius: 4px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  border: 1px solid transparent;
 
   &:hover {
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: var(--bg-card-hover);
+    border-color: var(--accent-dim);
   }
 }
 
 .trackActive {
-  background-color: rgba(255, 255, 255, 0.05);
+  background-color: var(--bg-card);
+  border-color: var(--accent-dim);
+
+  .trackTitle {
+    color: var(--accent);
+    text-shadow: 0 0 8px var(--accent-dim);
+  }
 }
 
 .trackInfoLeft {
@@ -128,32 +139,34 @@
 .trackIndex {
   font-size: 0.875rem;
   font-family: monospace;
-  color: #4b5563;
+  color: var(--text-muted);
 
   &.active {
-    color: $accent;
+    color: var(--accent);
   }
 }
 
 .trackTitle {
   font-weight: 500;
-  color: white;
+  color: var(--text-main);
+  transition: color 0.2s;
 
   &.active {
-    color: $accent;
+    color: var(--accent);
   }
 }
 
 .trackArtist {
   font-size: 0.75rem;
-  color: #6b7280;
+  color: var(--text-muted);
 }
 
 .trackIndicator {
   width: 0.5rem;
   height: 0.5rem;
-  background-color: $accent;
+  background-color: var(--accent);
   border-radius: 9999px;
+  box-shadow: 0 0 8px var(--accent);
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
@@ -170,10 +183,10 @@
 }
 
 .controlBox {
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: var(--bg-card);
   padding: 1rem;
-  border-radius: 0.5rem;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  border: 1px solid var(--accent-dim);
 }
 
 .timeBar {
@@ -185,7 +198,7 @@
 
 .timeStamp {
   font-size: 0.75rem;
-  color: #6b7280;
+  color: var(--text-muted);
   font-family: monospace;
 }
 
@@ -193,10 +206,11 @@
   flex: 1;
   margin: 0 1rem;
   height: 0.25rem;
-  background-color: #374151;
+  background-color: var(--bg-card-hover);
   border-radius: 9999px;
   position: relative;
   cursor: pointer;
+  overflow: visible;
 
   &::after {
     content: '';
@@ -210,11 +224,11 @@
 
 .progressFill {
   height: 100%;
-  background-color: $accent;
+  background-color: var(--accent);
   border-radius: 9999px;
   position: relative;
+  box-shadow: 0 0 10px var(--accent-dim);
 }
-
 
 .progressHandle {
   position: absolute;
@@ -223,10 +237,11 @@
   transform: translateY(-50%) scale(0);
   width: 12px;
   height: 12px;
-  background-color: white;
+  background-color: var(--text-main);
   border-radius: 50%;
   transition: transform 0.1s;
   pointer-events: none;
+  box-shadow: 0 0 10px var(--accent);
 }
 
 .progressBar:hover .progressHandle {
@@ -250,12 +265,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  color: #9ca3af;
+  color: var(--text-muted);
   cursor: pointer;
   transition: color 0.2s;
 
   &:hover {
-    color: white;
+    color: var(--text-main);
   }
 }
 
@@ -265,27 +280,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $accent;
+  background-color: var(--accent);
   color: black;
   border-radius: 9999px;
   transition: transform 0.2s;
-
   cursor: pointer;
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0);
 
   &:hover {
     transform: scale(1.1);
+    box-shadow: var(--glow);
 
     &:disabled {
       opacity: 0.4;
       transform: none;
+      box-shadow: none;
     }
 
     &:disabled:hover {
       transform: none;
     }
   }
-
-
 }
 
 .volumeControls {
@@ -297,7 +312,7 @@
 .volumeBar {
   width: 5rem;
   height: 0.25rem;
-  background-color: #374151;
+  background-color: var(--bg-card-hover);
   border-radius: 9999px;
   position: relative;
   cursor: pointer;
@@ -314,12 +329,15 @@
 
 .volumeFill {
   height: 100%;
-  background-color: #9ca3af;
+  background-color: var(--text-muted);
   border-radius: 9999px;
   position: relative;
   pointer-events: none;
 }
 
+.volumeBar:hover .volumeFill {
+  background-color: var(--text-main);
+}
 
 .volumeHandle {
   position: absolute;
@@ -351,7 +369,7 @@
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: $gray-500;
+  color: var(--text-muted);
 }
 
 .addButton {
@@ -365,15 +383,15 @@
   cursor: pointer;
 
   .icon {
-    color: $gray-500;
+    color: var(--text-muted);
     transition: color 150ms ease;
   }
 
   &:hover {
-    background-color: rgba(114, 111, 111, 0.1);
+    background-color: var(--bg-card);
 
     .icon {
-      color: $accent;
+      color: var(--accent);
     }
   }
 }
@@ -393,9 +411,11 @@
   left: 0;
   right: 0;
   height: 80px;
-  background-color: rgba(19, 21, 26, 0.95);
-  backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+
+  background-color: rgba(10, 10, 10, 0.9);
+  backdrop-filter: blur(12px);
+
+  border-top: 1px solid var(--accent-dim);
   z-index: 100;
 
   transform: translateY(100%);
@@ -413,7 +433,7 @@
   left: 0;
   right: 0;
   height: 3px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: transparent;
   cursor: pointer;
   transition: height 0.2s ease;
   z-index: 102;
@@ -425,8 +445,8 @@
 
 .stickyProgressFill {
   height: 100%;
-  background-color: $accent;
-  box-shadow: 0 0 10px rgba($accent, 0.5);
+  background-color: var(--accent);
+  box-shadow: 0 0 10px var(--accent);
 }
 
 .stickyContent {
@@ -447,14 +467,13 @@
   overflow: hidden;
 }
 
-/* NEW MINI VINYL STYLE */
 .miniVinyl {
   width: 48px;
   height: 48px;
   border-radius: 50%;
   overflow: hidden;
   flex-shrink: 0;
-  border: 2px solid #222;
+  border: 2px solid var(--bg-card);
   background: #000;
 
   img {
@@ -471,7 +490,7 @@
 }
 
 .stickyTitle {
-  color: white;
+  color: var(--text-main);
   font-weight: 600;
   font-size: 0.9rem;
   white-space: nowrap;
@@ -480,12 +499,12 @@
 }
 
 .stickyArtist {
-  color: #9ca3af;
+  color: var(--text-muted);
   font-size: 0.75rem;
 }
 
 .stickyDuration {
-  color: #555;
+  color: var(--text-muted);
   font-size: 0.7rem;
   font-family: monospace;
   margin-top: 2px;
@@ -501,20 +520,20 @@
 
 .stickySkip {
   all: unset;
-  color: #9ca3af;
+  color: var(--text-muted);
   cursor: pointer;
   transition: color 0.2s;
   display: flex;
 
   &:hover {
-    color: white;
+    color: var(--text-main);
   }
 }
 
 .stickyPlay {
   width: 2.5rem;
   height: 2.5rem;
-  background-color: white;
+  background-color: var(--text-main);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -536,7 +555,7 @@
 }
 
 .stickyVolumeBox {
-  display: none; // Hide on mobile
+  display: none;
 
   @include md {
     display: block;
@@ -545,15 +564,14 @@
 
 .stickyBtn {
   all: unset;
-  color: #9ca3af;
+  color: var(--text-muted);
   cursor: pointer;
   padding: 0.5rem;
 
   &:hover {
-    color: $accent;
+    color: var(--accent);
   }
 }
-
 
 @media (max-width: 768px) {
   .stickyPlayer {
@@ -569,10 +587,9 @@
   }
 
   .stickyDuration {
-    display: none; // Hide duration string on very small screens
+    display: none;
   }
 }
-
 
 .albumArtContainer {
   display: flex;
@@ -594,7 +611,7 @@
       #222 3px,
       #222 4px);
   position: relative;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -631,7 +648,6 @@
 
 .openMusic {
   all: unset;
-
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -643,14 +659,17 @@
   border-radius: 8px;
   padding: 8px;
   transition: background-color 0.2s ease-in-out;
-  background-color: #888888;
-  color: black;
+
+  background-color: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid var(--accent-dim);
   cursor: pointer;
 
   &:hover {
-    transition: background-color 0.2s ease-in-out;
-    background-color: #13151a;
-    color: white;
+    background-color: var(--bg-card-hover);
+    color: var(--text-main);
+    border-color: var(--accent);
+    box-shadow: var(--glow);
   }
 }
 
@@ -664,12 +683,14 @@
   border-radius: 8px;
   padding: 8px;
   transition: background-color 0.2s ease-in-out;
-  background-color: #888888;
-  color: black;
+
+  background-color: var(--bg-card);
+  color: var(--text-muted);
+  border: 1px solid transparent;
 
   &:hover {
-    transition: background-color 0.2s ease-in-out;
-    background-color: #13151a;
-    color: white;
+    background-color: var(--bg-card-hover);
+    color: var(--text-main);
+    border-color: var(--accent-dim);
   }
 }

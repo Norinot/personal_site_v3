@@ -1,6 +1,3 @@
-$accent: var(--accent);
-$text-muted: var(--text-muted);
-
 .container {
   margin-bottom: 3rem;
 }
@@ -15,17 +12,17 @@ $text-muted: var(--text-muted);
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: white;
+  color: var(--text);
 }
 
 .accentBar {
   display: block;
   width: 2rem;
   height: 0.25rem;
-  background-color: $accent;
+  background-color: var(--accent);
 }
 
 .subtitle {
-  color: $text-muted;
+  color: var(--text-muted);
   margin-left: 2.75rem;
 }

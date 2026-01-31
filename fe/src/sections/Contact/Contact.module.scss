@@ -22,12 +22,74 @@
   gap: 1.5rem;
 }
 
+.inputGroup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.errorText {
+  color: var(--accent-secondary);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-left: 0.5rem;
+  animation: fadeIn 0.3s ease;
+}
+
+
+.statusWrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transition: grid-template-rows 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 0.4s ease,
+    margin-top 0.4s ease;
+  margin-top: 0;
+
+  &.open {
+    grid-template-rows: 1fr;
+    opacity: 1;
+    margin-top: 0.5rem;
+  }
+}
+
+.overflowHidden {
+  overflow: hidden;
+  min-height: 0;
+}
+
+
+.statusBox {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+
+
+  .message {
+    color: var(--text-on-accent);
+  }
+}
+
 .submitBtnContainer {
   margin-top: 1rem;
+  cursor: pointer;
+
+  &.disabled {
+    opacity: 0.6;
+    pointer-events: none;
+    filter: grayscale(1);
+  }
 }
 
 .submitBtn {
   width: 100%;
+  background-color: var(--accent);
   color: black;
   font-weight: 700;
   text-transform: uppercase;
@@ -37,15 +99,19 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
 }
 
 .contactsWrapper {
   margin-bottom: 40px;
+
   .label {
     font-size: 0.79rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
-    color: $gray-500;
+    color: var(--text-muted);
     font-weight: 700;
     margin-left: 0.25rem;
 
@@ -54,8 +120,26 @@
     gap: 8px;
     align-items: center;
     margin-bottom: 8px;
+
     span {
-      color: rgb(199, 196, 196);
+      color: var(--text-main);
     }
+
+    svg,
+    i {
+      color: var(--accent);
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }

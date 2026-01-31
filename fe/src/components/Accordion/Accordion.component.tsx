@@ -31,7 +31,7 @@ const Accordion: React.FC<AccordionProps> = ({
       <ChamferBox
         cutSize={15}
         className={styles.chamferBox}
-        bg={isOpen ? "#232730" : "var(--bg-card)"}
+        bg={isOpen ? "var(--bg-card-hover)" : "var(--bg-card)"}
         noPadding
       >
         {/* Header Section */}

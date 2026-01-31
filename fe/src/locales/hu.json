@@ -11,7 +11,7 @@
     "hi": "Szia, a nevem",
     "firstName": "Bernáth",
     "lastName": "Márk Bence",
-    "description": "Szoftvermérnök és csapatvezető, bizonyított tapasztalattal komplex full-stack alkalmazások építésében. A modern frontend ökoszisztémák (Angular, React, Svelte) és robusztus backend architektúrák (Java, Go) szakértője. Elkötelezett az egyedi, nagy teljesítményű digitális termékek szállítása iránt.",
+    "description": "<0>Szoftvermérnök</0> és <0>csapatvezető</0>, bizonyított tapasztalattal komplex <0>full-stack</0> alkalmazások építésében. A <0>modern frontend</0> ökoszisztémák (<1>Angular</1>, <2>React</2>, <3>Svelte</3>) és robusztus backend architektúrák (<4>Java</4>, <5>Go</5>) szakértője. Elkötelezett az egyedi, <0>nagy teljesítményű</0> digitális termékek szállítása iránt.",
     "hireMe": "Dolgozzunk együtt",
     "viewWork": "Munkáim"
   },
@@ -88,26 +88,26 @@
         "role": "Szoftverfejlesztő",
         "company": "Deutsche Telekom System Solutions",
         "bullets": [
-          "Frontend alkalmazások fejlesztése és karbantartása Angular, React és Svelte használatával.",
-          "Együttműködés keresztfunkcionális csapatokkal felhasználóközpontú funkciók tervezésében.",
-          "Full-stack fejlesztés támogatása Go és Java (Spring Boot) backend megoldásokkal.",
-          "Alkalmazásteljesítmény optimalizálása és a kód karbantarthatóságának biztosítása.",
-          "Frontend tesztcsomagok írása és karbantartása Jasmine és Playwright keretrendszerekben.",
-          "Részvétel CI/CD folyamatok hibakeresésében és a telepítési megbízhatóság növelésében.",
-          "Rendszeres kódismétlés (code review) és építészeti visszajelzések a kódminőség javítására.",
-          "Projektek indítása a frontend architektúra és repozitórium-struktúra megtervezésével.",
-          "Szoros együttműködés UX/UI tervezőkkel a végleges design kialakításában.",
-          "Részvétel backend tervezési folyamatokban az API és adatbázis igények összehangolásáért."
+          "Frontend alkalmazások fejlesztése és karbantartása <0>Angular</0>, <0>React</0> és <0>Svelte</0> használatával.",
+          "Együttműködés keresztfunkcionális csapatokkal <0>felhasználóközpontú</0> funkciók tervezésében.",
+          "Full-stack fejlesztés támogatása <0>Go</0> és <0>Java (Spring Boot)</0> backend megoldásokkal.",
+          "<0>Alkalmazásteljesítmény optimalizálása</0> és a kód karbantarthatóságának biztosítása.",
+          "Frontend tesztcsomagok írása és karbantartása <0>Jasmine</0> és <0>Playwright</0> keretrendszerekben.",
+          "Részvétel <0>CI/CD folyamatok</0> hibakeresésében és a telepítési megbízhatóság növelésében.",
+          "Rendszeres <0>kódismétlés (code review)</0> és építészeti visszajelzések a kódminőség javítására.",
+          "Projektek indítása a <0>frontend architektúra</0> és repozitórium-struktúra megtervezésével.",
+          "Szoros együttműködés <0>UX/UI tervezőkkel</0> a végleges design kialakításában.",
+          "Részvétel <0>backend tervezési</0> folyamatokban az API és adatbázis igények összehangolásáért."
         ]
       },
       "code-craftsmen": {
         "role": "Alapító és Vezető Szoftvermérnök",
         "company": "Code_Craftsmen",
         "bullets": [
-          "Mérnökökből és UX/UI tervezőből álló csapat vezetése webes megoldások szállítására.",
-          "Full-stack alkalmazások tervezése és fejlesztése React, Angular, Java, C# és Go nyelveken.",
-          "Projektek életciklusának teljes körű kezelése a UX tervezéstől a karbantartásig.",
-          "Megoldások telepítése Linux VPS-re Docker, NGINX és SSL konfigurációval."
+          "Mérnökökből és <0>UX/UI tervezőből</0> álló csapat vezetése webes megoldások szállítására.",
+          "Full-stack alkalmazások tervezése és fejlesztése <0>React</0>, <0>Angular</0>, <0>Java</0>, <0>C#</0> és <0>Go</0> nyelveken.",
+          "Projektek életciklusának teljes körű kezelése a <0>UX tervezéstől</0> a karbantartásig.",
+          "Megoldások telepítése <0>Linux VPS</0>-re <0>Docker</0>, <0>NGINX</0> és <0>SSL</0> konfigurációval."
         ]
       }
     }
@@ -127,7 +127,13 @@
     "messageLabel": "Üzenet",
     "messagePlaceholder": "Írd le pár szóban a projektet...",
     "sendButton": "Üzenet küldése",
-    "alert": "Üzenet elküldve!"
+    "sendingButton": "Küldés folyamatban...",
+    "successMessage": "Üzenet fogadva! Hamarosan kereslek.",
+    "errorMessage": "Hiba történt a küldéskor. Kérlek próbáld újra.",
+    "errors": {
+      "required": "Ez a mező kötelező.",
+      "invalidEmail": "Érvénytelen email formátum."
+    }
   },
   "common": { "close": "Bezár" }
 }

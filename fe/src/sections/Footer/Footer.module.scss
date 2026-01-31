@@ -23,7 +23,7 @@
 }
 
 .copyright {
-  color: #6b7280;
+  color: var(--accent-muted);
   font-size: 0.875rem;
 }
 
@@ -33,13 +33,13 @@
 }
 
 .footerLink {
-  color: #6b7280;
+  color: var(--accent-muted);
   font-size: 0.875rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   transition: color 0.2s;
 
   &:hover {
-    color: $accent;
+    color: var(--accent);
   }
 }

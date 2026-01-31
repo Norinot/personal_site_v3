@@ -11,7 +11,7 @@
     "hi": "Hello, I am",
     "firstName": "Bernáth",
     "lastName": "Márk Bence",
-    "description": "Software Engineer and Team Lead with a proven track record in building complex full-stack applications. Expert in modern frontend ecosystems (Angular, React, Svelte) and robust backend architectures (Java, Go). Dedicated to delivering bespoke, high-performance digital products.",
+    "description": "<0>Software Engineer</0> and <0>Team Lead</0> with a proven track record in building complex <0>full-stack</0> applications. <0>Expert in modern frontend</0> ecosystems (<1>Angular</1>, <2>React</2>, <3>Svelte</3>) and robust backend architectures (<4>Java</4>,  <5>Go</5>). Dedicated to delivering bespoke, <0>high-performance</0> digital products.",
     "hireMe": "Hire me",
     "viewWork": "View Work"
   },
@@ -88,26 +88,26 @@
         "role": "Software Developer",
         "company": "Deutsche Telekom System Solutions",
         "bullets": [
-          "Developed and maintained frontend applications using Angular, React, and Svelte.",
-          "Collaborated with cross-functional teams to design and implement user-centric features.",
-          "Contributed to backend development with Go and Java (Spring Boot) to support full-stack functionality.",
-          "Optimized application performance and ensured code maintainability.",
-          "Wrote and maintained frontend test suites using Jasmine and Playwright.",
-          "Participated in CI/CD pipeline debugging and enhanced deployment reliability.",
-          "Performed code reviews and provided architectural feedback to improve consistency.",
-          "Initiated projects by designing frontend architecture and repository structures.",
-          "Collaborated with UX/UI designers to integrate suggestions into final designs.",
-          "Participated in backend design discussions to align frontend requirements with APIs."
+          "Developed and maintained frontend applications using <0>Angular</0>, <0>React</0>, and <0>Svelte</0>.",
+          "Collaborated with cross-functional teams to design and implement <0>user-centric features</0>.",
+          "Contributed to backend development with <0>Go</0> and <0>Java (Spring Boot)</0> to support full-stack functionality.",
+          "Optimized <0>application performance</0> and ensured code maintainability.",
+          "Wrote and maintained frontend test suites using <0>Jasmine</0> and <0>Playwright</0>.",
+          "Participated in <0>CI/CD pipeline</0> debugging and enhanced deployment reliability.",
+          "Performed <0>code reviews</0> and provided architectural feedback to improve consistency.",
+          "Initiated projects by designing <0>frontend architecture</0> and repository structures.",
+          "Collaborated with <0>UX/UI designers</0> to integrate suggestions into final designs.",
+          "Participated in <0>backend design</0> discussions to align frontend requirements with APIs."
         ]
       },
       "code-craftsmen": {
         "role": "Founder & Lead Software Engineer",
         "company": "Code_Craftsmen",
         "bullets": [
-          "Led a small team of engineers and a UX/UI designer to deliver web solutions.",
-          "Designed and built full-stack applications using React, Angular, Java, C#, and Go.",
-          "Owned project lifecycles from UX design to implementation and maintenance.",
-          "Deployed solutions to Linux VPS using Docker, NGINX, and SSL setup."
+          "Led a small team of engineers and a <0>UX/UI designer</0> to deliver web solutions.",
+          "Designed and built full-stack applications using <0>React</0>, <0>Angular</0>, <0>Java</0>, <0>C#</0>, and <0>Go</0>.",
+          "Owned project lifecycles from <0>UX design</0> to implementation and maintenance.",
+          "Deployed solutions to <0>Linux VPS</0> using <0>Docker</0>, <0>NGINX</0>, and <0>SSL</0> setup."
         ]
       }
     }
@@ -118,16 +118,22 @@
     "que": "Queue"
   },
   "contact": {
-    "title": "Initialize Contact",
-    "subtitle": "Available for freelance opportunities.",
+    "title": "Get in Touch",
+    "subtitle": "Available for freelance projects.",
     "emailLabel": "Your Email",
-    "emailPlaceholder": "john@doe.com",
+    "emailPlaceholder": "example@email.com",
     "subjectLabel": "Subject",
-    "subjectPlaceholder": "Project Inquiry",
+    "subjectPlaceholder": "Project inquiry",
     "messageLabel": "Message",
-    "messagePlaceholder": "Tell me about your project...",
+    "messagePlaceholder": "Tell me briefly about your project...",
     "sendButton": "Send Message",
-    "alert": "Message Sent!"
+    "sendingButton": "Transmitting...",
+    "successMessage": "Signal received! I'll get back to you soon.",
+    "errorMessage": "Transmission failed. Please try again later.",
+    "errors": {
+      "required": "This field is required.",
+      "invalidEmail": "Please enter a valid email address."
+    }
   },
   "common": { "close": "Close" }
 }

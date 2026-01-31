@@ -1,9 +1,4 @@
-// ChamferInput.module.scss
-
-$accent: var(--accent);
-$gray-500: #6b7280;
-$gray-600: #4b5563;
-$text-white: #ffffff;
+@use "@/styles/variables" as *;
 
 .container {
   display: flex;
@@ -15,7 +10,7 @@ $text-white: #ffffff;
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  color: $gray-500;
+  color: var(--text-muted);
   font-weight: 700;
   margin-left: 0.25rem;
 }
@@ -35,22 +30,22 @@ $text-white: #ffffff;
   background-color: transparent;
   border: none;
   outline: none;
-  color: $text-white;
+  color: var(--text-main);
   font-family: inherit;
   font-size: 1rem;
   padding: 1rem;
   margin: 0;
 
   &::placeholder {
-    color: $gray-500;
+    color: var(--text-muted);
     opacity: 1;
   }
 
   &:-webkit-autofill,
   &:-webkit-autofill:hover,
   &:-webkit-autofill:focus {
-    -webkit-text-fill-color: $text-white;
-    -webkit-box-shadow: 0 0 0px 1000px #0f1115 inset;
+    -webkit-text-fill-color: var(--text-main);
+    -webkit-box-shadow: 0 0 0px 1000px var(--bg-card) inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 }
@@ -61,7 +56,7 @@ $text-white: #ffffff;
 
 .iconWrapper {
   margin-left: 0.75rem;
-  color: $gray-600;
+  color: var(--text-muted);
   transition: color 300ms;
   display: flex;
   align-items: center;
@@ -69,5 +64,5 @@ $text-white: #ffffff;
 }
 
 .iconFocused {
-  color: $accent;
+  color: var(--accent);
 }

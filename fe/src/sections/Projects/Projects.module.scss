@@ -7,7 +7,7 @@
 }
 
 .projectLink {
-  color: $accent;
+  color: var(--accent);
 
   &:hover {
     color: white;

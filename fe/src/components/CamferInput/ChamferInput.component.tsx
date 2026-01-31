@@ -35,6 +35,7 @@ const ChamferInput: React.FC<ChamferInputProps> = ({
             <input
               {...(props as React.InputHTMLAttributes<HTMLInputElement>)}
               className={styles.inputField}
+              value={value}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
             />
@@ -43,6 +44,7 @@ const ChamferInput: React.FC<ChamferInputProps> = ({
               {...(props as React.TextareaHTMLAttributes<HTMLTextAreaElement>)}
               className={`${styles.inputField} ${styles.textarea}`}
               onFocus={() => setIsFocused(true)}
+              value={value}
               onBlur={() => setIsFocused(false)}
             />
           )}

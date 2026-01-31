@@ -47,7 +47,7 @@
   inset: 0;
   z-index: 20;
   overflow: hidden;
-  background-color: #4b5563;
+  background-color: var(--bg-card);
 }
 
 .profileImg {
@@ -55,10 +55,13 @@
   height: 100%;
   object-fit: cover;
   opacity: 0.9;
-  transition: transform 700ms;
+  filter: grayscale(20%);
+  transition: all 700ms ease;
 
   &:hover {
     transform: scale(1.05);
+    filter: grayscale(0%);
+    opacity: 1;
   }
 }
 
@@ -68,10 +71,19 @@
   left: 1rem;
   width: 100%;
   height: 100%;
-  border: 2px solid $accent;
+  border: 2px solid var(--accent);
   opacity: 0.5;
   z-index: 10;
   background: transparent;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.heroImageWrapper:hover .profileBorder {
+  top: 1.5rem;
+  left: 1.5rem;
+  opacity: 1;
+  box-shadow: var(--glow);
 }
 
 .heroContentColumn {
@@ -91,26 +103,33 @@
 }
 
 .greeting {
-  color: $accent;
+  color: var(--accent);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+  text-shadow: 0 0 10px var(--accent-dim);
 }
 
 .mainHeadline {
   font-size: 3rem;
   font-weight: 700;
   line-height: 1.25;
+  color: var(--text-main);
 
   @include md {
     font-size: 4.5rem;
   }
+
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
 }
 
 .introText {
   font-size: 1.25rem;
-  color: $text-gray;
+  color: var(--text-muted);
   margin-top: 1rem;
   max-width: 32rem;
 }
@@ -121,18 +140,6 @@
   padding-top: 1rem;
 }
 
-.socialIcon {
-  padding: 0.75rem;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-radius: 0.125rem;
-  transition: background-color 0.2s, color 0.2s;
-  color: inherit;
-
-  &:hover {
-    background-color: $accent;
-    color: black;
-  }
-}
 
 .ctaRow {
   padding-top: 2rem;
@@ -143,17 +150,92 @@
 .hireBtnText {
   padding: 0.75rem 2rem;
   font-weight: 700;
-  color: black;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.875rem;
+  cursor: pointer;
+
+  background-color: var(--accent);
+  color: black;
+  transition: all 0.2s ease;
+
+  &:hover {
+    filter: brightness(1.1);
+    box-shadow: var(--glow);
+  }
 }
 
 .workBtnText {
   padding: 0.75rem 2rem;
   font-weight: 700;
-  color: black;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   font-size: 0.875rem;
+  cursor: pointer;
+
+  background-color: var(--accent-secondary);
+  color: var(--text-on-accent);
+
+  transition: all 0.2s ease
+}
+
+.highlight {
+  color: var(--accent-secondary);
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(255, 0, 122, 0.3);
+}
+
+
+@keyframes pulse-glow {
+  0% {
+    text-shadow: 0 0 0 rgba(var(--tech-rgb), 0);
+  }
+
+  50% {
+    text-shadow: 0 0 10px var(--tech-color);
+  }
+
+  100% {
+    text-shadow: 0 0 0 rgba(var(--tech-rgb), 0);
+  }
+}
+
+.techHighlight {
+  font-weight: 700;
+  cursor: help;
+  position: relative;
+  transition: all 0.2s ease;
+  color: var(--tech-color);
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  display: inline-block;
+
+  animation: pulse-glow 2s infinite ease-in-out;
+
+  &:hover {
+    opacity: 1;
+    border-bottom-style: solid;
+    border-bottom-color: var(--tech-color);
+    z-index: 10;
+    animation: none;
+  }
+}
+
+.angular {
+  --tech-color: #ff2e63;
+}
+
+.react {
+  --tech-color: #00f0ff;
+}
+
+.svelte {
+  --tech-color: #ff5722;
+}
+
+.java {
+  --tech-color: #f89820;
+}
+
+.go {
+  --tech-color: #00add8;
 }

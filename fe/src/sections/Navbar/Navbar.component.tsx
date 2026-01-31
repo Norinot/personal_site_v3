@@ -1,7 +1,7 @@
 import styles from "./Navbar.module.scss";
 import ChamferBox from "@/components/CamferBox/ChamferBox.component";
 import NavButton from "@/components/NavButton/NavButton.component";
-import { ChevronDown, Globe, Menu, X } from "lucide-react";
+import { ChevronDown, Globe, Menu, X, Palette } from "lucide-react"; 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,13 +10,37 @@ interface NavbarProps {
   scrollTo: (id: string) => void;
 }
 
+const themes = [
+  { id: "cyber", name: "Cyber", color: "#00f0ff" },
+  { id: "ocean", name: "Ocean", color: "#38bdf8" },
+  { id: "terminal", name: "Term", color: "#00ff9d" },
+  { id: "solar", name: "Solar", color: "#fb923c" },
+];
+
 const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
   const { i18n, t } = useTranslation();
 
   const currentLangLabel = i18n.language ? i18n.language.toUpperCase() : "EN";
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
 
+  const [isThemeMenuOpen, setIsThemeMenuOpen] = useState(false);
+  const [currentTheme, setCurrentTheme] = useState("cyber");
+
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("site-theme") || "cyber";
+    setCurrentTheme(savedTheme);
+    document.documentElement.setAttribute("data-theme", savedTheme);
+  }, []);
+
+  const handleThemeChange = (themeId: string) => {
+    setCurrentTheme(themeId);
+    document.documentElement.setAttribute("data-theme", themeId);
+    localStorage.setItem("site-theme", themeId);
+    setIsThemeMenuOpen(false);
+    setIsMobileMenuOpen(false);
+  };
 
   const handleLanguageChange = (lang: string) => {
     i18n.changeLanguage(lang.toLowerCase());
@@ -51,7 +75,6 @@ const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
         <ChamferBox
           variant="bevel"
           cutSize={30}
-          bg="rgba(16, 21, 15, 0.95)"
           className={styles.headerInner}
           noPadding
           style={{ width: "100%", height: "100%" }}
@@ -82,12 +105,68 @@ const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
 
         <div className={styles.wrapper}>
           <div className={styles.desktopExtras}>
+            <div className={styles.dropdownContainer}>
+              <ChamferBox
+                cutSize={10}
+                bg="var(--bg-dark)"
+                borderColor="var(--bg-card-hover)"
+                hoverEffect
+                onClick={() => setIsThemeMenuOpen(!isThemeMenuOpen)}
+                noPadding
+              >
+                <div className={styles.triggerBtn}>
+                  <div className={styles.currentLang}>
+                    <Palette
+                      size={16}
+                      style={{
+                        color: themes.find((t) => t.id === currentTheme)?.color,
+                      }}
+                    />
+                    <span className={styles.langLabel}>THEME</span>
+                  </div>
+                  <ChevronDown
+                    size={14}
+                    className={`${styles.chevron} ${isThemeMenuOpen ? styles.open : ""}`}
+                  />
+                </div>
+              </ChamferBox>
+
+              {isThemeMenuOpen && (
+                <div className={styles.menuPosition}>
+                  <ChamferBox
+                    cutSize={10}
+                    bg="var(--bg-dark)"
+                    borderColor="var(--bg-card-hover)"
+                    noPadding
+                  >
+                    <div className={styles.menuList}>
+                      {themes.map((theme) => (
+                        <div
+                          key={theme.id}
+                          onClick={() => handleThemeChange(theme.id)}
+                          className={`${styles.menuItem} ${
+                            currentTheme === theme.id ? styles.active : ""
+                          }`}
+                        >
+                          <span
+                            className={styles.themeDot}
+                            style={{ backgroundColor: theme.color }}
+                          />
+                          {theme.name.toUpperCase()}
+                        </div>
+                      ))}
+                    </div>
+                  </ChamferBox>
+                </div>
+              )}
+            </div>
+
             <div className={styles.langWrapper}>
               <div className={styles.dropdownContainer}>
                 <ChamferBox
                   cutSize={10}
-                  bg="rgba(255,255,255,0.05)"
-                  borderColor="rgba(255,255,255,0.1)"
+                  bg="var(--bg-dark)"
+                  borderColor="var(--bg-card-hover)"
                   hoverEffect
                   onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
                   noPadding
@@ -110,8 +189,8 @@ const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
                   <div className={styles.menuPosition}>
                     <ChamferBox
                       cutSize={10}
-                      bg="#181b21"
-                      borderColor="rgba(255,255,255,0.1)"
+                      bg="var(--bg-card)"
+                      borderColor="var(--bg-card-hover)"
                       noPadding
                     >
                       <div className={styles.menuList}>
@@ -151,7 +230,7 @@ const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
           <div className={styles.mobileToggle}>
             <ChamferBox
               cutSize={10}
-              bg="rgba(255,255,255,0.05)"
+              bg="var(--bg-card)"
               noPadding
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
@@ -182,10 +261,39 @@ const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
 
             <div className={styles.mobileExtras}>
               <div className={styles.mobileLangRow}>
+                {themes.map((theme) => (
+                  <div
+                    key={theme.id}
+                    className={`${styles.mobileLangBtn} ${
+                      currentTheme === theme.id ? styles.activeLang : ""
+                    }`}
+                    onClick={() => handleThemeChange(theme.id)}
+                    style={{
+                      display: "flex",
+                      gap: "0.5rem",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span
+                      className={styles.themeDot}
+                      style={{
+                        backgroundColor: theme.color,
+                        width: "8px",
+                        height: "8px",
+                      }}
+                    />
+                    {theme.name.toUpperCase()}
+                  </div>
+                ))}
+              </div>
+
+              <div className={styles.mobileLangRow}>
                 {["en", "hu"].map((lang) => (
                   <div
                     key={lang}
-                    className={`${styles.mobileLangBtn} ${i18n.language === lang ? styles.activeLang : ""}`}
+                    className={`${styles.mobileLangBtn} ${
+                      i18n.language === lang ? styles.activeLang : ""
+                    }`}
                     onClick={() => handleLanguageChange(lang)}
                   >
                     {lang.toUpperCase()}

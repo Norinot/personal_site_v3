@@ -1,54 +1,145 @@
-  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --cut-size: 20px;
+}
 
 
-  :root {
-    --bg-dark: #0f1115;
-    --bg-card: #181b21;
-    --bg-card-hover: #1e222b;
-    --accent: #00f0ff;
-    --accent-dim: rgba(0, 240, 255, 0.1);
-    --text-main: #ffffff;
-    --text-muted: #94a3b8;
-  }
+:root,
+[data-theme="cyber"] {
+  --bg-dark: #0b0a14;
+  --bg-card: #151221;
+  --bg-card-hover: #1e1a2e;
+  --accent: #00f0ff;
+  --accent-secondary: #ff007a;
+  --accent-gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  --accent-dim: rgba(0, 240, 255, 0.08);
+  --glow: 0px 0px 40px rgba(0, 240, 255, 0.15);
+  --text-main: #ffffff;
+  --text-muted: #a3a3c2;
 
-  body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    font-family: 'Space Grotesk', sans-serif;
-    overflow-x: hidden;
-    margin: 0;
-  }
+  --text-on-accent: #ffffff;
+}
 
-  .chamfer-box {
-    clip-path: polygon(var(--cut-size) 0%,
-        100% 0%,
-        100% calc(100% - var(--cut-size)),
-        calc(100% - var(--cut-size)) 100%,
-        0% 100%,
-        0% var(--cut-size));
-    transition: all 0.3s ease;
-  }
+[data-theme="ocean"] {
+  --bg-dark: #020617;
+  --bg-card: #0f172a;
+  --bg-card-hover: #1e293b;
+  --accent: #38bdf8;
+  --accent-secondary: #6366f1;
+  --accent-gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  --accent-dim: rgba(56, 189, 248, 0.08);
+  --glow: 0px 0px 40px rgba(56, 189, 248, 0.15);
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
 
-  .bevel-box {
-    clip-path: polygon(0% 0%,
-        100% 0%,
-        100% calc(100% - var(--cut-size)),
-        0% 100%);
-  }
+  --text-on-accent: #ffffff;
+}
 
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
+[data-theme="terminal"] {
+  --bg-dark: #0c0c0c;
+  --bg-card: #161616;
+  --bg-card-hover: #222222;
+  --accent: #00ff9d;
+  --accent-secondary: #ccff00;
+  --accent-gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  --accent-dim: rgba(0, 255, 157, 0.08);
+  --glow: 0px 0px 40px rgba(0, 255, 157, 0.15);
+  --text-main: #ffffff;
+  --text-muted: #888888;
 
-  .input-reset {
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    width: 100%;
-    font-family: inherit;
-  }
+  --text-on-accent: #000000;
+}
 
-  .input-reset::placeholder {
-    color: #4b5563;
-  }
+[data-theme="solar"] {
+  --bg-dark: #0f0a14;
+  --bg-card: #1a1221;
+  --bg-card-hover: #251b2e;
+  --accent: #fb923c;
+  --accent-secondary: #c084fc;
+  --accent-gradient: linear-gradient(135deg, var(--accent), var(--accent-secondary));
+  --accent-dim: rgba(251, 146, 60, 0.08);
+  --glow: 0px 0px 40px rgba(251, 146, 60, 0.15);
+  --text-main: #fff7ed;
+  --text-muted: #a8a29e;
+
+  --text-on-accent: #1a1221;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Space Grotesk', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+
+  background-image: radial-gradient(circle at 50% 0%, var(--accent-dim) 0%, transparent 60%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bg-card-hover);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+::selection {
+  background: var(--accent);
+  color: #000;
+}
+
+.chamfer-box {
+  clip-path: polygon(var(--cut-size) 0%,
+      100% 0%,
+      100% calc(100% - var(--cut-size)),
+      calc(100% - var(--cut-size)) 100%,
+      0% 100%,
+      0% var(--cut-size));
+  transition: all 0.3s ease;
+}
+
+.bevel-box {
+  clip-path: polygon(0% 0%,
+      100% 0%,
+      100% calc(100% - var(--cut-size)),
+      0% 100%);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.input-reset {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  width: 100%;
+  font-family: inherit;
+}
+
+.input-reset::placeholder {
+  color: var(--text-muted);
+}

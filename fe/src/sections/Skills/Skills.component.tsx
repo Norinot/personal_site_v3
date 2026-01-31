@@ -138,7 +138,7 @@ const SkillColumn = ({
 
   return (
     <div className={styles.skillColumn}>
-      <ChamferBox cutSize={15} bg="#1a1d24" className={styles.skillHeader}>
+      <ChamferBox cutSize={15} bg="var(--bg-card-hover)" className={styles.skillHeader}>
         <h3 className={headerClass}>{title}</h3>
       </ChamferBox>
 
