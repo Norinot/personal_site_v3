@@ -4,7 +4,7 @@ import SectionTitle from "@/components/SectionTitle/SectionTitle.component";
 import { Mail, PhoneCall, Send, AlertCircle, CheckCircle } from "lucide-react";
 import styles from "./Contact.module.scss";
 import { useTranslation } from "react-i18next";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
 
 interface ContactFormState {
