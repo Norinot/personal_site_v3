@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Accent border: chamfered square (top-left + bottom-right corners cut) -->
+  <polygon points="6,0 32,0 32,26 26,32 0,32 0,6" fill="#00f0ff"/>
+  <!-- Dark inner background, 1.5px inset -->
+  <polygon points="7.5,1.5 30.5,1.5 30.5,24.5 24.5,30.5 1.5,30.5 1.5,7.5" fill="#0b0a14"/>
+  <!-- Bold N, vertically and horizontally centered -->
+  <text
+    x="16" y="22"
+    text-anchor="middle"
+    font-family="system-ui,-apple-system,sans-serif"
+    font-size="18"
+    font-weight="700"
+    fill="#ffffff"
+  >N</text>
+</svg>

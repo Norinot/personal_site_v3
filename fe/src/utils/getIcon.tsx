@@ -8,6 +8,7 @@ import {
   Database,
   Settings,
   MessageSquare,
+  Pizza,
   type LucideIcon,
 } from "lucide-react";
 
@@ -21,6 +22,7 @@ const iconMap: Record<string, LucideIcon> = {
   database: Database,
   settings: Settings,
   consulting: MessageSquare,
+  pizza: Pizza,
 };
 
 export const getIcon = (iconName: string, size = 24) => {

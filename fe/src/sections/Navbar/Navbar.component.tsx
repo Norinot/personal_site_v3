@@ -65,6 +65,7 @@ const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
     { id: "hero", translationKey: "nav.about" },
     { id: "skills", translationKey: "nav.skills" },
     { id: "projects", translationKey: "nav.projects" },
+    { id: "apps", translationKey: "nav.apps" },
     { id: "services", translationKey: "nav.services" },
     { id: "hobbies", translationKey: "nav.hobbies" },
   ];

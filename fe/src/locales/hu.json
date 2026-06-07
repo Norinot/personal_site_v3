@@ -3,6 +3,7 @@
     "about": "Rólam",
     "skills": "Készségek",
     "projects": "Projektek",
+    "apps": "Appok",
     "services": "Szolgáltatások",
     "hobbies": "Hobbik",
     "contactMe": "Kapcsolat"
@@ -133,6 +134,24 @@
     "errors": {
       "required": "Ez a mező kötelező.",
       "invalidEmail": "Érvénytelen email formátum."
+    }
+  },
+  "apps": {
+    "sectionTitle": "Workshop",
+    "sectionSubtitle": "Appok, amiket magamnak fejlesztettem, és bárkinek, aki szeretné.",
+    "launch": "Megnyitás",
+    "items": {
+      "forno": {
+        "title": "Forno",
+        "subtitle": "Precíz pizzaszámológép és recept útmutató",
+        "description": "Négy év pizzakészítés sűrítve egyetlen eszközbe. Azért csináltam, hogy minden alkalommal pontosan eltaláljam a receptemet, és végre legyen hova irányítanom a barátaimat, amikor megkérdezik, hogyan csinálom.",
+        "features": [
+          "Számológép - pontos tészta-arányok bármilyen mérethez, stílushoz vagy hidratációhoz",
+          "Irányított folyamat - lépésről lépésre haladó beállítás kezdőknek: sütő, kéreg, időzítés",
+          "A receptem - a teljes folyamatom és 4 év alatt szerzett összes tapasztalatom",
+          "Alapok - a technikák mögötti magyarázat, hogy semmi ne tűnjön önkényesnek"
+        ]
+      }
     }
   },
   "common": { "close": "Bezár" }

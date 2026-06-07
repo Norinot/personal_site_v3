@@ -6,6 +6,7 @@ import Hero from "@/sections/Hero/Hero.component";
 import Navbar from "@/sections/Navbar/Navbar.component";
 import Skills from "@/sections/Skills/Skills.component";
 import Projects from "@/sections/Projects/Projects.component";
+import Apps from "@/sections/Apps/Apps.component";
 import MyServices from "@/sections/MyServices/MyServices.component";
 import WorkExperience from "@/sections/WorkExperience/WorkExperience.component";
 import Contact from "@/sections/Contact/Contact.component";
@@ -27,6 +28,7 @@ const MainContent = () => {
         <Hero scrollTo={scrollTo} />
         <Skills />
         <Projects />
+        <Apps />
         <MyServices />
         <WorkExperience />
         <Hobbies />

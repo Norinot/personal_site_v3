@@ -3,6 +3,7 @@
     "about": "About",
     "skills": "Skills",
     "projects": "Projects",
+    "apps": "Apps",
     "services": "Services",
     "hobbies": "Hobbies",
     "contactMe": "Contact Me"
@@ -133,6 +134,24 @@
     "errors": {
       "required": "This field is required.",
       "invalidEmail": "Please enter a valid email address."
+    }
+  },
+  "apps": {
+    "sectionTitle": "Workshop",
+    "sectionSubtitle": "Apps I built for myself,  and anyone else who wants them.",
+    "launch": "Open App",
+    "items": {
+      "forno": {
+        "title": "Forno",
+        "subtitle": "Precision pizza calculator & recipe guide",
+        "description": "Four years of pizza making condensed into one tool. Built to nail my recipe every time and to finally have a place to point friends when they ask how I make my pizza.",
+        "features": [
+          "Calculator - precision dough ratios for any size, style or hydration level",
+          "Guided Flow - step-by-step setup for beginners: oven style, crust, bake schedule",
+          "My Recipe - my full process and everything I have learned over 4 years",
+          "Fundamentals - the why behind every technique, so nothing feels arbitrary"
+        ]
+      }
     }
   },
   "common": { "close": "Close" }
