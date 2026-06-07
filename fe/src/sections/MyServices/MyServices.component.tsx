@@ -3,6 +3,8 @@ import SectionTitle from "@/components/SectionTitle/SectionTitle.component";
 import { Code, Users, Server, Cog } from "lucide-react";
 import styles from "./MyServices.module.scss";
 import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "@/utils/animations";
 
 const MyServices = () => {
   const { t } = useTranslation();
@@ -14,7 +16,13 @@ const MyServices = () => {
         subtitle={t("services.subtitle")}
       />
 
-      <div className={styles.servicesGrid}>
+      <motion.div
+        className={styles.servicesGrid}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
         {[
           {
             icon: <Users size={32} />,
@@ -37,18 +45,19 @@ const MyServices = () => {
             desc: t("services.maintenanceAndSupport.description"),
           },
         ].map((service, idx) => (
-          <ChamferBox
-            key={idx}
-            cutSize={20}
-            hoverEffect
-            className={`${styles.serviceCard} group`}
-          >
-            <div className={styles.serviceIcon}>{service.icon}</div>
-            <h3 className={styles.serviceTitle}>{service.title}</h3>
-            <p className={styles.serviceDesc}>{service.desc}</p>
-          </ChamferBox>
+          <motion.div key={idx} variants={fadeUp}>
+            <ChamferBox
+              cutSize={20}
+              hoverEffect
+              className={`${styles.serviceCard} group`}
+            >
+              <div className={styles.serviceIcon}>{service.icon}</div>
+              <h3 className={styles.serviceTitle}>{service.title}</h3>
+              <p className={styles.serviceDesc}>{service.desc}</p>
+            </ChamferBox>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

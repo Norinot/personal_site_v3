@@ -4,6 +4,7 @@ import styles from "./Skills.module.scss";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { fadeUp, staggerContainer } from "@/utils/animations";
 
 export type SkillLevel = "expert" | "advanced" | "intermediate";
 export interface Skill {
@@ -87,31 +88,43 @@ const Skills = () => {
     <section id="skills">
       <SectionTitle title={t("skills.title")} subtitle={t("skills.subtitle")} />
 
-      <div className={styles.skillsGrid}>
-        <SkillColumn
-          title={t("skills.expert")}
-          skills={skillsData.expert}
-          headerClass={styles.skillTitleAccent}
-          itemClass={styles.skillItemExpert}
-          dotColor="var(--accent)"
-        />
+      <motion.div
+        className={styles.skillsGrid}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.15 }}
+      >
+        <motion.div variants={fadeUp}>
+          <SkillColumn
+            title={t("skills.expert")}
+            skills={skillsData.expert}
+            headerClass={styles.skillTitleAccent}
+            itemClass={styles.skillItemExpert}
+            dotColor="var(--accent)"
+          />
+        </motion.div>
 
-        <SkillColumn
-          title={t("skills.advanced")}
-          skills={skillsData.advanced}
-          headerClass={styles.skillTitleWhite}
-          itemClass={styles.skillItemAdv}
-          dotColor="rgba(255,255,255,0.5)"
-        />
+        <motion.div variants={fadeUp}>
+          <SkillColumn
+            title={t("skills.advanced")}
+            skills={skillsData.advanced}
+            headerClass={styles.skillTitleWhite}
+            itemClass={styles.skillItemAdv}
+            dotColor="rgba(255,255,255,0.5)"
+          />
+        </motion.div>
 
-        <SkillColumn
-          title={t("skills.intermediate")}
-          skills={skillsData.intermediate}
-          headerClass={styles.skillTitleGray}
-          itemClass={styles.skillItemInt}
-          dotColor="#4b5563"
-        />
-      </div>
+        <motion.div variants={fadeUp}>
+          <SkillColumn
+            title={t("skills.intermediate")}
+            skills={skillsData.intermediate}
+            headerClass={styles.skillTitleGray}
+            itemClass={styles.skillItemInt}
+            dotColor="#4b5563"
+          />
+        </motion.div>
+      </motion.div>
     </section>
   );
 };

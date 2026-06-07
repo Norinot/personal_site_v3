@@ -4,6 +4,8 @@ import { ExternalLink } from "lucide-react";
 import styles from "./Projects.module.scss";
 import { useTranslation } from "react-i18next";
 import { getIcon } from "@/utils/getIcon";
+import { motion } from "framer-motion";
+import { fadeUp, staggerContainer } from "@/utils/animations";
 
 interface Project {
   id: string;
@@ -54,30 +56,37 @@ const Projects = () => {
         subtitle={t("projects.sectionSubtitle")}
       />
 
-      <div className={styles.projectsList}>
+      <motion.div
+        className={styles.projectsList}
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
         {projects.map((project: Project) => (
-          <Accordion
-            key={project.id}
-            title={t(`projects.items.${project.id}.title`)}
-            subtitle={t(`projects.items.${project.id}.subtitle`)}
-            tags={project.tags}
-            icon={getIcon(project.icon)}
-            sideAction={
-              project.link !== "#" && (
-                <a
-                  target="_blank"
-                  href={project.link}
-                  className={styles.projectLink}
-                >
-                  <ExternalLink size={20} />
-                </a>
-              )
-            }
-          >
-            <p>{t(`projects.items.${project.id}.description`)}</p>
-          </Accordion>
+          <motion.div key={project.id} variants={fadeUp}>
+            <Accordion
+              title={t(`projects.items.${project.id}.title`)}
+              subtitle={t(`projects.items.${project.id}.subtitle`)}
+              tags={project.tags}
+              icon={getIcon(project.icon)}
+              sideAction={
+                project.link !== "#" && (
+                  <a
+                    target="_blank"
+                    href={project.link}
+                    className={styles.projectLink}
+                  >
+                    <ExternalLink size={20} />
+                  </a>
+                )
+              }
+            >
+              <p>{t(`projects.items.${project.id}.description`)}</p>
+            </Accordion>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };

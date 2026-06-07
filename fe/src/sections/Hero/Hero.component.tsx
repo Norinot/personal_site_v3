@@ -3,6 +3,8 @@ import ChamferBox from "@/components/CamferBox/ChamferBox.component";
 import portrait from "@/assets/portrait.jpg";
 import { Trans, useTranslation } from "react-i18next";
 import TechHighlight from "@/components/TechHighlight/TechHighlight.component";
+import { motion } from "framer-motion";
+import { slideLeft, slideRight } from "@/utils/animations";
 
 interface HeroProps {
   scrollTo: (id: string) => void;
@@ -14,7 +16,12 @@ const Hero = ({ scrollTo }: HeroProps) => {
   return (
     <section id="hero" className={styles.heroSection}>
       <div className={styles.heroGrid}>
-        <div className={styles.heroImageColumn}>
+        <motion.div
+          className={styles.heroImageColumn}
+          variants={slideLeft}
+          initial="hidden"
+          animate="visible"
+        >
           <div className={styles.heroImageWrapper}>
             <div
               className={`chamfer-box ${styles.profileMask}`}
@@ -29,9 +36,15 @@ const Hero = ({ scrollTo }: HeroProps) => {
               style={{ "--cut-size": "30px" } as any}
             ></div>
           </div>
-        </div>
+        </motion.div>
 
-        <div className={styles.heroContentColumn}>
+        <motion.div
+          className={styles.heroContentColumn}
+          variants={slideRight}
+          initial="hidden"
+          animate="visible"
+          transition={{ delay: 0.15 }}
+        >
           <ChamferBox cutSize={40} borderColor="rgba(0, 240, 255, 0.1)">
             <div className={styles.heroTexts}>
               <div>
@@ -106,7 +119,7 @@ const Hero = ({ scrollTo }: HeroProps) => {
               </div>
             </div>
           </ChamferBox>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

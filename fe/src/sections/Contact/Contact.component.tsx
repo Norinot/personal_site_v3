@@ -6,6 +6,8 @@ import styles from "./Contact.module.scss";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
+import { motion } from "framer-motion";
+import { fadeUp } from "@/utils/animations";
 
 interface ContactFormState {
   email: string;
@@ -141,6 +143,12 @@ const Contact = () => {
         subtitle={t("contact.subtitle")}
       />
 
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.1 }}
+      >
       <ChamferBox cutSize={40} borderColor="rgba(0, 240, 255, 0.15)">
         <div className={styles.contactsWrapper}>
           <div className={styles.label}>
@@ -248,6 +256,7 @@ const Contact = () => {
           </ChamferBox>
         </form>
       </ChamferBox>
+      </motion.div>
     </section>
   );
 };
