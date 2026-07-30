@@ -40,35 +40,50 @@
     "items": {
       "business-gpt": {
         "title": "Business GPT",
-        "subtitle": "Bespoke conversational AI solution",
-        "description": "Developed a bespoke chat application leveraging the cutting-edge capabilities of GPT-based conversational AI, tailored with a custom user interface to meet unique client requirements.",
-        "role": "TODO — your role on this project",
-        "problem": "TODO — one sentence on what was painful before this existed.",
-        "work": ["TODO — what you actually built.", "TODO — a second thing."]
+        "subtitle": "Configurable AI chat platform",
+        "description": "Started as an internally built chat tool that Deutsche Telekom licensed out to businesses, customized per client. After the second client, proposed rebuilding it as a single configurable, self-serve platform instead of repeating one-off custom builds.",
+        "role": "Frontend Engineer",
+        "problem": "Every new client meant another one-off, customized rebuild of an internal chat tool — a model that stopped scaling by the third client.",
+        "work": [
+          "Proposed and led the shift from one-off per-client builds to a single configurable, self-serve platform, kicking off the rebuild by migrating the frontend from Svelte to React and laying its foundation.",
+          "Built out nearly the entire platform: settings, the API service layer, authentication, permission wrappers, groups, integrations, the prompt library, workspace management (client-side configuration, terms of use and data-privacy setup with validation), and the assistants/areas configuration (wrapping an LLM with resources).",
+          "Now one of two frontend engineers still building the product; didn't build the chat feature itself, and a recent redesign of the document container pages was handled by others."
+        ]
       },
       "ai4test": {
         "title": "AI4TEST",
         "subtitle": "AI-integrated automated testing platform",
         "description": "Contributed to a web application integrating AI for automated testing. Implemented performance statistics and a user-friendly video playback feature for comprehensive analysis.",
-        "role": "TODO — your role on this project",
-        "problem": "TODO — one sentence on what was painful before this existed.",
-        "work": ["TODO — what you actually built.", "TODO — a second thing."]
+        "role": "Frontend Engineer",
+        "problem": "Manually testing a website end-to-end — clicking through flows, checking what broke and why — was slow and easy to get wrong.",
+        "work": [
+          "Built and maintained the run configuration flow — target URL, optional auth, and LLM settings — used to kick off an automated test.",
+          "Built the results playback UI: a video-style, timestamped walkthrough of each AI-driven test run with pass/fail states and screenshots.",
+          "Contributed a small amount of Go on the API side; day-to-day was mostly tickets and bug fixes."
+        ]
       },
       "saray-webshop": {
         "title": "SARAY Webshop",
         "subtitle": "E-commerce platform for SARAY Szőnyegház",
         "description": "Development of a comprehensive e-commerce platform integrating standard webshop functionalities tailored to the company's specific needs.",
-        "role": "TODO — your role on this project",
-        "problem": "TODO — one sentence on what was painful before this existed.",
-        "work": ["TODO — what you actually built.", "TODO — a second thing."]
+        "role": "Solo Developer",
+        "problem": "A local carpet retailer had no way for customers to browse inventory or check prices online.",
+        "work": [
+          "Designed and built a catalog-style webshop — customers browse uploaded items and check prices; no cart or checkout, by design.",
+          "Owned the entire lifecycle alone: design, development, deployment, and about a year of maintenance."
+        ]
       },
       "mapa-crm": {
         "title": "MAPA",
         "subtitle": "Customizable CRM Baseline",
         "description": "Collaborated with a team to build a customizable CRM system designed as a baseline application that can be tailored to future client needs.",
-        "role": "TODO — your role on this project",
-        "problem": "TODO — one sentence on what was painful before this existed.",
-        "work": ["TODO — what you actually built.", "TODO — a second thing."]
+        "role": "Junior Frontend Developer",
+        "problem": "Auditors had no shared system to plan audits and log results, or for auditees to see upcoming visits and their outcomes.",
+        "work": [
+          "Built document upload and parsing.",
+          "Built ticket creation within the system.",
+          "First professional project, working as part of a 4-person junior frontend team."
+        ]
       }
     }
   },

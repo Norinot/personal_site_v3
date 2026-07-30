@@ -40,35 +40,50 @@
     "items": {
       "business-gpt": {
         "title": "Business GPT",
-        "subtitle": "Egyedi párbeszédes AI megoldás",
-        "description": "Egyedi csevegőalkalmazás fejlesztése a GPT-alapú mesterséges intelligencia legmodernebb képességeivel, testreszabott felhasználói felülettel az ügyfél egyedi igényei szerint.",
-        "role": "TODO — a te szereped ebben a projektben",
-        "problem": "TODO — egy mondat arról, mi volt nehézkes ezelőtt.",
-        "work": ["TODO — mit építettél pontosan.", "TODO — egy második dolog."]
+        "subtitle": "Konfigurálható AI chat platform",
+        "description": "Eredetileg egy belső fejlesztésű chat-alkalmazás volt, amit a Deutsche Telekom cégeknek adott bérbe, ügyfelenként testreszabva. A második ügyfél után javaslatot tettem egy egységes, konfigurálható, önkiszolgáló platform kiépítésére az egyedi fejlesztések ismétlése helyett.",
+        "role": "Frontend Mérnök",
+        "problem": "Minden új ügyfél egy újabb egyszeri, testreszabott újraépítést jelentett egy belső chat-alkalmazásból — ez a modell a harmadik ügyfélnél már nem skálázódott.",
+        "work": [
+          "Javasoltam és vezettem az átállást az ügyfelenkénti egyedi fejlesztésekről egy egységes, konfigurálható, önkiszolgáló platformra; az újraépítést a frontend Sveltéről Reactre való migrálásával indítottam, és lefektettem az alapjait.",
+          "Felépítettem szinte a teljes platformot: beállítások, API service réteg, autentikáció, jogosultsági wrapperek, csoportok, integrációk, promptkönyvtár, workspace-kezelés (ügyféloldali konfiguráció, ÁSZF és adatvédelmi oldalak beállítása és validálása), valamint az assistants/areas konfiguráció (egy LLM becsomagolása erőforrásokkal).",
+          "Jelenleg a két frontend mérnök egyike, akik továbbra is fejlesztik a terméket; magát a chat funkciót nem én építettem, ahogy a dokumentum-konténer oldalak nemrégi redesignját sem."
+        ]
       },
       "ai4test": {
         "title": "AI4TEST",
         "subtitle": "AI-integrált automatizált tesztelő platform",
         "description": "Részvétel egy AI-t integráló webalkalmazás fejlesztésében automatizált teszteléshez. Teljesítménystatisztikák és felhasználóbarát videólejátszási funkció megvalósítása.",
-        "role": "TODO — a te szereped ebben a projektben",
-        "problem": "TODO — egy mondat arról, mi volt nehézkes ezelőtt.",
-        "work": ["TODO — mit építettél pontosan.", "TODO — egy második dolog."]
+        "role": "Frontend Mérnök",
+        "problem": "Egy weboldal végigtesztelése kézzel — a folyamatok végigkattintása, annak kiderítése, hogy mi és miért romlott el — lassú volt, és könnyen hibázhattak benne.",
+        "work": [
+          "Megépítettem és karbantartottam a futtatás-konfigurációt — cél URL, opcionális bejelentkezés, LLM beállítások —, amivel egy automatizált teszt elindítható.",
+          "Megépítettem az eredmény-visszajátszó felületet: egy videószerű, időbélyegzett bejárást az AI-vezérelt teszt futásáról, siker/hiba állapotokkal és képernyőképekkel.",
+          "Kis mértékben Go-ban is dolgoztam az API oldalon; a mindennapok inkább jegyekről és hibajavításról szóltak."
+        ]
       },
       "saray-webshop": {
         "title": "SARAY Webshop",
         "subtitle": "E-kereskedelmi platform a SARAY Szőnyegház részére",
         "description": "Átfogó e-kereskedelmi platform fejlesztése, amely a cég specifikus igényeihez szabott standard webshop funkciókat tartalmaz.",
-        "role": "TODO — a te szereped ebben a projektben",
-        "problem": "TODO — egy mondat arról, mi volt nehézkes ezelőtt.",
-        "work": ["TODO — mit építettél pontosan.", "TODO — egy második dolog."]
+        "role": "Önálló Fejlesztő",
+        "problem": "Egy helyi szőnyegkereskedésnek nem volt módja arra, hogy a vásárlók online böngésszék a készletet vagy nézzék meg az árakat.",
+        "work": [
+          "Megterveztem és megépítettem egy katalógus-jellegű webshopot — a vásárlók feltöltött termékeket böngészhetnek és árakat nézhetnek meg; kosár és rendelés szándékosan nincs.",
+          "Egyedül vittem végig a teljes életciklust: tervezés, fejlesztés, üzembe helyezés, és kb. egy év karbantartás."
+        ]
       },
       "mapa-crm": {
         "title": "MAPA",
         "subtitle": "Testreszabható CRM alaprendszer",
         "description": "Együttműködés egy fejlesztőcsapattal egy testreszabható CRM rendszer kiépítésében, amely alapalkalmazásként szolgál a jövőbeli ügyféligényekhez.",
-        "role": "TODO — a te szereped ebben a projektben",
-        "problem": "TODO — egy mondat arról, mi volt nehézkes ezelőtt.",
-        "work": ["TODO — mit építettél pontosan.", "TODO — egy második dolog."]
+        "role": "Junior Frontend Fejlesztő",
+        "problem": "Az auditoroknak nem volt közös rendszerük az auditok tervezésére és az eredmények rögzítésére, sem az auditáltaknak a következő látogatás és eredmények megtekintésére.",
+        "work": [
+          "Dokumentumfeltöltést és -feldolgozást építettem.",
+          "Jegy (ticket) létrehozást építettem a rendszeren belül.",
+          "Ez volt az első szakmai projektem, egy 4 fős junior frontend csapat tagjaként."
+        ]
       }
     }
   },
