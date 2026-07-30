@@ -239,7 +239,12 @@
       "noTrack": "no audio source configured",
       "selectTrack": "Select a track",
       "addTrack": "+ add track",
-      "empty": "No tracks yet."
+      "empty": "No tracks yet.",
+      "prev": "Previous track",
+      "play": "Play",
+      "pause": "Pause",
+      "next": "Next track",
+      "stop": "Stop"
     },
     "contact": {
       "hint": "Run message to send directly from here, or hire for a guided wizard."

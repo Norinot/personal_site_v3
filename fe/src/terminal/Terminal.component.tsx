@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Play, Pause, SkipBack, SkipForward, Square } from "lucide-react";
 import styles from "./Terminal.module.scss";
 import { PROFILE } from "@/content/profile";
 import { Banner, About, SkillsSection, ExperienceLog, AppsListing, ServicesGrid, HelpTable } from "./commands";
@@ -409,6 +410,7 @@ const Terminal = ({ onSwitchToClassic }: TerminalProps) => {
 
   return (
     <div className={styles.root} data-terminal-theme={theme}>
+      <audio ref={player.audioRef} />
       <div className={`${styles.crt} ${crtOn ? styles.crtOn : ""}`} aria-hidden="true" />
 
       <div className={styles.win}>
@@ -532,6 +534,25 @@ const Terminal = ({ onSwitchToClassic }: TerminalProps) => {
                     <span>{song.title}</span>
                   </button>
                 ))}
+              </div>
+              <div className={styles.transport}>
+                <button type="button" aria-label={t("terminal.music.prev")} onClick={() => player.skip("prev")}>
+                  <SkipBack size={14} />
+                </button>
+                <button
+                  type="button"
+                  className={styles.playBtn}
+                  aria-label={player.playing ? t("terminal.music.pause") : t("terminal.music.play")}
+                  onClick={player.togglePlay}
+                >
+                  {player.playing ? <Pause size={14} /> : <Play size={14} />}
+                </button>
+                <button type="button" aria-label={t("terminal.music.next")} onClick={() => player.skip("next")}>
+                  <SkipForward size={14} />
+                </button>
+                <button type="button" aria-label={t("terminal.music.stop")} onClick={player.stop}>
+                  <Square size={12} />
+                </button>
               </div>
               <MiniVisualizer analyser={player.analyser} playing={player.playing} />
             </div>

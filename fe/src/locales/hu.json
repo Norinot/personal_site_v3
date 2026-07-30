@@ -239,7 +239,12 @@
       "noTrack": "nincs beállítva hangforrás",
       "selectTrack": "Válassz egy számot",
       "addTrack": "+ szám hozzáadása",
-      "empty": "Még nincsenek feltöltött számok."
+      "empty": "Még nincsenek feltöltött számok.",
+      "prev": "Előző szám",
+      "play": "Lejátszás",
+      "pause": "Szünet",
+      "next": "Következő szám",
+      "stop": "Leállítás"
     },
     "contact": {
       "hint": "Írd be: message a közvetlen küldéshez, vagy hire az irányított folyamathoz."

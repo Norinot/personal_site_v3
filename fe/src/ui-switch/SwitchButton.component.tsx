@@ -74,8 +74,10 @@ const SwitchButton = ({ label, onActivate }: SwitchButtonProps) => {
 
   return (
     <button type="button" className={styles.btn} aria-label={label} onClick={handleClick}>
-      <span className={styles.label} aria-hidden="true">
-        {displayText}
+      <span className={styles.face}>
+        <span className={styles.label} aria-hidden="true">
+          {displayText}
+        </span>
       </span>
     </button>
   );

@@ -855,6 +855,41 @@
   }
 }
 
+.transport {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  margin-bottom: 10px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--fg);
+    padding: 6px;
+    cursor: pointer;
+    transition: color 0.13s, border-color 0.13s;
+
+    &:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 1px;
+    }
+  }
+
+  .playBtn {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+}
+
 .viz {
   display: block;
   width: 100%;

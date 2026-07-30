@@ -1,6 +1,11 @@
 // The one thing on the page that doesn't belong there.
 // Deliberately its own palette — never the host UI's tokens — so it always
 // reads as bled-through from somewhere else, in either UI.
+//
+// Two-layer clip-path trick (same idea as the classic site's own ChamferBox):
+// clip-path cuts straight through a border, so the "border" here is really the
+// outer .btn's background showing through a 1px inset around the inner .face —
+// otherwise the border color just abruptly stops at the chamfered corners.
 
 .btn {
   --sw-void: #050107;
@@ -10,24 +15,18 @@
 
   position: relative;
   isolation: isolate;
-  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--sw-fg);
-  background: var(--sw-void);
-  border: 1px solid var(--sw-magenta);
-  padding: 8px 14px;
+  display: inline-block;
+  border: 0;
+  padding: 1px;
+  background: var(--sw-magenta);
   cursor: pointer;
   clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
-  transition: border-color 0.18s, box-shadow 0.18s, background 0.18s, transform 0.08s;
+  transition: background 0.18s, box-shadow 0.18s, transform 0.08s;
   box-shadow: 0 0 0 rgba(255, 43, 214, 0);
 
   &:hover,
   &:focus-visible {
-    border-color: var(--sw-cyan);
-    background: #0a0210;
+    background: var(--sw-cyan);
     box-shadow: 0 0 14px rgba(0, 255, 242, 0.35), 0 0 2px rgba(255, 43, 214, 0.6);
   }
 
@@ -38,10 +37,28 @@
 
   &:active {
     transform: scale(0.93);
-    background: var(--sw-magenta);
-    color: var(--sw-void);
-    transition: transform 0.05s, background 0.05s, color 0.05s;
+    transition: transform 0.05s;
   }
+}
+
+.face {
+  position: relative;
+  display: block;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sw-fg);
+  background: var(--sw-void);
+  padding: 7px 13px;
+  clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  transition: background 0.05s, color 0.05s;
+}
+
+.btn:active .face {
+  background: var(--sw-magenta);
+  color: var(--sw-void);
 }
 
 .label {
@@ -64,7 +81,7 @@
   }
 }
 
-.btn::after {
+.face::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -74,8 +91,8 @@
   opacity: 0;
   transition: opacity 0.15s;
 }
-.btn:hover::after,
-.btn:focus-visible::after {
+.btn:hover .face::after,
+.btn:focus-visible .face::after {
   opacity: 1;
   animation: sw-sweep 0.7s ease-in-out infinite;
 }
@@ -90,12 +107,12 @@
 
 @media (prefers-reduced-motion: reduce) {
   .btn,
-  .btn::after,
+  .face::after,
   .label {
     animation: none !important;
     transition: none !important;
   }
-  .btn::after {
+  .face::after {
     opacity: 0 !important;
   }
 }

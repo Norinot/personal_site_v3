@@ -218,3 +218,24 @@ depend on Clerk directly — no shared old-UI component is imported).
   motion, and confirmed the only `position:fixed` element left after a switch is the
   terminal's own permanent CRT scanline layer (not a transition leftover) with
   `document.body.style.overflow` correctly cleared.
+
+## Post-Phase-4 fixes (user testing, same day)
+
+- **`Terminal.component.tsx` never rendered an `<audio>` element.** `useMusicPlayer()`'s
+  `audioRef` was created but never attached to a real DOM node, so every
+  `audioRef.current` access silently no-op'd behind its `if (!audio) return` guards —
+  playback state updated, nothing ever actually played, and `stop` had nothing to pause.
+  Fixed by mounting `<audio ref={player.audioRef} />` in the shell. Reminder for next
+  time: a hook owning a ref is not the same as that ref being attached anywhere.
+- **Added persistent transport controls** (skip-prev, play/pause, skip-next, stop) to the
+  sidebar's "now playing" section — the aside previously only let you *select* a track
+  (click to play), with no way to pause/skip/stop without typing `stop` or re-running
+  `music`. Matches the old UI's Hobbies player having always-visible transport controls.
+- **`SwitchButton`'s clip-path was clipping its own border.** `clip-path` cuts straight
+  through everything painted on the element, including a CSS `border` — so the border
+  simply stopped at the two chamfered corners instead of following the cut edge. Fixed
+  with the same two-layer trick the classic site's own `ChamferBox` already uses: an
+  outer element (background = border color, clip-path, 1px padding) wrapping an inner
+  `.face` (background = fill color, its own slightly-smaller clip-path) — the 1px ring of
+  outer color showing through is the "border," and it now follows the cut on both
+  corners in both UIs' hosting contexts.
