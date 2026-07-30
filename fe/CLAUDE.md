@@ -148,3 +148,73 @@ depend on Clerk directly — no shared old-UI component is imported).
   chunk are the new `terminal.*` locale strings themselves (a few KB of JSON text),
   which ride along because both locale files are already loaded eagerly for the whole
   site (a pre-existing i18n pattern, not something this phase introduced).
+
+## The transition (`ui-switch/useUiTransition.ts`, `transition.module.scss`,
+## `TransitionOverlay.component.tsx`) — Phase 4, done
+
+- **State machine, not a library.** `useUiTransition()` owns a `phase` state machine
+  (`idle → corrupt → void → boot → arrive → idle`) driven by plain `setTimeout`s
+  scheduled relative to when the switch was requested — no animation library. `HomeShell`
+  applies a CSS class to the *currently mounted* UI's wrapper div based on `phase`
+  (`.corrupting` during corrupt, `.hiddenBehindOverlay` during void/boot,
+  `.arriving` during arrive), while `TransitionOverlay` is the one full-screen component
+  that owns the void/static/boot visuals for the rest of the sequence. Both read from the
+  same `phase` value, so there's one source of truth for the timeline.
+- **No DOM snapshots.** Per the hard constraint, beat 1's "corruption" is entirely CSS:
+  an SVG `<filter>` (`feColorMatrix`/`feOffset`/`feBlend`, defined inline in
+  `TransitionOverlay`) does the RGB channel split on the *live* outgoing root, layered
+  with a `clip-path`/`transform` jump-cut keyframe (`steps(1,end)` easing, not smooth
+  interpolation, so it reads as tearing rather than a wobble) for the slice-displacement
+  look, plus one-frame `invert()` flashes at a couple of keyframe marks. Beat 4 runs a
+  mirrored decaying version of the same filter/clip-path on the *incoming* root. Nothing
+  is ever duplicated or rasterized — this also sidesteps the real risk of literally
+  cloning either UI's live tree (duplicate audio elements, duplicate Clerk state,
+  duplicate interactive widgets) that a "render two copies for the glitch layers"
+  approach would have created.
+- **Current beat timings**: corrupt 1050ms · void 150ms · boot 700ms · arrive 400ms
+  (≈2.3s total) — longer than the brief's ~1.6s starting point, tuned by eye per the
+  brief's own "treat these numbers as a starting point" allowance. If retuning, the
+  `.corrupting`/`.arriving` `animation-duration` values in `transition.module.scss` and
+  the `BEATS` array in `useUiTransition.ts` must be changed together — the JS timer is
+  what swaps the CSS class off at the end of each beat, so a mismatch either cuts an
+  animation off mid-escalation or leaves it frozen on its last frame.
+- **Found and fixed a real bug while verifying**: the original beat-scheduling loop
+  accumulated `elapsed += beat.duration` and scheduled `setPhase(beat.phase)` at that
+  mark — off by one beat, since it re-affirmed the *current* phase at the end of its own
+  duration instead of scheduling the *next* phase there. Net effect: every beat visually
+  ran for the *following* beat's duration, and "arrive" was clobbered entirely by
+  `finish()` firing in the same tick. Fixed by accumulating durations *before* the beat
+  being scheduled (see the loop starting at `i = 1`). Caught via Playwright by
+  querying `data-phase` at fixed offsets, not by eye — worth knowing if this ever needs
+  touching again.
+- **Boot idiom is genuinely different per direction**, per the brief: going to the
+  terminal reuses the real `terminal.boot.*` i18n lines in the terminal's own monospace
+  font with an amber progress bar; coming back to classic renders a `ChamferBox`-framed
+  "reconnecting" card in the classic site's cyan/magenta gradient and `Space Grotesk`
+  font. This is the one place the transition imports a classic-UI component
+  (`ChamferBox`) — deliberate, since the transition overlay isn't part of either UI's
+  self-contained folder and reusing the real primitive guarantees the "current site's
+  idiom" is pixel-accurate rather than approximated.
+- **Audio**: stopped cleanly, not carried across. `stopAllAudio()` pauses every
+  `<audio>` element in the document the moment a switch is requested. Chosen over
+  carrying playback across because both UIs' music players own an independent
+  `<audio>` element and `AudioContext` — and a `MediaElementSource` binding is
+  permanent for the life of that element, so actually carrying a stream across would
+  require hoisting a single shared `<audio>` element above both UIs permanently, a much
+  bigger architectural change than "the transition" warrants.
+- **Skip**: any click or keydown while `phase !== "idle"` calls `jumpToEnd`, attached at
+  `document` capture phase — deferred by one `requestAnimationFrame` after
+  `requestSwitch` so the initiating click doesn't immediately trip its own skip listener.
+  Calls `preventDefault`/`stopPropagation` so a skip-click can't also activate whatever's
+  underneath.
+- **Double-click guard**: `busyRef` in `useUiTransition` ignores `requestSwitch` calls
+  while a transition is already running, on top of `SwitchButton`'s own independent
+  400ms debounce from Phase 3 — two independent layers.
+- **Reduced motion**: skips the whole beat sequence, calls `setMode` immediately, and
+  auto-finishes after a 150ms window (matching the brief's crossfade duration) with no
+  overlay ever mounted.
+- Verified via Playwright: full sequence beat-by-beat (querying `data-phase` directly,
+  not just screenshots, after the bug above), skip-to-end, double-click guard, reduced
+  motion, and confirmed the only `position:fixed` element left after a switch is the
+  terminal's own permanent CRT scanline layer (not a transition leftover) with
+  `document.body.style.overflow` correctly cleared.

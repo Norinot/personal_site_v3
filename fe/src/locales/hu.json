@@ -167,6 +167,7 @@
     }
   },
   "common": { "close": "Bezár" },
+  "uiSwitch": { "reconnecting": "Csatlakozás a norinot.hu-hoz" },
   "terminal": {
     "session": {
       "sessionHeading": "Munkamenet",

@@ -167,6 +167,7 @@
     }
   },
   "common": { "close": "Close" },
+  "uiSwitch": { "reconnecting": "Reconnecting to norinot.hu" },
   "terminal": {
     "session": {
       "sessionHeading": "Session",

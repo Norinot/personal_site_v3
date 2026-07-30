@@ -1,0 +1,250 @@
+// Beat 1 — corruption, applied directly to the outgoing UI's own root.
+// Escalating jump-cuts (steps, not smooth easing) rather than a constant wobble.
+@keyframes uiSwitchCorrupt {
+  0% {
+    filter: none;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+  18% {
+    transform: none;
+  }
+  20% {
+    transform: translateX(-6px);
+    clip-path: inset(10% 0 62% 0);
+  }
+  22% {
+    transform: translateX(4px);
+    clip-path: inset(42% 0 18% 0);
+  }
+  24% {
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+  44% {
+    filter: url(#ui-switch-rgb-split) invert(1);
+  }
+  46% {
+    filter: url(#ui-switch-rgb-split);
+  }
+  60% {
+    transform: translateX(11px);
+    clip-path: inset(56% 0 4% 0);
+  }
+  62% {
+    transform: translateX(-9px);
+    clip-path: inset(4% 0 58% 0);
+  }
+  64% {
+    transform: none;
+    clip-path: inset(0 0 0 0);
+  }
+  79% {
+    filter: url(#ui-switch-rgb-split) invert(1) contrast(2);
+  }
+  81% {
+    filter: url(#ui-switch-rgb-split) contrast(1.4);
+  }
+  90% {
+    transform: translateX(-15px);
+    clip-path: inset(22% 0 40% 0);
+  }
+  93% {
+    transform: translateX(15px);
+    clip-path: inset(60% 0 8% 0);
+  }
+  100% {
+    transform: none;
+    clip-path: inset(0 0 0 0);
+    filter: url(#ui-switch-rgb-split) saturate(0.3);
+  }
+}
+
+.corrupting {
+  animation: uiSwitchCorrupt 350ms steps(1, end) both;
+  will-change: filter, transform, clip-path;
+}
+
+// Beat 4 — arrival: the incoming UI settles out of a decaying glitch.
+@keyframes uiSwitchArrive {
+  0% {
+    filter: url(#ui-switch-rgb-split) contrast(1.6);
+    transform: translateX(8px);
+    clip-path: inset(32% 0 32% 0);
+    opacity: 0.82;
+  }
+  25% {
+    transform: translateX(-6px);
+    clip-path: inset(10% 0 52% 0);
+    opacity: 0.9;
+  }
+  50% {
+    filter: url(#ui-switch-rgb-split);
+    transform: translateX(3px);
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+  75% {
+    transform: translateX(-1px);
+  }
+  100% {
+    filter: none;
+    transform: none;
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+  }
+}
+
+.arriving {
+  animation: uiSwitchArrive 400ms steps(1, end) both;
+}
+
+// Beats 2/3 — the outgoing (or newly-swapped incoming) root sits inertly behind
+// the opaque overlay. visibility (not display:none) so layout doesn't reflow.
+.hiddenBehindOverlay {
+  visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .corrupting,
+  .arriving {
+    animation: none !important;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// The overlay itself
+// ---------------------------------------------------------------------------
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.12s linear, background 0.12s linear;
+}
+
+.overlay[data-phase="void"],
+.overlay[data-phase="boot"] {
+  opacity: 1;
+  pointer-events: auto;
+  background: #030004;
+}
+
+.overlay[data-phase="corrupt"] {
+  // scanline tearing texture, layered on top of the live (corrupting) page
+  opacity: 1;
+  background: repeating-linear-gradient(to bottom, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 3px);
+  mix-blend-mode: overlay;
+}
+
+.overlay[data-phase="arrive"] {
+  opacity: 0;
+}
+
+.static {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  background:
+    repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.08) 0 2px, transparent 2px 5px),
+    repeating-linear-gradient(5deg, rgba(255, 255, 255, 0.05) 0 1px, transparent 1px 4px);
+  animation: uiSwitchStatic 90ms steps(2, end) infinite;
+}
+@keyframes uiSwitchStatic {
+  0% {
+    background-position: 0 0, 0 0;
+  }
+  100% {
+    background-position: 37px -19px, -23px 31px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .static {
+    animation: none;
+    opacity: 0.15;
+  }
+}
+
+.bootBox {
+  position: relative;
+  z-index: 1;
+  min-width: 280px;
+  max-width: 90vw;
+}
+
+// terminal-idiom boot (going classic -> terminal)
+.terminalBoot {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+  color: #c6d5da;
+  font-size: 13px;
+  line-height: 1.7;
+
+  .line {
+    opacity: 0;
+    animation: uiSwitchLine 0.18s ease-out forwards;
+  }
+  .bar {
+    margin-top: 10px;
+    height: 3px;
+    background: rgba(255, 180, 84, 0.18);
+    overflow: hidden;
+  }
+  .barFill {
+    height: 100%;
+    background: #ffb454;
+    transform-origin: left;
+  }
+}
+@keyframes uiSwitchLine {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+// classic-idiom boot (going terminal -> classic) — distinct from the above
+.classicBoot {
+  font-family: "Space Grotesk", sans-serif;
+  color: #ffffff;
+  text-align: center;
+
+  .label {
+    font-size: 12px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #00f0ff;
+    margin-bottom: 14px;
+  }
+  .bar {
+    width: 240px;
+    height: 4px;
+    background: rgba(0, 240, 255, 0.15);
+    clip-path: polygon(6px 0, 100% 0, 100% calc(100% - 6px), calc(100% - 6px) 100%, 0 100%, 0 6px);
+    overflow: hidden;
+  }
+  .barFill {
+    height: 100%;
+    background: linear-gradient(135deg, #00f0ff, #ff007a);
+    transform-origin: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .terminalBoot .line {
+    opacity: 1;
+    animation: none;
+  }
+}
