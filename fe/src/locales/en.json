@@ -41,22 +41,34 @@
       "business-gpt": {
         "title": "Business GPT",
         "subtitle": "Bespoke conversational AI solution",
-        "description": "Developed a bespoke chat application leveraging the cutting-edge capabilities of GPT-based conversational AI, tailored with a custom user interface to meet unique client requirements."
+        "description": "Developed a bespoke chat application leveraging the cutting-edge capabilities of GPT-based conversational AI, tailored with a custom user interface to meet unique client requirements.",
+        "role": "TODO — your role on this project",
+        "problem": "TODO — one sentence on what was painful before this existed.",
+        "work": ["TODO — what you actually built.", "TODO — a second thing."]
       },
       "ai4test": {
         "title": "AI4TEST",
         "subtitle": "AI-integrated automated testing platform",
-        "description": "Contributed to a web application integrating AI for automated testing. Implemented performance statistics and a user-friendly video playback feature for comprehensive analysis."
+        "description": "Contributed to a web application integrating AI for automated testing. Implemented performance statistics and a user-friendly video playback feature for comprehensive analysis.",
+        "role": "TODO — your role on this project",
+        "problem": "TODO — one sentence on what was painful before this existed.",
+        "work": ["TODO — what you actually built.", "TODO — a second thing."]
       },
       "saray-webshop": {
         "title": "SARAY Webshop",
         "subtitle": "E-commerce platform for SARAY Szőnyegház",
-        "description": "Development of a comprehensive e-commerce platform integrating standard webshop functionalities tailored to the company's specific needs."
+        "description": "Development of a comprehensive e-commerce platform integrating standard webshop functionalities tailored to the company's specific needs.",
+        "role": "TODO — your role on this project",
+        "problem": "TODO — one sentence on what was painful before this existed.",
+        "work": ["TODO — what you actually built.", "TODO — a second thing."]
       },
       "mapa-crm": {
         "title": "MAPA",
         "subtitle": "Customizable CRM Baseline",
-        "description": "Collaborated with a team to build a customizable CRM system designed as a baseline application that can be tailored to future client needs."
+        "description": "Collaborated with a team to build a customizable CRM system designed as a baseline application that can be tailored to future client needs.",
+        "role": "TODO — your role on this project",
+        "problem": "TODO — one sentence on what was painful before this existed.",
+        "work": ["TODO — what you actually built.", "TODO — a second thing."]
       }
     }
   },
@@ -154,5 +166,112 @@
       }
     }
   },
-  "common": { "close": "Close" }
+  "common": { "close": "Close" },
+  "terminal": {
+    "session": {
+      "sessionHeading": "Session",
+      "commandsHeading": "Commands",
+      "nowPlayingHeading": "Now playing",
+      "user": "user",
+      "host": "host",
+      "shell": "shell",
+      "uptime": "uptime"
+    },
+    "about": {
+      "role": "Software Engineer & Team Lead",
+      "location": "Budapest, Hungary",
+      "langs": "Hungarian, English",
+      "stack": "Angular · React · Svelte · Java · Go",
+      "rowName": "name",
+      "rowRole": "role",
+      "rowShell": "shell",
+      "rowLocated": "located",
+      "rowSpeaks": "speaks",
+      "rowStack": "stack",
+      "rowContact": "contact",
+      "decodedCaption": "generated · decoded"
+    },
+    "boot": {
+      "line1": "norsh 2.0 · loading session…",
+      "line2": "mount /dev/portfolio → ok",
+      "line3": "modules angular react svelte java go → loaded",
+      "line4": "locale hu_HU en_GB → ok",
+      "ready": "Type help, or click a command in the sidebar."
+    },
+    "help": {
+      "intro": "Type a command, or click one in the sidebar.",
+      "footer": "↑ ↓ history · Tab completes · Ctrl+L clears",
+      "about": "who I am and what I work with",
+      "skills": "tools, by how well I know them",
+      "projects": "recent work · projects <name> for one",
+      "experience": "career, as a commit log",
+      "apps": "things I built for myself",
+      "services": "what I can do for you",
+      "music": "tracks I've written · play <n>",
+      "contact": "how to reach me",
+      "hire": "four questions, then a pre-filled email",
+      "message": "send a message directly, no email client needed",
+      "cv": "the whole thing on one page · print-ready",
+      "theme": "cycle palette · phosphor, emerald, ice, paper",
+      "clear": "wipe the screen"
+    },
+    "wizard": {
+      "intro": "Four questions, then I'll hand you a pre-filled email. Type cancel at any point to bail out.",
+      "cancelled": "Cancelled. Nothing sent.",
+      "qName": "Who am I talking to?",
+      "hName": "your name",
+      "qEmail": "Where should I reply?",
+      "hEmail": "email address",
+      "qKind": "What kind of work?",
+      "hKind": "consulting · frontend · backend · maintenance",
+      "qMsg": "Briefly — what are you building?",
+      "hMsg": "one or two sentences",
+      "readyTitle": "Ready to send",
+      "readyLead": "Opens in your own mail client, already filled in. Nothing leaves this page until you hit send.",
+      "openEmail": "open the email ↗",
+      "subjectPrefix": "Work enquiry —"
+    },
+    "music": {
+      "intro": "What keeps me coding. Tracks written and produced by me.",
+      "scopeCaption": "output · scope",
+      "playHint": "play <n> to start, stop to stop.",
+      "noTrack": "no audio source configured",
+      "selectTrack": "Select a track",
+      "addTrack": "+ add track",
+      "empty": "No tracks yet."
+    },
+    "contact": {
+      "hint": "Run message to send directly from here, or hire for a guided wizard."
+    },
+    "upload": {
+      "title": "Upload track",
+      "file": "Audio file",
+      "filePrompt": "Click to select MP3",
+      "titleLabel": "Track title",
+      "artistLabel": "Artist",
+      "backlinkLabel": "Backlink (optional)",
+      "descriptionLabel": "Description",
+      "submit": "Upload",
+      "uploading": "Uploading…",
+      "cancel": "Cancel",
+      "success": "Track uploaded.",
+      "error": "Upload failed."
+    },
+    "cv": {
+      "printHint": "Press Ctrl+P to print or save this as a PDF — the rest of the page drops away.",
+      "experience": "experience",
+      "skills": "skills",
+      "projects": "selected projects"
+    },
+    "errors": {
+      "notFound": "norsh: command not found:",
+      "tryHelp": "try help",
+      "noProject": "projects: no project matching",
+      "trackRange": "play: track out of range",
+      "unknownTheme": "theme: unknown"
+    },
+    "status": {
+      "themeChanged": "palette →"
+    }
+  }
 }

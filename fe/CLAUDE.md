@@ -57,3 +57,57 @@ incoming UI's chunk preloading concurrently — a route change would unmount the
 tree as part of navigation, fighting that requirement for no benefit (code-splitting
 doesn't need a route either, just `React.lazy`/`Suspense`). `/login` (Clerk admin
 sign-in) is untouched either way.
+
+## Terminal UI (`src/terminal/`) — Phase 2, done
+
+Fully self-contained; the only imports crossing into the old UI's territory are
+`content/*`, `i18n` (via `react-i18next`), and `@clerk/clerk-react` (both UIs already
+depend on Clerk directly — no shared old-UI component is imported).
+
+- **Own design tokens.** `Terminal.module.scss` scopes every CSS variable under a
+  `.root[data-terminal-theme="…"]` selector instead of `:root[data-theme]`, so it can
+  never collide with the classic site's theme vars even though both happen to use a
+  `data-*-theme` attribute convention. Own `localStorage` keys: `terminal-theme`,
+  `terminal-crt` (the scanline toggle — a cheap, idea.html-faithful extra, independent
+  of the theme choice).
+- **Boot sequence lives in Phase 4, not here.** `idea.html`'s typed-out boot log is
+  explicitly a Phase 4 requirement (the transition's beat 3, "a loading sequence in the
+  incoming UI's idiom") — it isn't in Phase 2's required-behavior list. So mounting the
+  Terminal component today just shows the banner + ready line immediately; the animated
+  boot log will be built as part of the Phase 4 overlay, not duplicated here.
+- **Output model.** Unlike `idea.html` (which appends static HTML strings), each command
+  pushes a typed `ViewDescriptor` into an `entries` array, and a `ViewRenderer` switch
+  maps descriptors to React components at render time. This matters for `music`
+  specifically: because it's live state looked up at render time rather than a frozen
+  HTML snapshot, every rendered instance of the `music` output (even from old commands
+  still visible in the scrollback) reflects the *current* playback state — a deliberate
+  improvement over the prototype, which only wires up one live `#scope` canvas by DOM id
+  and would duplicate IDs if `music` were run twice.
+- **Project case-study fields** (`role`, `problem`, `work[]`) were added as real i18n
+  keys (`projects.items.<id>.role/problem/work`, both locales) rather than staying in
+  `idea.html`'s hardcoded English — but the copy itself is still `"TODO — …"` placeholder
+  text, same convention `idea.html` used. Nobody has supplied real per-project case-study
+  copy yet; replace these before shipping.
+- **Contact dual-path**, per the resolved ambiguity above: `contact` command is read-only
+  info + a hint; `message` is a new command with an inline form reusing the *exact same*
+  `contact.*` i18n keys and `POST /contact` flow as the old site's `Contact.component.tsx`
+  (same Clerk bearer token); `hire` is `idea.html`'s step-by-step wizard producing a
+  `mailto:`. All three are one source of truth away from the old UI (content + i18n),
+  never importing its components.
+- **Admin upload parity**: `MusicView` checks `useUser()`'s email against
+  `PROFILE.email` (from `content/profile.ts` — the same value `AdminLogin.tsx` hardcodes
+  separately as `EMAIL_CLIENT_CHECK`; not unified across files since that constant is
+  auth-gating config outside Phase 1's content-extraction scope, not "content"). When
+  matched, an inline upload form (title/artist/backlink/description/file) appears next to
+  the track grid inside the `music` output — chosen over a floating modal (the old UI's
+  approach) because the terminal has no modal/overlay idiom elsewhere and inline output
+  blocks are how everything else in this UI presents.
+- **Full EN/HU parity** required a large `terminal.*` locale namespace (session labels,
+  help text, wizard copy, error strings, etc.) — command *names* themselves (`about`,
+  `skills`, …) stay untranslated, same as any real CLI's command names would.
+- **Known pre-existing-class lint noise**: `useMusicPlayer.ts`'s two `setState`-in-effect
+  calls (fetching songs on mount, and marking `playing` true when a track is selected)
+  trip the experimental `react-hooks/set-state-in-effect` rule. This is the same rule,
+  same false-positive class, as the one already sitting unaddressed in `Navbar.component.tsx`
+  from before this project started — not a new regression, not a real bug (`tsc` is clean,
+  behavior verified via Playwright).

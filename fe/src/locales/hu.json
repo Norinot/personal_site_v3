@@ -41,22 +41,34 @@
       "business-gpt": {
         "title": "Business GPT",
         "subtitle": "Egyedi párbeszédes AI megoldás",
-        "description": "Egyedi csevegőalkalmazás fejlesztése a GPT-alapú mesterséges intelligencia legmodernebb képességeivel, testreszabott felhasználói felülettel az ügyfél egyedi igényei szerint."
+        "description": "Egyedi csevegőalkalmazás fejlesztése a GPT-alapú mesterséges intelligencia legmodernebb képességeivel, testreszabott felhasználói felülettel az ügyfél egyedi igényei szerint.",
+        "role": "TODO — a te szereped ebben a projektben",
+        "problem": "TODO — egy mondat arról, mi volt nehézkes ezelőtt.",
+        "work": ["TODO — mit építettél pontosan.", "TODO — egy második dolog."]
       },
       "ai4test": {
         "title": "AI4TEST",
         "subtitle": "AI-integrált automatizált tesztelő platform",
-        "description": "Részvétel egy AI-t integráló webalkalmazás fejlesztésében automatizált teszteléshez. Teljesítménystatisztikák és felhasználóbarát videólejátszási funkció megvalósítása."
+        "description": "Részvétel egy AI-t integráló webalkalmazás fejlesztésében automatizált teszteléshez. Teljesítménystatisztikák és felhasználóbarát videólejátszási funkció megvalósítása.",
+        "role": "TODO — a te szereped ebben a projektben",
+        "problem": "TODO — egy mondat arról, mi volt nehézkes ezelőtt.",
+        "work": ["TODO — mit építettél pontosan.", "TODO — egy második dolog."]
       },
       "saray-webshop": {
         "title": "SARAY Webshop",
         "subtitle": "E-kereskedelmi platform a SARAY Szőnyegház részére",
-        "description": "Átfogó e-kereskedelmi platform fejlesztése, amely a cég specifikus igényeihez szabott standard webshop funkciókat tartalmaz."
+        "description": "Átfogó e-kereskedelmi platform fejlesztése, amely a cég specifikus igényeihez szabott standard webshop funkciókat tartalmaz.",
+        "role": "TODO — a te szereped ebben a projektben",
+        "problem": "TODO — egy mondat arról, mi volt nehézkes ezelőtt.",
+        "work": ["TODO — mit építettél pontosan.", "TODO — egy második dolog."]
       },
       "mapa-crm": {
         "title": "MAPA",
         "subtitle": "Testreszabható CRM alaprendszer",
-        "description": "Együttműködés egy fejlesztőcsapattal egy testreszabható CRM rendszer kiépítésében, amely alapalkalmazásként szolgál a jövőbeli ügyféligényekhez."
+        "description": "Együttműködés egy fejlesztőcsapattal egy testreszabható CRM rendszer kiépítésében, amely alapalkalmazásként szolgál a jövőbeli ügyféligényekhez.",
+        "role": "TODO — a te szereped ebben a projektben",
+        "problem": "TODO — egy mondat arról, mi volt nehézkes ezelőtt.",
+        "work": ["TODO — mit építettél pontosan.", "TODO — egy második dolog."]
       }
     }
   },
@@ -154,5 +166,112 @@
       }
     }
   },
-  "common": { "close": "Bezár" }
+  "common": { "close": "Bezár" },
+  "terminal": {
+    "session": {
+      "sessionHeading": "Munkamenet",
+      "commandsHeading": "Parancsok",
+      "nowPlayingHeading": "Most szól",
+      "user": "felhasználó",
+      "host": "host",
+      "shell": "shell",
+      "uptime": "üzemidő"
+    },
+    "about": {
+      "role": "Szoftvermérnök & Csapatvezető",
+      "location": "Budapest, Magyarország",
+      "langs": "Magyar, Angol",
+      "stack": "Angular · React · Svelte · Java · Go",
+      "rowName": "név",
+      "rowRole": "szerep",
+      "rowShell": "shell",
+      "rowLocated": "helyszín",
+      "rowSpeaks": "nyelvek",
+      "rowStack": "stack",
+      "rowContact": "elérhetőség",
+      "decodedCaption": "generált · dekódolva"
+    },
+    "boot": {
+      "line1": "norsh 2.0 · munkamenet betöltése…",
+      "line2": "mount /dev/portfolio → ok",
+      "line3": "modulok angular react svelte java go → betöltve",
+      "line4": "locale hu_HU en_GB → ok",
+      "ready": "Írd be: help, vagy kattints egy parancsra az oldalsávban."
+    },
+    "help": {
+      "intro": "Írj egy parancsot, vagy kattints egyre az oldalsávban.",
+      "footer": "↑ ↓ előzmények · Tab kiegészít · Ctrl+L törli a képernyőt",
+      "about": "ki vagyok és mivel dolgozom",
+      "skills": "eszközök, tudásszint szerint",
+      "projects": "legutóbbi munkák · projects <név> egyhez",
+      "experience": "karrier, commit-log formában",
+      "apps": "amiket magamnak építettem",
+      "services": "miben tudok segíteni",
+      "music": "számok, amiket írtam · play <n>",
+      "contact": "hogyan érhetsz el",
+      "hire": "négy kérdés, aztán egy előre kitöltött email",
+      "message": "üzenet küldése közvetlenül, email kliens nélkül",
+      "cv": "az egész, egy oldalon · nyomtatásra kész",
+      "theme": "paletta váltása · phosphor, emerald, ice, paper",
+      "clear": "képernyő törlése"
+    },
+    "wizard": {
+      "intro": "Négy kérdés, aztán kapsz egy előre kitöltött emailt. Írd be: cancel, ha bármikor ki akarsz lépni.",
+      "cancelled": "Megszakítva. Semmi nem lett elküldve.",
+      "qName": "Kivel beszélek?",
+      "hName": "a neved",
+      "qEmail": "Hova válaszoljak?",
+      "hEmail": "email cím",
+      "qKind": "Milyen jellegű munkáról van szó?",
+      "hKind": "tanácsadás · frontend · backend · karbantartás",
+      "qMsg": "Röviden — mit építenél?",
+      "hMsg": "egy-két mondat",
+      "readyTitle": "Küldésre kész",
+      "readyLead": "A saját email kliensedben nyílik meg, már kitöltve. Semmi nem hagyja el ezt az oldalt, amíg nem küldöd el.",
+      "openEmail": "email megnyitása ↗",
+      "subjectPrefix": "Munkára vonatkozó megkeresés —"
+    },
+    "music": {
+      "intro": "Ez adja a ritmust a kódhoz. Számok, amiket én írtam és készítettem.",
+      "scopeCaption": "kimenet · oszcilloszkóp",
+      "playHint": "play <n> az indításhoz, stop a leállításhoz.",
+      "noTrack": "nincs beállítva hangforrás",
+      "selectTrack": "Válassz egy számot",
+      "addTrack": "+ szám hozzáadása",
+      "empty": "Még nincsenek feltöltött számok."
+    },
+    "contact": {
+      "hint": "Írd be: message a közvetlen küldéshez, vagy hire az irányított folyamathoz."
+    },
+    "upload": {
+      "title": "Szám feltöltése",
+      "file": "Hangfájl",
+      "filePrompt": "Kattints egy MP3 kiválasztásához",
+      "titleLabel": "Szám címe",
+      "artistLabel": "Előadó",
+      "backlinkLabel": "Hivatkozás (opcionális)",
+      "descriptionLabel": "Leírás",
+      "submit": "Feltöltés",
+      "uploading": "Feltöltés…",
+      "cancel": "Mégse",
+      "success": "Szám feltöltve.",
+      "error": "A feltöltés sikertelen."
+    },
+    "cv": {
+      "printHint": "Nyomj Ctrl+P-t a nyomtatáshoz vagy PDF-ként mentéshez — a többi elem eltűnik.",
+      "experience": "tapasztalat",
+      "skills": "készségek",
+      "projects": "kiemelt projektek"
+    },
+    "errors": {
+      "notFound": "norsh: ismeretlen parancs:",
+      "tryHelp": "próbáld: help",
+      "noProject": "projects: nincs egyező projekt:",
+      "trackRange": "play: a szám száma tartományon kívül",
+      "unknownTheme": "theme: ismeretlen"
+    },
+    "status": {
+      "themeChanged": "paletta →"
+    }
+  }
 }
