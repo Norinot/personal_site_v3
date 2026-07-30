@@ -257,7 +257,7 @@ export function Oscilloscope({ analyser, playing }: OscilloscopeProps) {
         const line = css.getPropertyValue("--line").trim() || "#1e2a30";
         const cx = w / 2;
         const cy = h / 2;
-        const R = Math.min(h * 0.36, 58);
+        const R = Math.min(h * 0.42, 72);
         const t = Date.now() / 900;
 
         let data: Uint8Array | null = null;
@@ -280,11 +280,19 @@ export function Oscilloscope({ analyser, playing }: OscilloscopeProps) {
         const N = 128;
         for (let i = 0; i <= N; i++) {
           const a = (i / N) * Math.PI * 2;
+          // Mirror the frequency sweep across the circle (up one side, back down
+          // the other) instead of wrapping the raw 0..1 range straight around.
+          // 20Hz and Nyquist are unrelated frequencies almost never at similar
+          // levels — closing a plain linear sweep into a loop draws a jarring
+          // straight cut where the two ends meet. Folding it means both seams
+          // (at the top and bottom of the circle) land on the *same* frequency,
+          // so the line is continuous all the way around.
+          const foldedT = i <= N / 2 ? i / (N / 2) : 2 - i / (N / 2);
           let v: number;
-          if (data) v = sampleAnalyserAt(data, analyser!, i / N);
+          if (data) v = sampleAnalyserAt(data, analyser!, foldedT);
           else if (playing) v = (Math.sin(a * 5 + t * 3) * 0.5 + 0.5) * 0.55 + 0.12;
           else v = 0.1 + Math.sin(a * 3 + t) * 0.03;
-          const r = R * (0.55 + v * 0.62);
+          const r = R * (0.5 + v * 0.75);
           const x = cx + Math.cos(a) * r;
           const y = cy + Math.sin(a) * r;
           if (i) g.lineTo(x, y);

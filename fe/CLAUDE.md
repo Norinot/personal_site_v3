@@ -284,3 +284,17 @@ depend on Clerk directly — no shared old-UI component is imported).
     over time and playback position (as few as 40 and as many as 101 of 128 bins active
     at different moments) — the bugs were entirely in how bin data was being sampled and
     mapped to screen position, not in the audio graph itself.
+
+## Third round: the oscilloscope's seam artifact
+
+Even after the sampling fixes above, a straight line cut across the circle at a fixed
+angle, worst when bass was loud. Root cause: the sweep drew a *closed loop* over a plain
+0→1 frequency range (20Hz at one end, Nyquist at the other), then `closePath()` connected
+the last point straight back to the first — but 20Hz and ~22kHz are unrelated frequencies
+almost never at similar levels, so that seam was, structurally, always going to be a
+jarring straight cut. Fixed by mirroring the sweep instead of wrapping it: the first half
+of the loop goes 20Hz→Nyquist, the second half goes back Nyquist→20Hz, so *both* points
+where the path closes (top and bottom of the circle) land on the same frequency and the
+line is continuous all the way around. Also gave the circle more room to move in per the
+same request — `R` from `min(h*0.36, 58)` to `min(h*0.42, 72)`, and widened the value-to-
+radius range from 0.55–1.17×R to 0.5–1.25×R.
