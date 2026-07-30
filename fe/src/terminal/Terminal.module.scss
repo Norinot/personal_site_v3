@@ -149,6 +149,13 @@
   flex: 0 0 auto;
   border-bottom: 1px solid var(--line);
   background: var(--panel-2);
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .dots {

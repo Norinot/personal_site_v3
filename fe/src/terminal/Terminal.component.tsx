@@ -93,7 +93,7 @@ interface TerminalProps {
 }
 
 const Terminal = ({ onSwitchToClassic }: TerminalProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const player = useMusicPlayer();
 
   const [theme, setThemeState] = useState<Theme>(() => {
@@ -433,6 +433,13 @@ const Terminal = ({ onSwitchToClassic }: TerminalProps) => {
               onClick={() => setTheme(THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length])}
             >
               <span className={styles.chipFace}>theme: {theme}</span>
+            </button>
+            <button
+              type="button"
+              className={styles.chip}
+              onClick={() => i18n.changeLanguage(i18n.language === "hu" ? "en" : "hu")}
+            >
+              <span className={styles.chipFace}>lang: {(i18n.language || "en").toUpperCase()}</span>
             </button>
             {onSwitchToClassic && <SwitchButton label="RETURN TO SITE" onActivate={onSwitchToClassic} />}
           </div>

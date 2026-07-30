@@ -267,6 +267,12 @@ const Navbar = ({ activeSection, scrollTo, onSwitchToTerminal }: NavbarProps) =>
             <div className={styles.mobileSeparator}></div>
 
             <div className={styles.mobileExtras}>
+              {onSwitchToTerminal && (
+                <div style={{ textAlign: "center" }}>
+                  <SwitchButton label="ENTER TERMINAL" onActivate={onSwitchToTerminal} />
+                </div>
+              )}
+
               <div className={styles.mobileLangRow}>
                 {themes.map((theme) => (
                   <div
@@ -321,12 +327,6 @@ const Navbar = ({ activeSection, scrollTo, onSwitchToTerminal }: NavbarProps) =>
                   {t("nav.contactMe")}
                 </div>
               </ChamferBox>
-
-              {onSwitchToTerminal && (
-                <div style={{ marginTop: "0.75rem", textAlign: "center" }}>
-                  <SwitchButton label="ENTER TERMINAL" onActivate={onSwitchToTerminal} />
-                </div>
-              )}
             </div>
           </div>
         </div>

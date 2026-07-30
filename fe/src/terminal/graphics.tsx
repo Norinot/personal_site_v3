@@ -279,7 +279,9 @@ export function Oscilloscope({ analyser, playing }: OscilloscopeProps) {
         g.beginPath();
         const N = 128;
         for (let i = 0; i <= N; i++) {
-          const a = (i / N) * Math.PI * 2;
+          // +90°: bass (t=0) lands at the bottom, treble (t=1) at the top,
+          // instead of the raw sweep's bass-right/treble-left axis.
+          const a = (i / N) * Math.PI * 2 + Math.PI / 2;
           // Mirror the frequency sweep across the circle (up one side, back down
           // the other) instead of wrapping the raw 0..1 range straight around.
           // 20Hz and Nyquist are unrelated frequencies almost never at similar
