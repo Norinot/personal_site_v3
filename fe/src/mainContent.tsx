@@ -12,7 +12,11 @@ import WorkExperience from "@/sections/WorkExperience/WorkExperience.component";
 import Contact from "@/sections/Contact/Contact.component";
 import Footer from "@/sections/Footer/Footer.component";
 
-const MainContent = () => {
+interface MainContentProps {
+  onSwitchToTerminal?: () => void;
+}
+
+const MainContent = ({ onSwitchToTerminal }: MainContentProps) => {
   const [activeSection, setActiveSection] = useState("hero");
 
   const scrollTo = (id: string) => {
@@ -22,7 +26,7 @@ const MainContent = () => {
 
   return (
     <div className={styles.appContainer}>
-      <Navbar activeSection={activeSection} scrollTo={scrollTo} />
+      <Navbar activeSection={activeSection} scrollTo={scrollTo} onSwitchToTerminal={onSwitchToTerminal} />
 
       <main className={styles.mainContent}>
         <Hero scrollTo={scrollTo} />

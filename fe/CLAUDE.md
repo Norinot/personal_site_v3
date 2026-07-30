@@ -111,3 +111,40 @@ depend on Clerk directly — no shared old-UI component is imported).
   same false-positive class, as the one already sitting unaddressed in `Navbar.component.tsx`
   from before this project started — not a new regression, not a real bug (`tsc` is clean,
   behavior verified via Playwright).
+
+## Switch button & mode wiring (`src/ui-switch/`, `src/HomeShell.tsx`) — Phase 3, done
+
+- `useUiMode()` owns `localStorage["ui-mode"]` (`"classic" | "terminal"`), read once at
+  init so a returning visitor who picked the terminal gets the terminal immediately —
+  matches the brief's persistence requirement.
+- `HomeShell.tsx` is the only new top-level file; it's what `App.tsx`'s `/` route now
+  renders (previously rendered `MainContent` directly). It owns `useUiMode()` and
+  conditionally renders `MainContent` or a `React.lazy`-loaded `Terminal`, each handed a
+  callback prop (`onSwitchToTerminal` / `onSwitchToClassic`) rather than either UI
+  reading `useUiMode()` itself — keeps the mode-switching state in exactly one place.
+  `/login` is untouched.
+- **`SwitchButton` is the one shared component** (`ui-switch/SwitchButton.component.tsx`),
+  rendered once in `Navbar.component.tsx` (desktop + mobile menu) and once in the
+  terminal's titlebar. It deliberately has its own hardcoded palette (magenta/cyan on
+  near-black) independent of *both* host UIs' theme systems, so it always reads as
+  something foreign, per the brief ("the one thing on the page that doesn't belong
+  there") — confirmed visually in both light/dark host contexts.
+  - Idle tell: a JS-driven character-scramble every 4–7s that resolves back to the real
+    label over ~320ms (not a constant loop). Fully skipped when
+    `prefers-reduced-motion: reduce` — verified the visible text never changes over a 6s
+    window under that setting.
+  - Hover/focus: CSS-only RGB channel split (layered `text-shadow`) + a scanline sweep
+    pseudo-element + a brighter "armed" border/glow. Press: `scale(0.93)` + a hard color
+    flash, gated by a `busyRef` debounce so rapid double-clicks can't fire twice (Phase 4
+    will own the more rigorous "don't start two transitions" guard).
+  - Accessibility: real `<button>`, `aria-label` always holds the true label; the
+    (possibly scrambled) text lives in a separate `aria-hidden` span, so the accessible
+    name never reads garbage. Verified keyboard-only activation (focus + Enter).
+- **Navbar diff stayed minimal**: one new prop (`onSwitchToTerminal?`), one import, two
+  render sites (desktop cluster, mobile menu) — no restructuring of existing markup.
+- **Bundle check**: built `vite build` and confirmed the actual terminal component code
+  (~36 KB minified) lands in its own chunk, only fetched when `React.lazy` resolves it —
+  not in the eagerly-loaded main chunk. The only terminal-related bytes in the main
+  chunk are the new `terminal.*` locale strings themselves (a few KB of JSON text),
+  which ride along because both locale files are already loaded eagerly for the whole
+  site (a pre-existing i18n pattern, not something this phase introduced).

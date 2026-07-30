@@ -11,6 +11,7 @@ import { Cv } from "./Cv";
 import { HIRE_STEPS, buildMailtoHref } from "./hireWizard";
 import { useMusicPlayer } from "./useMusicPlayer";
 import { MiniVisualizer } from "./graphics";
+import SwitchButton from "@/ui-switch/SwitchButton.component";
 
 const THEMES = ["phosphor", "emerald", "ice", "paper"] as const;
 type Theme = (typeof THEMES)[number];
@@ -86,7 +87,11 @@ interface WizardState {
   data: Record<string, string>;
 }
 
-const Terminal = () => {
+interface TerminalProps {
+  onSwitchToClassic?: () => void;
+}
+
+const Terminal = ({ onSwitchToClassic }: TerminalProps) => {
   const { t } = useTranslation();
   const player = useMusicPlayer();
 
@@ -427,6 +432,7 @@ const Terminal = () => {
             >
               theme: {theme}
             </button>
+            {onSwitchToClassic && <SwitchButton label="RETURN TO SITE" onActivate={onSwitchToClassic} />}
           </div>
         </header>
 

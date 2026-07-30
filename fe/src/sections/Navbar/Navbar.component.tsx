@@ -4,10 +4,12 @@ import NavButton from "@/components/NavButton/NavButton.component";
 import { ChevronDown, Globe, Menu, X, Palette } from "lucide-react"; 
 import { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import SwitchButton from "@/ui-switch/SwitchButton.component";
 
 interface NavbarProps {
   activeSection: string;
   scrollTo: (id: string) => void;
+  onSwitchToTerminal?: () => void;
 }
 
 const themes = [
@@ -17,7 +19,7 @@ const themes = [
   { id: "solar", name: "Solar", color: "#fb923c" },
 ];
 
-const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
+const Navbar = ({ activeSection, scrollTo, onSwitchToTerminal }: NavbarProps) => {
   const { i18n, t } = useTranslation();
 
   const currentLangLabel = i18n.language ? i18n.language.toUpperCase() : "EN";
@@ -226,6 +228,10 @@ const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
                 </div>
               </ChamferBox>
             </div>
+
+            {onSwitchToTerminal && (
+              <SwitchButton label="ENTER TERMINAL" onActivate={onSwitchToTerminal} />
+            )}
           </div>
 
           <div className={styles.mobileToggle}>
@@ -315,6 +321,12 @@ const Navbar = ({ activeSection, scrollTo }: NavbarProps) => {
                   {t("nav.contactMe")}
                 </div>
               </ChamferBox>
+
+              {onSwitchToTerminal && (
+                <div style={{ marginTop: "0.75rem", textAlign: "center" }}>
+                  <SwitchButton label="ENTER TERMINAL" onActivate={onSwitchToTerminal} />
+                </div>
+              )}
             </div>
           </div>
         </div>

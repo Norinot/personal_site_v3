@@ -1,11 +1,11 @@
 import { Route, Routes } from "react-router-dom";
-import MainContent from "./mainContent";
+import HomeShell from "./HomeShell";
 import AdminLogin from "./AdminLogin";
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<MainContent />} />
+      <Route path="/" element={<HomeShell />} />
       <Route path="/login" element={<AdminLogin />} />
     </Routes>
   );

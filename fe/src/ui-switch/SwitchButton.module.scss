@@ -1,0 +1,101 @@
+// The one thing on the page that doesn't belong there.
+// Deliberately its own palette — never the host UI's tokens — so it always
+// reads as bled-through from somewhere else, in either UI.
+
+.btn {
+  --sw-void: #050107;
+  --sw-fg: #f3eaff;
+  --sw-magenta: #ff2bd6;
+  --sw-cyan: #00fff2;
+
+  position: relative;
+  isolation: isolate;
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sw-fg);
+  background: var(--sw-void);
+  border: 1px solid var(--sw-magenta);
+  padding: 8px 14px;
+  cursor: pointer;
+  clip-path: polygon(0 0, calc(100% - 9px) 0, 100% 9px, 100% 100%, 9px 100%, 0 calc(100% - 9px));
+  transition: border-color 0.18s, box-shadow 0.18s, background 0.18s, transform 0.08s;
+  box-shadow: 0 0 0 rgba(255, 43, 214, 0);
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--sw-cyan);
+    background: #0a0210;
+    box-shadow: 0 0 14px rgba(0, 255, 242, 0.35), 0 0 2px rgba(255, 43, 214, 0.6);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--sw-cyan);
+    outline-offset: 3px;
+  }
+
+  &:active {
+    transform: scale(0.93);
+    background: var(--sw-magenta);
+    color: var(--sw-void);
+    transition: transform 0.05s, background 0.05s, color 0.05s;
+  }
+}
+
+.label {
+  position: relative;
+  display: inline-block;
+}
+
+// hover/focus: RGB channel split via layered text-shadow, plus a scanline sweep
+.btn:hover .label,
+.btn:focus-visible .label {
+  animation: sw-rgb-split 0.9s ease-in-out infinite;
+}
+@keyframes sw-rgb-split {
+  0%,
+  100% {
+    text-shadow: -1.5px 0 var(--sw-magenta), 1.5px 0 var(--sw-cyan);
+  }
+  50% {
+    text-shadow: -2.5px 0 var(--sw-magenta), 2.5px 0 var(--sw-cyan);
+  }
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(to bottom, transparent, rgba(0, 255, 242, 0.35) 45%, transparent 55%, transparent);
+  transform: translateY(-120%);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.btn:hover::after,
+.btn:focus-visible::after {
+  opacity: 1;
+  animation: sw-sweep 0.7s ease-in-out infinite;
+}
+@keyframes sw-sweep {
+  from {
+    transform: translateY(-120%);
+  }
+  to {
+    transform: translateY(120%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn,
+  .btn::after,
+  .label {
+    animation: none !important;
+    transition: none !important;
+  }
+  .btn::after {
+    opacity: 0 !important;
+  }
+}
