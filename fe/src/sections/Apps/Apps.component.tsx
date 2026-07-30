@@ -6,22 +6,7 @@ import { useTranslation } from "react-i18next";
 import { getIcon } from "@/utils/getIcon";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/utils/animations";
-
-interface PersonalApp {
-  id: string;
-  icon: string;
-  link: string;
-  tags: string[];
-}
-
-const apps: PersonalApp[] = [
-  {
-    id: "forno",
-    icon: "pizza",
-    link: "https://forno.norinot.hu",
-    tags: ["React"],
-  },
-];
+import { APPS } from "@/content/apps";
 
 const Apps = () => {
   const { t } = useTranslation();
@@ -40,7 +25,7 @@ const Apps = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
       >
-        {apps.map((app) => {
+        {APPS.map((app) => {
           const features = t(`apps.items.${app.id}.features`, {
             returnObjects: true,
           }) as string[];

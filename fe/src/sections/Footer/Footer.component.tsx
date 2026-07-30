@@ -1,4 +1,5 @@
 import styles from "./Footer.module.scss";
+import { SOCIAL_LINKS } from "@/content/profile";
 
 const Footer = () => {
   return (
@@ -8,34 +9,16 @@ const Footer = () => {
           © 2026 Bernáth Márk bence. All systems nominal.
         </div>
         <div className={styles.footerLinks}>
-          <a
-            href="https://github.com/Norinot"
-            target="_blank"
-            className={styles.footerLink}
-          >
-            GitHub
-          </a>
-          <a
-            href="https://www.linkedin.com/in/bernath-mark-bence/"
-            target="_blank"
-            className={styles.footerLink}
-          >
-            LinkedIn
-          </a>
-          <a
-            href="https://soundcloud.com/bence-ber"
-            target="_blank"
-            className={styles.footerLink}
-          >
-            SoundCloud
-          </a>
-          <a
-            href="https://open.spotify.com/artist/6mdH9R4KsdLJzfu6hAOd7F"
-            target="_blank"
-            className={styles.footerLink}
-          >
-            Spotify
-          </a>
+          {SOCIAL_LINKS.map((link) => (
+            <a
+              key={link.label}
+              href={link.url}
+              target="_blank"
+              className={styles.footerLink}
+            >
+              {link.label}
+            </a>
+          ))}
         </div>
       </div>
     </footer>

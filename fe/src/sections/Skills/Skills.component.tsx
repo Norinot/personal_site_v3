@@ -5,77 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/utils/animations";
-
-export type SkillLevel = "expert" | "advanced" | "intermediate";
-export interface Skill {
-  id: string;
-  name: string;
-  level: SkillLevel;
-  descriptionKey: string;
-}
-
-export const skillsData: Record<string, Skill[]> = {
-  expert: [
-    {
-      id: "react",
-      name: "React",
-      level: "expert",
-      descriptionKey: "react_desc",
-    },
-    {
-      id: "angular",
-      name: "Angular",
-      level: "expert",
-      descriptionKey: "angular_desc",
-    },
-    {
-      id: "ts",
-      name: "TypeScript",
-      level: "expert",
-      descriptionKey: "ts_desc",
-    },
-    {
-      id: "svelte",
-      name: "Svelte",
-      level: "expert",
-      descriptionKey: "svelte_desc",
-    },
-  ],
-  advanced: [
-    {
-      id: "java",
-      name: "Java (Spring)",
-      level: "advanced",
-      descriptionKey: "java_desc",
-    },
-    {
-      id: "go",
-      name: "Go (Golang)",
-      level: "advanced",
-      descriptionKey: "go_desc",
-    },
-    {
-      id: "git",
-      name: "Git",
-      level: "advanced",
-      descriptionKey: "git_desc",
-    },
-  ],
-  intermediate: [
-    {
-      id: "csharp",
-      name: "C# & Unity",
-      level: "intermediate",
-      descriptionKey: "csharp_desc",
-    },
-    {
-      id: "docker",
-      name: "Docker & Linux",
-      level: "intermediate",
-      descriptionKey: "docker_desc",
-    },
-  ],
-};
+import { SKILLS, type Skill } from "@/content/skills";
 
 const SkillDot = ({ color }: { color: string }) => (
   <div className={styles.skillDot} style={{ backgroundColor: color }}></div>
@@ -98,7 +28,7 @@ const Skills = () => {
         <motion.div variants={fadeUp}>
           <SkillColumn
             title={t("skills.expert")}
-            skills={skillsData.expert}
+            skills={SKILLS.expert}
             headerClass={styles.skillTitleAccent}
             itemClass={styles.skillItemExpert}
             dotColor="var(--accent)"
@@ -108,7 +38,7 @@ const Skills = () => {
         <motion.div variants={fadeUp}>
           <SkillColumn
             title={t("skills.advanced")}
-            skills={skillsData.advanced}
+            skills={SKILLS.advanced}
             headerClass={styles.skillTitleWhite}
             itemClass={styles.skillItemAdv}
             dotColor="rgba(255,255,255,0.5)"
@@ -118,7 +48,7 @@ const Skills = () => {
         <motion.div variants={fadeUp}>
           <SkillColumn
             title={t("skills.intermediate")}
-            skills={skillsData.intermediate}
+            skills={SKILLS.intermediate}
             headerClass={styles.skillTitleGray}
             itemClass={styles.skillItemInt}
             dotColor="#4b5563"

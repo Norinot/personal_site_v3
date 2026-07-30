@@ -6,45 +6,7 @@ import { useTranslation } from "react-i18next";
 import { getIcon } from "@/utils/getIcon";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/utils/animations";
-
-interface Project {
-  id: string;
-  date: string;
-  tags: string[];
-  icon: string;
-  link: string;
-}
-
-const projects: Project[] = [
-  {
-    id: "business-gpt",
-    date: "2024",
-    tags: ["React", "Svelte", "Python"],
-    icon: "Layers",
-    link: "https://www.telekom-mms.com/expertise/business-gpt",
-  },
-  {
-    id: "ai4test",
-    date: "2023 - 2024",
-    tags: ["React", "Go"],
-    icon: "Cpu",
-    link: "#",
-  },
-  {
-    id: "saray-webshop",
-    date: "2024",
-    tags: ["Angular", "Go"],
-    icon: "ExternalLink",
-    link: "https://sarayszonyeg.hu/",
-  },
-  {
-    id: "mapa-crm",
-    date: "Present",
-    tags: ["Angular", "Java Spring Boot"],
-    icon: "Terminal",
-    link: "#",
-  },
-];
+import { PROJECTS, type Project } from "@/content/projects";
 
 const Projects = () => {
   const { t } = useTranslation();
@@ -63,7 +25,7 @@ const Projects = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
       >
-        {projects.map((project: Project) => (
+        {PROJECTS.map((project: Project) => (
           <motion.div key={project.id} variants={fadeUp}>
             <Accordion
               title={t(`projects.items.${project.id}.title`)}

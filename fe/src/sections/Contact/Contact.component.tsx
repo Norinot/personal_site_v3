@@ -8,6 +8,7 @@ import { useState } from "react";
 import { useAuth } from "@clerk/clerk-react";
 import { motion } from "framer-motion";
 import { fadeUp } from "@/utils/animations";
+import { PROFILE } from "@/content/profile";
 
 interface ContactFormState {
   email: string;
@@ -153,10 +154,10 @@ const Contact = () => {
         <div className={styles.contactsWrapper}>
           <div className={styles.label}>
             <Mail />
-            <span>bencemark.bernath@gmail.com</span>
+            <span>{PROFILE.email}</span>
           </div>
           <div className={styles.label}>
-            <PhoneCall /> <span> +36 30 202 4133</span>
+            <PhoneCall /> <span> {PROFILE.phone}</span>
           </div>
         </div>
 

@@ -6,21 +6,7 @@ import { useTranslation, Trans } from "react-i18next";
 import { getIcon } from "@/utils/getIcon";
 import { motion } from "framer-motion";
 import { fadeUp, staggerContainer } from "@/utils/animations";
-
-const workHistory = [
-  {
-    id: "deutsche-telekom",
-    date: "08/2022 - Present",
-    location: "Budapest, Hungary",
-    iconName: "briefcase",
-  },
-  {
-    id: "code-craftsmen",
-    date: "01/2024 - Present",
-    location: "Hungary",
-    iconName: "briefcase",
-  },
-];
+import { EXPERIENCE } from "@/content/experience";
 
 const WorkExperience = () => {
   const { t } = useTranslation();
@@ -36,7 +22,7 @@ const WorkExperience = () => {
         whileInView="visible"
         viewport={{ once: true, amount: 0.1 }}
       >
-        {workHistory.map((job) => {
+        {EXPERIENCE.map((job) => {
           const bulletPoints = t(`work.items.${job.id}.bullets`, {
             returnObjects: true,
           }) as string[];

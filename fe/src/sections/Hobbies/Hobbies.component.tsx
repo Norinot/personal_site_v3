@@ -17,15 +17,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import UploadModal from "@/components/UploadModal/UploadModal.component";
 import { useUser } from "@clerk/clerk-react";
 import { EMAIL_CLIENT_CHECK } from "@/AdminLogin";
-
-interface Song {
-  artist: string;
-  description: string;
-  duration: number;
-  id: string;
-  title: string;
-  backlink?: string;
-}
+import { fetchSongs, type Song } from "@/content/music";
 
 const Hobbies = () => {
   const { user } = useUser();
@@ -92,18 +84,16 @@ const Hobbies = () => {
   }, [isPlaying]);
 
   useEffect(() => {
-    const fetchSongs = async () => {
+    const loadSongs = async () => {
       try {
-        const response = await fetch("/songs");
-        if (!response.ok) throw new Error("Network response was not ok!");
-        const data = await response.json();
-        setMusic(data || []);
+        const songs = await fetchSongs();
+        setMusic(songs);
       } catch (error) {
         console.error("Failed to fetch music:", error);
         setMusic([]);
       }
     };
-    fetchSongs();
+    loadSongs();
   }, []);
 
   const animate = useCallback(() => {
