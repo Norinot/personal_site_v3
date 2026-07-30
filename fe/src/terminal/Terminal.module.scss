@@ -201,37 +201,56 @@
   flex: 0 0 auto;
 }
 
+// Same two-layer clip-path trick as ui-switch's SwitchButton: clip-path cuts
+// straight through a plain CSS border, so the "border" here is really the
+// outer .chip's background (--line, or --accent when hovered/pressed) showing
+// through a 1px inset around the inner .chipFace.
 .chip {
-  font-family: var(--mono);
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: transparent;
-  color: var(--dim);
-  border: 1px solid var(--line);
-  padding: 5px 11px;
+  display: inline-block;
+  border: 0;
+  padding: 1px;
+  background: var(--line);
   cursor: pointer;
   clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
-  transition: color 0.14s, border-color 0.14s, background 0.14s;
+  transition: background 0.14s;
 
   &:hover {
-    color: var(--accent);
-    border-color: var(--accent);
+    background: var(--accent);
   }
 
   &[aria-pressed="true"] {
-    color: var(--void);
     background: var(--accent);
-    border-color: var(--accent);
-
-    .root[data-terminal-theme="paper"] & {
-      color: #fff;
-    }
   }
 
   &:focus-visible {
     outline: 2px solid var(--cyan);
     outline-offset: 2px;
+  }
+}
+
+.chipFace {
+  display: block;
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: var(--panel-2);
+  color: var(--dim);
+  padding: 4px 10px;
+  clip-path: polygon(0 0, calc(100% - 7px) 0, 100% 7px, 100% 100%, 7px 100%, 0 calc(100% - 7px));
+  transition: color 0.14s, background 0.14s;
+}
+
+.chip:hover .chipFace {
+  color: var(--accent);
+}
+
+.chip[aria-pressed="true"] .chipFace {
+  background: var(--accent);
+  color: var(--void);
+
+  .root[data-terminal-theme="paper"] & {
+    color: #fff;
   }
 }
 
@@ -887,6 +906,71 @@
   .playBtn {
     color: var(--accent);
     border-color: var(--accent);
+  }
+}
+
+.volumeRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+    background: transparent;
+    border: 0;
+    color: var(--dim);
+    padding: 2px;
+    cursor: pointer;
+
+    &:hover {
+      color: var(--accent);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--cyan);
+      outline-offset: 1px;
+    }
+  }
+}
+
+.volumeSlider {
+  flex: 1 1 auto;
+  appearance: none;
+  height: 3px;
+  background: var(--line);
+  cursor: pointer;
+  outline: none;
+
+  &::-webkit-slider-thumb {
+    appearance: none;
+    width: 11px;
+    height: 11px;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+  }
+
+  &::-moz-range-thumb {
+    width: 11px;
+    height: 11px;
+    border: 0;
+    border-radius: 50%;
+    background: var(--accent);
+    cursor: pointer;
+  }
+
+  &::-moz-range-track {
+    height: 3px;
+    background: var(--line);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--cyan);
+    outline-offset: 2px;
   }
 }
 

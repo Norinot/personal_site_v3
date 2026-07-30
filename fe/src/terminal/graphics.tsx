@@ -3,6 +3,36 @@ import portrait from "@/assets/portrait.jpg";
 import { SKILLS } from "@/content/skills";
 import styles from "./Terminal.module.scss";
 
+const MIN_AUDIBLE_HZ = 20;
+
+/**
+ * Maps a linear 0..1 sweep position to a frequency bin using equal space per
+ * *octave* (20Hz–Nyquist), the same convention a real EQ/spectrum analyzer
+ * uses — not equal space per raw FFT bin. getByteFrequencyData bins are
+ * linearly spaced in Hz, so a bare bin-index curve either buries everything
+ * in the first few bins (pure log against bin *count*) or gives the mostly-
+ * silent top of the spectrum a whole arc (linear). Going through actual Hz
+ * means the curve's shape is anchored to real acoustic octaves instead of
+ * however many bins happen to exist.
+ *
+ * The other half of the fix is interpolating between the two nearest bins
+ * rather than flooring to one — with few bins covering a wide low-frequency
+ * range, a hard floor() makes many consecutive sweep positions read the
+ * exact same bin, which looks like a flat "stuck" plateau rather than real
+ * variation.
+ */
+function sampleAnalyserAt(data: Uint8Array, analyser: AnalyserNode, t: number): number {
+  const sampleRate = analyser.context.sampleRate;
+  const binWidth = sampleRate / analyser.fftSize;
+  const octaves = Math.log2(sampleRate / 2 / MIN_AUDIBLE_HZ);
+  const freq = MIN_AUDIBLE_HZ * Math.pow(2, Math.max(0, t) * octaves);
+  const pos = Math.max(0, Math.min(data.length - 1, freq / binWidth));
+  const lo = Math.floor(pos);
+  const hi = Math.min(data.length - 1, lo + 1);
+  const frac = pos - lo;
+  return (data[lo] * (1 - frac) + data[hi] * frac) / 255;
+}
+
 /** Deterministic PRNG seeded from a string, so generated art stays stable per id. */
 function seeded(str: string) {
   let h = 1779033703 ^ str.length;
@@ -181,7 +211,7 @@ export function MiniVisualizer({ analyser, playing }: { analyser: AnalyserNode |
         }
         for (let i = 0; i < bars; i++) {
           let v: number;
-          if (data) v = data[i % data.length] / 255;
+          if (data) v = sampleAnalyserAt(data, analyser!, i / bars);
           else if (playing) v = (Math.sin(Date.now() / 240 + i * 0.55) * 0.5 + 0.5) * (0.35 + 0.5 * Math.random());
           else v = 0.06;
           const bh = Math.max(1.5, v * (h - 4));
@@ -251,7 +281,7 @@ export function Oscilloscope({ analyser, playing }: OscilloscopeProps) {
         for (let i = 0; i <= N; i++) {
           const a = (i / N) * Math.PI * 2;
           let v: number;
-          if (data) v = data[Math.floor((i / N) * data.length)] / 255;
+          if (data) v = sampleAnalyserAt(data, analyser!, i / N);
           else if (playing) v = (Math.sin(a * 5 + t * 3) * 0.5 + 0.5) * 0.55 + 0.12;
           else v = 0.1 + Math.sin(a * 3 + t) * 0.03;
           const r = R * (0.55 + v * 0.62);
@@ -271,7 +301,7 @@ export function Oscilloscope({ analyser, playing }: OscilloscopeProps) {
         g.fillStyle = playing ? accent : line;
         for (let i = 0; i < 22; i++) {
           let v: number;
-          if (data) v = data[i % data.length] / 255;
+          if (data) v = sampleAnalyserAt(data, analyser!, i / 22);
           else if (playing) v = Math.abs(Math.sin(t * 2 + i * 0.4)) * 0.8;
           else v = 0.05;
           g.fillRect(w - 26, h - 12 - i * 6, Math.max(2, v * 18), 3);

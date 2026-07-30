@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Play, Pause, SkipBack, SkipForward, Square } from "lucide-react";
+import { Play, Pause, SkipBack, SkipForward, Square, Volume2, VolumeX } from "lucide-react";
 import styles from "./Terminal.module.scss";
 import { PROFILE } from "@/content/profile";
 import { Banner, About, SkillsSection, ExperienceLog, AppsListing, ServicesGrid, HelpTable } from "./commands";
@@ -425,14 +425,14 @@ const Terminal = ({ onSwitchToClassic }: TerminalProps) => {
           </span>
           <div className={styles.tbRight}>
             <button type="button" className={styles.chip} aria-pressed={crtOn} onClick={toggleCrt}>
-              scanlines
+              <span className={styles.chipFace}>scanlines</span>
             </button>
             <button
               type="button"
               className={styles.chip}
               onClick={() => setTheme(THEMES[(THEMES.indexOf(theme) + 1) % THEMES.length])}
             >
-              theme: {theme}
+              <span className={styles.chipFace}>theme: {theme}</span>
             </button>
             {onSwitchToClassic && <SwitchButton label="RETURN TO SITE" onActivate={onSwitchToClassic} />}
           </div>
@@ -441,7 +441,7 @@ const Terminal = ({ onSwitchToClassic }: TerminalProps) => {
         <nav className={styles.mobileNav} aria-label="Sections (mobile)">
           {NAV_COMMANDS.map((cmd) => (
             <button key={cmd} type="button" className={styles.chip} onClick={() => typeThenRun(cmd)}>
-              {cmd}
+              <span className={styles.chipFace}>{cmd}</span>
             </button>
           ))}
         </nav>
@@ -553,6 +553,24 @@ const Terminal = ({ onSwitchToClassic }: TerminalProps) => {
                 <button type="button" aria-label={t("terminal.music.stop")} onClick={player.stop}>
                   <Square size={12} />
                 </button>
+              </div>
+              <div className={styles.volumeRow}>
+                <button
+                  type="button"
+                  aria-label={player.volume === 0 ? t("terminal.music.play") : t("terminal.music.volume")}
+                  onClick={() => player.setVolume(player.volume === 0 ? 1 : 0)}
+                >
+                  {player.volume === 0 ? <VolumeX size={14} /> : <Volume2 size={14} />}
+                </button>
+                <input
+                  type="range"
+                  className={styles.volumeSlider}
+                  aria-label={t("terminal.music.volume")}
+                  min={0}
+                  max={100}
+                  value={Math.round(player.volume * 100)}
+                  onChange={(e) => player.setVolume(Number(e.target.value) / 100)}
+                />
               </div>
               <MiniVisualizer analyser={player.analyser} playing={player.playing} />
             </div>

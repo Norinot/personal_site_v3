@@ -239,3 +239,48 @@ depend on Clerk directly — no shared old-UI component is imported).
   `.face` (background = fill color, its own slightly-smaller clip-path) — the 1px ring of
   outer color showing through is the "border," and it now follows the cut on both
   corners in both UIs' hosting contexts.
+
+## Second round of post-Phase-4 fixes (user testing, same day)
+
+- **`.chip` (titlebar scanlines/theme toggles, and the mobile-nav command bar) had the
+  exact same clip-path-clips-border bug as `SwitchButton`**, since it also combined a
+  plain `border` with `clip-path` on one element. Same fix, same two-layer shape: `.chip`
+  is now the outer layer (background = `--line` normally, `--accent` on hover/pressed,
+  1px padding, clip-path), wrapping a `.chipFace` inner span carrying the actual
+  text/background. All three usages (`Terminal.component.tsx`'s scanlines toggle, theme
+  toggle, and the `.mobileNav` command chips) share this one class, so one fix covers all
+  three — confirmed clean borders on desktop and on the terminal's own mobile nav bar.
+- **Added a volume slider** (native `<input type="range">`, styled to match, plus a
+  mute-toggle icon button) to the sidebar's music controls — `useMusicPlayer` already
+  had `volume`/`setVolume` in its API from Phase 2, there was just never a control wired
+  up to it.
+- **Oscilloscope/mini-visualizer frequency mapping had two real, stacked bugs**,
+  producing exactly what was reported: part of the circle reading as permanently maxed,
+  part never moving.
+  1. Bin lookup used a hard `Math.floor()` with far more sample points (128 angle steps,
+     28 bars) than usable low-frequency detail at a small `fftSize` — many consecutive
+     sweep positions rounded to the *same* bin, reading as a flat "stuck" plateau instead
+     of real variation. Fixed by interpolating between the two nearest bins for every
+     sample position (`sampleAnalyserAt` in `graphics.tsx`).
+  2. The bin-index curve itself was wrong twice over before landing right: first a plain
+     linear bin index (buries all the visible movement in a couple of low bins, leaves a
+     silent arc for the mostly-empty high end), then an overly aggressive
+     `bin = binCount^t` curve (the first quarter of the sweep covered only ~3 of 64 bins
+     — exactly why a loud bass bin read as "always maxed" across a huge arc, confirmed
+     by reading `getByteFrequencyData` directly and finding the first 4-5 bins reading
+     150-210 nearly identically). Landed on mapping sweep position to actual **Hz** on an
+     equal-per-octave (20Hz–Nyquist) curve — the same convention a real EQ uses — rather
+     than a curve over raw bin *count*, since bin count alone has no relationship to how
+     octaves are actually distributed across the spectrum.
+  3. Also bumped `fftSize` from 64 → 2048 (128 → 1024 bins): the earlier small FFT meant
+     each low bin already spanned hundreds of Hz, blurring together genuinely different
+     bass content into one flat-reading bin no matter how the curve above was shaped —
+     more bins were needed for the low end to have anything real to interpolate between.
+  4. Widened `minDecibels`/`maxDecibels` (-100/-10, from the -100/-30 default) so loud
+     bass content stops pegging at 255 as easily.
+  - Verified this wasn't a rendering artifact by reading `analyser.getByteFrequencyData()`
+    directly (bypassing canvas entirely) at multiple points across a real uploaded track:
+    confirmed the underlying Web Audio data is genuinely live and varies substantially
+    over time and playback position (as few as 40 and as many as 101 of 128 bins active
+    at different moments) — the bugs were entirely in how bin data was being sampled and
+    mapped to screen position, not in the audio graph itself.

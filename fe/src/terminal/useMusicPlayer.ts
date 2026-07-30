@@ -62,7 +62,16 @@ export function useMusicPlayer(): MusicPlayerState {
         const AudioCtx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
         const ctx = new AudioCtx();
         const node = ctx.createAnalyser();
-        node.fftSize = 64;
+        // Bass frequencies need a much finer FFT to resolve distinctly — at a
+        // small fftSize each low bin spans hundreds of Hz, so a whole octave
+        // of genuinely-different low end blurs into one or two bins that all
+        // read the same, looking like a flat "stuck" plateau on the display.
+        node.fftSize = 2048;
+        // Default -30dB ceiling clips to 255 too easily on bass-heavy content,
+        // pegging the low end at "always maxed" — widen the range a bit.
+        node.minDecibels = -100;
+        node.maxDecibels = -10;
+        node.smoothingTimeConstant = 0.75;
         ctx.createMediaElementSource(audio).connect(node);
         node.connect(ctx.destination);
         audioCtxRef.current = ctx;

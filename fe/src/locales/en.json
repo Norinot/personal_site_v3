@@ -244,7 +244,8 @@
       "play": "Play",
       "pause": "Pause",
       "next": "Next track",
-      "stop": "Stop"
+      "stop": "Stop",
+      "volume": "Volume"
     },
     "contact": {
       "hint": "Run message to send directly from here, or hire for a guided wizard."
